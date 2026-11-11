@@ -25,17 +25,32 @@ A comprehensive, responsive web-based **Hospital Management System** designed to
 ---
 
 ## 📂 Project Structure
+
+```text
 hospital-management-web/
 │
-├── Admin/             # Admin dashboard & management panels
-├── Doctor/            # Doctor portal & appointment views
-├── Patient/           # Patient dashboard & booking interface
-├── Service/           # Hospital services information pages
-├── Contact/           # Support & contact channels
-├── login/             # User authentication (Login portal)
-├── signup/            # User registration portal
-├── image/             # Project assets, icons & banners
-├── index.html         # Main landing page
-├── index.js           # Core application router & logic
-├── firebase.js        # Firebase configuration & initialization
-└── style.css          # Custom overrides & styling
+├── 📁 Admin/                      # Main Admin Control Panel
+│   ├── 📁 appointment/            # Appointment management dashboard
+│   ├── 📁 department/             # Hospital departments configuration
+│   ├── 📁 doctor/                 # Doctors directory & status management
+│   ├── 📁 messages/               # Contact & feedback messages center
+│   ├── 📁 paitent/                # Patient records & logs management
+│   ├── 📁 staff/                  # Staff directory & role management
+│   ├── 📄 index.html              # Admin main view
+│   └── ⚡ index.js                # Admin logic handler
+│
+├── 📁 About/                      # About Us page details
+├── 📁 book-Appointment/           # Public appointment booking module
+├── 📁 Contact/                    # ContactUs form module
+├── 📁 Doctor/                     # Dedicated Doctor Portal
+├── 📁 Patient/                    # Dedicated Patient Portal
+├── 📁 Service/                    # Hospital services showcase
+├── 📁 Staff/                      # Dedicated Staff Portal
+├── 📁 login/                      # User authentication login module
+├── 📁 signup/                     # User registration module
+├── 📁 image/                      # Media assets, icons & graphics
+│
+├── 📄 index.html                  # Main website landing page
+├── ⚡ index.js                    # Main router & app startup logic
+├── 🔥 firebase.js                 # Firebase initialization & auth configuration
+└── 🎨 style.css                   # Global styles & layout rules
