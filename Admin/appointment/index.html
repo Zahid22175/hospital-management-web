@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Appointment Management - ApexHealth</title>
+
+  <!-- SVG FAVICON -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+ 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+ <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+ fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+ 5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Inter & JetBrains Mono Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0f17;
+      color: #f8fafc;
+    }
+
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-modal {
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .glass-input {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #f8fafc;
+    }
+
+    .glass-input:focus {
+      background: rgba(30, 41, 59, 0.9);
+      border-color: #06b6d4;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #06b6d4;
+    }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen selection:bg-cyan-500 selection:text-white hidden">
+
+  <!-------------- NAVBAR SECTION START -------------->
+  <div class="fixed top-0 left-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-cyan-600/10 rounded-full blur-3xl
+     pointer-events-none -z-10">
+  </div>
+
+  <div class="fixed bottom-0 right-1/4 w-72 h-72 sm:w-96 sm:h-96 bg-blue-600/10 rounded-full blur-3xl
+     pointer-events-none -z-10">
+  </div>
+
+  <div class="min-h-screen flex flex-col lg:flex-row relative">
+
+    <!-- MOBILE NAVIGATION HEADER -->
+    <header class="lg:hidden bg-slate-900/90 backdrop-blur-md text-white p-4 flex items-center 
+      justify-between sticky top-0 z-30 border-b border-slate-800">
+
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 
+          flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-tooth text-base"></i>
+        </div>
+
+        <div class="truncate">
+          <h1 class="text-base font-black tracking-tight text-white truncate leading-none">
+            Clinic<span class="text-cyan-400">Book</span>
+          </h1>
+          <p class="text-[9px] text-cyan-400/90 uppercase tracking-widest font-semibold truncate mt-1">
+            BOOKING SCHEDULE </p>
+        </div>
+      </div>
+
+      <!-- Hamburger Button -->
+      <button id="mobileMenuBtn" aria-label="Toggle Navigation Menu" class="p-2 text-slate-300 hover:text-white 
+        focus:outline-none transition-colors cursor-pointer">
+        <i class="fas fa-bars-staggered text-xl"></i>
+      </button>
+    </header>
+
+    <!-- SIDEBAR OVERLAY (MOBILE) -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 hidden 
+      lg:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-full w-72 bg-slate-900 border-r border-slate-800/80 
+      text-slate-300 p-6 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform 
+      duration-300 ease-in-out">
+
+      <!-- Mobile Close Button -->
+      <button id="closeSidebarBtn" aria-label="Close Sidebar" class="lg:hidden absolute top-5 right-5 
+          text-slate-400 hover:text-white p-1 cursor-pointer">
+        <i class="fas fa-xmark text-xl"></i>
+      </button>
+
+      <!-- Dasktop Header -->
+      <div class="mb-10 flex items-center gap-3.5 px-2">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 flex 
+          items-center justify-center text-white font-bold text-xl shadow-xl shadow-cyan-500/20 shrink-0">
+          <i class="fa-solid fa-tooth text-lg"></i>
+        </div>
+
+        <div>
+          <h1 class="text-xl font-black tracking-tight text-white flex items-center leading-none">
+            Clinic<span class="bg-gradient-to-r from-cyan-400 to-cyan-400 bg-clip-text text-transparent">Book</span>
+          </h1>
+
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase 
+            tracking-widest text-cyan-400 mt-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> BOOKING SCHEDULE
+          </span>
+
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Main Navigation</div>
+      <nav class="space-y-1.5 flex-1 pr-1">
+
+        <!-- Dashboard -->
+        <a href="../index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-chart-pie w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <!-- Doctor -->
+        <a href="../doctor/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-user-doctor w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Doctors</span>
+        </a>
+
+        <!-- Patient -->
+        <a href="../paitent/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-hospital-user w-5 text-center text-slate-500 group-hover:text-cyan-400 
+          transition-colors"></i><span>Patients</span>
+        </a>
+
+        <!-- Appointment -->
+        <a href="#" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl bg-gradient-to-r 
+         from-cyan-500/10 to-blue-500/10 text-cyan-400 border border-cyan-500/20 font-semibold text-sm shadow-sm">
+          <i class="fas fa-calendar-check w-5 text-center text-cyan-400"></i>
+          <span>Appointments</span>
+        </a>
+
+        <!-- Department -->
+        <a href="../department/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400 
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-sitemap w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Departments</span>
+        </a>
+
+        <!-- Staff -->
+        <a href="../staff/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-users-gear w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Staff</span>
+        </a>
+
+        <!-- Messages -->
+        <a href="../messages/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+         hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-comments w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Messages</span>
+        </a>
+      </nav>
+
+      <!-- Logout Component -->
+      <div class="pt-4 mt-auto border-t border-slate-800">
+        <button class="logout-btn w-full flex items-center justify-between px-4 py-3 rounded-xl 
+         bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/30 text-slate-400
+         hover:text-rose-400 transition-all text-xs font-semibold group cursor-pointer">
+
+          <span class="flex items-center gap-3">
+            <i class="fas fa-arrow-right-from-bracket group-hover:translate-x-0.5 transition-transform"></i>
+            <span>Sign Out</span>
+          </span>
+
+          <span class="bg-slate-800 group-hover:bg-rose-500/20 text-slate-400
+          group-hover:text-rose-300 text-[10px] px-2 py-0.5 rounded-md transition-colors">Shift End</span>
+        </button>
+      </div>
+    </aside>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!------------- MAIN CONTENT START ------------->
+    <main class="flex-1 lg:ml-72 p-4 md:p-8 min-w-0">
+
+      <div class="glass-card rounded-2xl p-4 sm:p-5 md:p-6 mb-6 md:mb-8 flex flex-col 
+      md:flex-row md:items-center justify-between gap-4">
+
+        <div>
+          <h1 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-white tracking-tight">
+            Appointment Management
+          </h1>
+
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">
+            Manage patient bookings, consultation timing, and status tracking
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div class="relative w-full sm:w-64 md:w-72">
+
+            <label for="searchInput" class="sr-only">Search Appointments</label>
+            <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+
+            <input type="text" id="searchInput" placeholder="Search appointments..." class="w-full pl-11 
+            pr-4 py-2.5 rounded-xl glass-input text-sm outline-none transition-all placeholder:text-slate-500" />
+          </div>
+
+          <button id="addAppointmentBtn" type="button" class="bg-gradient-to-r from-cyan-500 to-cyan-600
+           hover:from-cyan-400 hover:to-cyan-500 text-white font-semibold px-5 py-2.5 rounded-xl shadow-lg
+            shadow-cyan-500/20 transition-all duration-300 flex items-center justify-center gap-2 text-sm 
+            whitespace-nowrap cursor-pointer">
+            <i class="fas fa-plus text-xs"></i>
+            <span>Add Appointment</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- STATS CARDS -->
+      <div class="grid grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-6 md:mb-8">
+
+        <!-- Doctor Card -->
+        <div onclick="window.location.href='../doctor/index.html'" class="group relative bg-slate-900/40 
+         backdrop-blur-md border border-slate-800/80 hover:border-cyan-500/50 p-3.5 sm:p-5 rounded-2xl transition-all
+         duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-slate-400 group-hover:text-cyan-400
+             transition-colors truncate">Doctors</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 
+            text-cyan-400 flex items-center justify-center group-hover:bg-cyan-500 group-hover:text-slate-950 
+            transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-user-doctor text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="doctorCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 
+            rounded-md border border-emerald-500/20">+12%</span>
+          </div>
+        </div>
+
+        <!-- Patients Card -->
+        <div onclick="window.location.href='../paitent/index.html'" class="group relative bg-slate-900/40 
+         backdrop-blur-md border border-slate-800/80 hover:border-emerald-500/50 p-3.5 sm:p-5 rounded-2xl 
+         transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-slate-400
+           group-hover:text-emerald-400 transition-colors truncate">Patients</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20
+           text-emerald-400 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-slate-950
+            transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-hospital-user text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="patientCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 
+          rounded-md border border-emerald-500/20">+5%</span>
+          </div>
+        </div>
+
+        <!-- Appointments Card -->
+        <div onclick="window.location.href='../appointment/index.html'" class="group relative
+         bg-slate-900/40 backdrop-blur-md border border-purple-500/50 p-3.5 sm:p-5 rounded-2xl transition-all
+         duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-purple-400 truncate">Appointments</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 border border-purple-500/20
+             text-purple-400 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-slate-950
+             transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-calendar-check text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="appointmentCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-purple-400 bg-purple-500/10 px-1.5 py-0.5 
+              rounded-md border border-purple-500/20">Active</span>
+          </div>
+        </div>
+
+        <!-- Department Card -->
+        <div onclick="window.location.href='../department/index.html'" class="group relative 
+         bg-slate-900/40 backdrop-blur-md border border-slate-800/80 hover:border-amber-500/50 p-3.5 sm:p-5 
+         rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/5
+         cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-slate-400 group-hover:text-amber-400 
+              transition-colors truncate">Depts</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 border border-amber-500/20 
+              text-amber-400 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-slate-950 
+              transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-sitemap text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="departmentCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded-md">Total</span>
+          </div>
+        </div>
+
+        <!-- Staff Card -->
+        <div onclick="window.location.href='../staff/index.html'" class="group relative bg-slate-900/40
+         backdrop-blur-md border border-slate-800/80 hover:border-rose-500/50 p-3.5 sm:p-5 rounded-2xl transition-all
+         duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-slate-400 group-hover:text-rose-400 
+             transition-colors truncate">Staff</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-500/10 border border-rose-500/20 
+             text-rose-400 flex items-center justify-center group-hover:bg-rose-500 group-hover:text-slate-950 
+             transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-users-gear text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="staffCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded-md">Shift</span>
+          </div>
+        </div>
+
+        <!-- Messages Card -->
+        <div onclick="window.location.href='../messages/index.html'" class="group relative bg-slate-900/40 
+         backdrop-blur-md border border-slate-800/80 hover:border-indigo-500/50 p-3.5 sm:p-5 rounded-2xl 
+         transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold tracking-wide text-slate-400
+              group-hover:text-indigo-400 transition-colors truncate">Messages</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20 
+             text-indigo-400 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-slate-950
+             transition-all duration-300 shrink-0 ml-1">
+              <i class="fas fa-comments text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="messageCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-cyan-400 bg-cyan-500/10 px-1.5 py-0.5 
+              rounded-md border border-cyan-500/20">New</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATA TABLE -->
+      <div class="glass-card rounded-2xl overflow-hidden w-full">
+        <div class="p-4 sm:p-5 border-b border-slate-800 flex items-center justify-between">
+          <h2 class="text-base sm:text-lg font-bold text-white flex items-center gap-2.5">
+            <i class="fas fa-calendar-alt text-cyan-400"></i> Appointment Schedule
+          </h2>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-sm text-slate-300">
+            <thead class="bg-slate-950/80 border-b border-slate-800 text-slate-400 uppercase text-[11px]
+              font-bold tracking-wider">
+              <tr>
+                <th scope="col" class="py-3.5 px-3 text-center">#</th>
+                <th scope="col" class="py-3.5 px-3">Patient Name</th>
+                <th scope="col" class="py-3.5 px-6">Doctor</th>
+                <th scope="col" class="py-3.5 px-6">Date</th>
+                <th scope="col" class="py-3.5 px-3">Time</th>
+                <th scope="col" class="py-3.5 px-3">Reason</th>
+                <th scope="col" class="py-3.5 px-3 text-center">Status</th>
+                <th scope="col" class="py-3.5 px-3 text-center">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="appointmentTableBody">
+              <tr>
+                <td colspan="8" class="text-center p-10">
+                  <div class="flex flex-col items-center justify-center space-y-3">
+                    <i class="fas fa-spinner fa-spin text-3xl text-cyan-400"></i>
+                    <span class="text-xs text-slate-400 font-medium">Loading appointments database...</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!------------- MAIN CONTENT END ------------->
+
+
+  <!------------- MODAL ADD / EDIT APPOINTMENT START ------------->
+  <div id="appointmentModal" class="fixed inset-0 hidden bg-slate-950/85 backdrop-blur-xl flex items-center
+   justify-center z-50 p-4 sm:p-6 overflow-y-auto">
+
+    <div class="relative w-full max-w-2xl my-auto">
+      <div class="absolute -inset-0.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-500 
+       rounded-[2.5rem] blur-xl opacity-30">
+      </div>
+
+      <!-- MAIN MODAL CONTAINER -->
+      <div class="relative w-full rounded-[2rem] bg-slate-900/95 border border-slate-700/50 shadow-2xl
+       backdrop-blur-2xl mb-8 overflow-visible">
+
+        <!-- MODAL HEADER -->
+        <div class="px-6 sm:px-8 py-5 bg-slate-950/40 border-b border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 p-[1px]
+             shadow-lg shadow-cyan-500/20">
+
+              <div class="w-full h-full bg-slate-950 rounded-[15px] flex items-center justify-center
+                text-cyan-400 text-xl">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+            </div>
+
+            <div>
+              <h2 id="modalTitle" class="text-xl sm:text-2xl font-bold text-white tracking-tight">Add Appointment</h2>
+              <p class="text-xs text-slate-400 mt-0.5 font-medium">Schedule a consultation slot with clinical precision
+              </p>
+            </div>
+          </div>
+
+          <button id="closeModalCross" type="button" aria-label="Close modal" class="w-9 h-9 rounded-xl bg-slate-800/50
+            border border-slate-700/50 text-slate-400 hover:text-white hover:bg-slate-800 flex items-center 
+            justify-center transition-all cursor-pointer active:scale-95">
+            <i class="fas fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- MODAL FORM -->
+        <form id="appointmentForm" class="p-6 sm:p-8 space-y-5">
+
+          <!-- PATIENT & DOCTOR ROW -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <!-- PATIENT NAME -->
+            <div class="relative">
+              <label class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+                <i class="fa-solid fa-user-injured mr-1 text-cyan-400"></i> Patient Name
+              </label>
+
+              <select id="patientName" required class="hidden">
+                <option value="" disabled selected>Select Patient</option>
+              </select>
+
+              <!-- Dropdown -->
+              <div id="patientCustomSelect" class="custom-dropdown-trigger w-full px-4 py-3 rounded-xl border 
+               border-slate-800 bg-slate-950/80 text-slate-100 text-sm font-medium outline-none cursor-pointer
+               flex items-center justify-between transition-all">
+                <span class="selected-value text-slate-500">Select Patient</span>
+                <i class="fa-solid fa-chevron-down text-xs text-slate-500 transition-transform duration-200"></i>
+              </div>
+
+              <!-- Dropdown Options Menu -->
+              <div id="patientDropdownMenu" class="custom-dropdown-menu absolute left-0 right-0 top-full
+               mt-2 bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden 
+               p-1 space-y-0.5 backdrop-blur-xl">
+                <!-- Options dynamically -->
+              </div>
+            </div>
+
+            <!-- DOCTOR NAME DROPDOWN -->
+            <div class="relative">
+              <label class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+                <i class="fa-solid fa-user-md mr-1 text-blue-400"></i> Doctor Name
+              </label>
+
+              <select id="doctorName" required class="hidden">
+                <option value="" disabled selected>Select Doctor</option>
+              </select>
+
+              <div id="doctorCustomSelect" class="custom-dropdown-trigger w-full px-4 py-3 rounded-xl border
+               border-slate-800 bg-slate-950/80 text-slate-100 text-sm font-medium outline-none cursor-pointer
+               flex items-center justify-between transition-all">
+                <span class="selected-value text-slate-500">Select Doctor</span>
+                <i class="fa-solid fa-chevron-down text-xs text-slate-500 transition-transform duration-200"></i>
+              </div>
+
+              <div id="doctorDropdownMenu" class="custom-dropdown-menu absolute left-0 right-0 top-full mt-2 
+                bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden 
+                p-1 space-y-0.5 backdrop-blur-xl">
+                <!-- Options dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <!-- DATE & TIME ROW -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <div>
+              <label for="appointmentDate"
+                class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+                <i class="fa-regular fa-calendar-days mr-1 text-slate-400"></i> Consultation Date
+              </label>
+
+              <input type="date" id="appointmentDate" required class="w-full px-4 py-3 rounded-xl border border-slate-800 
+                bg-slate-950/80 text-slate-100 text-sm font-medium outline-none focus:border-cyan-500 focus:ring-1
+                focus:ring-cyan-500 transition-all [color-scheme:dark] cursor-pointer">
+            </div>
+
+            <div>
+              <label for="appointmentTime"
+                class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+                <i class="fa-regular fa-clock mr-1 text-slate-400"></i> Consultation Time
+              </label>
+
+              <input type="time" id="appointmentTime" required class="w-full px-4 py-3 rounded-xl border
+                border-slate-800 bg-slate-950/80 text-slate-100 text-sm font-medium outline-none focus:border-cyan-500
+                focus:ring-1 focus:ring-cyan-500 transition-all [color-scheme:dark] cursor-pointer">
+            </div>
+          </div>
+
+          <!-- REASON / SYMPTOMS -->
+          <div>
+            <label for="appointmentReason"
+              class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+              <i class="fa-solid fa-notes-medical mr-1 text-slate-400"></i> Reason / Symptoms
+            </label>
+
+            <input type="text" id="appointmentReason" placeholder="e.g. Regular Checkup / High Fever" required class="w-full
+            px-4 py-3 rounded-xl border border-slate-800 bg-slate-950/80 text-slate-100 text-sm font-medium outline-none
+            focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition-all placeholder:text-slate-600
+            placeholder:font-normal">
+          </div>
+
+          <!-- Dropdown -->
+          <div class="relative">
+            <label class="block font-bold text-[11px] uppercase tracking-wider text-slate-400 mb-2">
+              <i class="fa-solid fa-signal mr-1 text-slate-400"></i> Appointment Status
+            </label>
+
+            <select id="appointmentStatus" required class="hidden">
+              <option value="" disabled selected>Select Status</option>
+              <option value="approved">Approved</option>
+              <option value="Pending">Pending</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+
+            <!-- Button -->
+            <div id="statusCustomSelect" class="custom-dropdown-trigger w-full px-4 py-3 rounded-xl border 
+             border-slate-800 bg-slate-950/80 text-slate-100 text-sm font-medium outline-none cursor-pointer 
+             flex items-center justify-between transition-all hover:border-cyan-500/50">
+              <span class="selected-value text-slate-500">Select Status</span>
+              <i class="fa-solid fa-chevron-down text-xs text-slate-500 transition-transform duration-200"
+                id="modal-status-arrow"></i>
+            </div>
+
+            <!-- Options Menu -->
+            <div id="statusDropdownMenu" class="custom-dropdown-menu absolute left-0 right-0 bottom-full mb-2 
+              bg-slate-950 border border-slate-800 rounded-xl shadow-2xl max-h-56 overflow-y-auto z-50 hidden 
+              p-1 space-y-0.5 backdrop-blur-xl">
+
+              <div class="custom-option px-4 py-2.5 rounded-lg text-sm text-emerald-400 font-semibold 
+                hover:bg-emerald-500/10 cursor-pointer transition-colors flex items-center gap-2"
+                data-value="approved">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Approved
+              </div>
+
+              <div class="custom-option px-4 py-2.5 rounded-lg text-sm text-amber-400 font-semibold 
+                hover:bg-amber-500/10 cursor-pointer transition-colors flex items-center gap-2" data-value="Pending">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span> Pending
+              </div>
+
+              <div class="custom-option px-4 py-2.5 rounded-lg text-sm text-rose-400 font-semibold 
+                hover:bg-rose-500/10 cursor-pointer transition-colors flex items-center gap-2" data-value="Rejected">
+                <span class="w-2 h-2 rounded-full bg-rose-400"></span> Rejected
+              </div>
+            </div>
+          </div>
+
+          <!-- BUTTONS -->
+          <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800/80">
+            <button id="cancelModal" type="button" class="px-5 py-2.5 rounded-xl bg-slate-800/40 hover:bg-slate-800
+              border border-slate-700/60 text-slate-300 hover:text-white text-xs font-semibold uppercase
+              tracking-wider transition-all cursor-pointer"> Cancel
+            </button>
+
+            <button id="saveAppointmentBtn" type="submit" class="relative group overflow-hidden px-6 py-2.5 rounded-xl 
+              bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-600 text-white text-xs font-bold uppercase 
+              tracking-wider shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all active:scale-95 
+              cursor-pointer">
+
+              <span class="relative z-10 flex items-center gap-2">
+                <i class="fa-solid fa-shield-check text-sm"></i> Save Appointment
+              </span>
+
+              <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 
+                transition-transform duration-300">
+              </div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Module JS -->
+  <script type="module" src="./index.js"></script>
+
+  <!------------- MODAL ADD / EDIT APPOINTMENT END ------------->
+
+</body>
+
+</html>

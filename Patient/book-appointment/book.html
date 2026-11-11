@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Appointment - ClinicBook</title>
+
+    <!-- SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+  100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+  <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+  fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+  5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+    <!-- TAILWIND CSS CDN LINK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONT AWESOME ICON LINK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+</head>
+    
+<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex items-center justify-center p-4 py-8 
+ sm:py-12 selection:bg-cyan-500 selection:text-white">
+
+    <!-------------- SECTION ONE START -------------->
+    <div class="w-full max-w-2xl mx-auto space-y-6">
+
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-xl sm:text-2xl font-bold text-slate-100 tracking-wide">Book New Appointment</h1>
+                <p class="text-xs text-slate-400 mt-0.5">Schedule a session with a certified specialist</p>
+            </div>
+
+            <!-- Back to Dashboard Btn -->
+            <a href="../index.html" class="self-start sm:self-auto px-4 py-2 bg-slate-900 hover:bg-slate-800 
+                text-cyan-400 border border-cyan-500/30 text-xs font-bold rounded-xl transition-all 
+                flex items-center gap-2 cursor-pointer shadow-sm shrink-0">
+                <i class="fa-solid fa-arrow-left"></i> Back to Dashboard
+            </a>
+        </div>
+
+        <!-- Card Form -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl sm:rounded-3xl p-5 
+            sm:p-8 shadow-2xl shadow-cyan-950/20 backdrop-blur-xl">
+            <form id="appointmentForm" class="space-y-4 sm:space-y-5">
+
+                <!-- DOCTOR DROPDOWN -->
+                <div class="relative">
+                    <label for="customDoctorSelectBtn"
+                        class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                        <i class="fa-solid fa-user-doctor text-cyan-400 mr-1.5"></i> Select Doctor
+                    </label>
+
+                    <!-- Doctor ID -->
+                    <input type="hidden" id="selectedDoctorId" name="selectedDoctorId" required />
+
+                    <!--Dropdown Button -->
+                    <button type="button" id="customDoctorSelectBtn" class="w-full p-3.5 bg-slate-950/80 border
+                         border-slate-800 hover:border-slate-700 rounded-2xl text-xs sm:text-sm text-slate-300
+                         flex items-center justify-between transition-all focus:outline-none focus:ring-2 
+                         focus:ring-cyan-500/50 cursor-pointer">
+
+                        <span id="selectedDoctorText" class="flex items-center gap-2 text-slate-400 truncate pr-2">
+                            <i class="fa-solid fa-stethoscope text-slate-500 shrink-0"></i> Loading doctors...
+                        </span>
+                        
+                        <i class="fa-solid fa-chevron-down text-xs text-slate-500 transition-transform 
+                        duration-200 shrink-0" id="dropdownArrow"></i>
+                    </button>
+
+                    <!-- Dropdown List Popup -->
+                    <div id="doctorDropdownList" class="hidden absolute z-30 left-0 right-0 mt-2 bg-slate-900/95 
+                        border border-slate-800 rounded-2xl shadow-2xl backdrop-blur-xl max-h-52 sm:max-h-60 
+                        overflow-y-auto divide-y divide-slate-800/50">
+                        <!-- Dynamic Doctor Options will be injected here -->
+                    </div>
+                </div>
+
+                <!-- DATE & TIME -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label for="appDate" class="block text-xs font-bold uppercase tracking-wider
+                             text-slate-400 mb-2">
+                            <i class="fa-solid fa-calendar-day text-cyan-400 mr-1.5"></i> Date
+                        </label>
+
+                        <input type="date" id="appDate" required class="w-full p-3.5 bg-slate-950/80 border 
+                            border-slate-800 rounded-2xl text-xs sm:text-sm text-slate-200 focus:ring-2 
+                            focus:ring-cyan-500/50 focus:border-cyan-500 outline-none transition-all 
+                            [color-scheme:dark]" />
+                    </div>
+
+                    <div>
+                        <label for="appTime" class="block text-xs font-bold uppercase tracking-wider
+                             text-slate-400 mb-2">
+                            <i class="fa-solid fa-clock text-cyan-400 mr-1.5"></i> Time Slot
+                        </label>
+
+                        <input type="time" id="appTime" required class="w-full p-3.5 bg-slate-950/80 border 
+                            border-slate-800 rounded-2xl text-xs sm:text-sm text-slate-200 focus:ring-2 
+                            focus:ring-cyan-500/50 focus:border-cyan-500 outline-none transition-all
+                            [color-scheme:dark]" />
+                    </div>
+                </div>
+
+                <!-- REASON / PROBLEM -->
+                <div>
+                    <label for="reason" class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
+                        <i class="fa-solid fa-notes-medical text-cyan-400 mr-1.5"></i> Reason for Visit
+                    </label>
+
+                    <textarea id="reason" rows="3" placeholder="Briefly describe your symptoms or health issue..."
+                        required class="w-full p-3.5 bg-slate-950/80 border border-slate-800 rounded-2xl text-xs 
+                        sm:text-sm text-slate-200 placeholder-slate-600 focus:ring-2 focus:ring-cyan-500/50
+                        focus:border-cyan-500 outline-none transition-all resize-none"></textarea>
+                </div>
+
+                <!-- SUBMIT BUTTON -->
+                <button type="submit" id="submitBtn" class="w-full py-3.5 sm:py-4 bg-gradient-to-r from-cyan-500 
+                    to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 text-xs sm:text-sm
+                    font-bold rounded-2xl transition-all shadow-lg shadow-cyan-500/20 active:scale-[0.99] 
+                    flex items-center justify-center gap-2 cursor-pointer mt-2">
+                    <i class="fa-solid fa-paper-plane"></i> Confirm Appointment Request
+                </button>
+            </form>
+
+            <!-- Modal Popup -->
+            <div id="statusModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/70 
+                backdrop-blur-md transition-all">
+
+                <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-2xl 
+                    sm:rounded-3xl p-5 sm:p-6 shadow-2xl text-center space-y-4 max-h-[90vh] overflow-y-auto">
+
+                    <div id="modalIconContainer" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl mx-auto flex items-center 
+                        justify-center text-xl sm:text-2xl shrink-0">
+                        <!-- Dynamic Icon -->
+                    </div>
+
+                    <div>
+                        <h3 id="modalTitle" class="text-base sm:text-lg font-bold text-slate-100"></h3>
+                        <p id="modalMessage" class="text-xs text-slate-400 mt-1 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Days & Time Info Box -->
+                    <div id="modalDoctorSchedule" class="hidden bg-slate-950/80 border border-slate-800/80 
+                        rounded-2xl p-3.5 text-left text-xs space-y-2">
+
+                        <p class="text-slate-400 font-bold uppercase tracking-wider
+                             text-[10px] flex items-center gap-1.5">
+                            <i class="fa-solid fa-calendar-check text-cyan-400"></i> Doctor's Schedule
+                        </p>
+
+                        <div class="flex items-center justify-between text-slate-300 text-[11px] sm:text-xs">
+                            <span class="text-slate-500">Available Days:</span>
+                            <span id="schedDays" class="font-semibold text-cyan-400 text-right"></span>
+                        </div>
+
+                        <div class="flex items-center justify-between text-slate-300 text-[11px] sm:text-xs">
+                            <span class="text-slate-500">Working Hours:</span>
+                            <span id="schedTime" class="font-semibold text-cyan-400 text-right"></span>
+                        </div>
+                    </div>
+
+                    <button type="button" id="closeModalBtn" class="w-full py-3 bg-slate-800 hover:bg-slate-700
+                         text-slate-200 text-xs font-bold rounded-xl transition-all cursor-pointer">
+                        Got it, Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODULE JS -->
+    <script type="module" src="./book.js"></script>
+
+    <!-------------- SECTION ONE END -------------->
+
+</body>
+
+</html>

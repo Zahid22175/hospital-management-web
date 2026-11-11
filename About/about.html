@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | ClinicBook Healthcare</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+    100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+    <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+    fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+    5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<style>
+  html,
+  body {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  * {
+    box-sizing: border-box !important;
+  }
+</style>
+</head>
+
+<body class="selection:bg-cyan-500 selection:text-white">
+
+  <div class="w-full max-w-full overflow-x-hidden">
+
+    <!-------------- NAVBAR SECTION START -------------->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 w-full shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center gap-4">
+
+        <!-- Logo -->
+        <a href="../index.html" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-2xl
+             flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-tooth text-lg"></i>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+              Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+            </span>
+            <span class="text-[9px] font-bold tracking-widest text-cyan-600 uppercase mt-0.5">
+              Dental & Smile Care</span>
+          </div>
+        </a>
+
+        <!-- Hamburger Button -->
+        <button id="menu-toggle" aria-label="Toggle navigation menu" class="lg:hidden text-slate-700 hover:text-cyan-600
+           w-10 h-10 rounded-xl hover:bg-slate-100 flex items-center justify-center text-xl transition cursor-pointer">
+          <i id="menu-icon" class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+
+          <!-- Home -->
+          <a href="../index.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+           hover:bg-slate-100/80 rounded-xl transition">Home </a>
+
+          <!-- About -->
+          <a href="../About/about.html" class="px-3 py-2 text-s font-bold text-sky-500 bg-blue-50 rounded-xl
+              transition">About </a>
+
+          <!-- Service -->
+          <a href="../Service/service.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+            hover:bg-slate-100/80 rounded-xl transition">Services </a>
+
+          <!-- Contact -->
+          <a href="../Contact/contact.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+             hover:bg-slate-100/80 rounded-xl transition">Contact </a>
+        </div>
+
+        <!-- Book Now Btn -->
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="../book-Appointment/book.html" target="_blank" class="book-now-btn inline-flex items-center gap-2
+           bg-gradient-to-r from-sky-500 to-sky-500 hover:from-sky-700 hover:to-sky-600 text-white text-s font-bold
+           px-4 py-2.5 rounded-xl shadow-md shadow-sky-500/20 transition transform active:scale-95">
+            <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+          <div class="h-4 w-px bg-slate-200 my-auto"></div>
+
+          <!-- Login Btn -->
+          <a id="login-btn" href="../login/login.html" class="inline-flex items-center gap-2 bg-sky-500
+           hover:bg-sky-400 text-white text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20 transition 
+           transform active:scale-95">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Login</span> </a>
+
+          <!-- Logout Btn -->
+          <button id="logout-btn" class="hidden inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white
+           text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-red-500/20 transition active:scale-95 
+            cursor-pointer">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="lg:hidden fixed top-0 left-0 h-screen w-72 bg-white shadow-2xl z-50 
+       transform -translate-x-full transition-transform duration-300 ease-in-out p-5 flex flex-col justify-between
+       overflow-y-auto">
+        <div>
+
+          <!-- Logo & Close Button ) -->
+          <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+            <div class="flex items-center gap-2">
+
+              <div class="w-8 h-8 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-xl 
+                flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 
+                transition-transform">
+                <i class="fa-solid fa-tooth text-sm"></i>
+              </div>
+              <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+                Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+              </span>
+            </div>
+
+            <!-- Close Button Icon -->
+            <button id="close-menu-btn" class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg flex 
+              items-center justify-center transition cursor-pointer">
+              <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Home -->
+          <div class="p-4 space-y-3">
+            <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600 
+               hover:bg-slate-100/80 hover:text-sky-500 rounded-xl transition"> Home </a>
+
+            <!-- About -->
+            <a href="../About/about.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-sky-500
+               bg-blue-50 rounded-xl"> About </a>
+
+            <!-- Services -->
+            <a href="../Service/service.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold 
+               text-slate-600 hover:bg-slate-100/80 hover:text-sky-500 rounded-xl transition"> Services </a>
+
+            <!-- Contact -->
+            <a href="../Contact/contact.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold 
+               text-slate-600 hover:bg-slate-100/80 hover:text-sky-500 rounded-xl transition"> Contact </a>
+
+            <!-- Book Now Btn -->
+            <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+              <a href="../book-Appointment/book.html" class="flex items-center justify-center gap-2 w-full
+                 bg-gradient-to-r from-sky-500 to-sky-600 text-white text-xs font-bold py-3 rounded-xl shadow-md 
+                 shadow-sky-500/20"> <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+              <!-- Login Btn -->
+              <div class="grid grid-cols-2 gap-2 mt-1">
+                <a id="login-btn-mobile" href="../login/login.html" class="flex items-center justify-center gap-2 
+                    py-2.5 bg-sky-500 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md 
+                    shadow-blue-500/20 transition active:scale-95">
+                  <i class="fa-solid fa-right-to-bracket"></i>
+                  <span>Login</span> </a>
+
+                <!-- Logout Btn -->
+                <button id="logout-btn-mobile" class="hidden text-center py-2.5 bg-red-600 text-white text-xs font-bold
+                 rounded-xl hover:bg-red-700 flex items-center justify-center gap-2">
+                  <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </nav>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!-------------- HERO BANNER SECTION START -------------->
+    <section class="relative bg-slate-900 py-20 lg:py-28 overflow-hidden">
+
+      <!-- Image -->
+      <div class="absolute inset-0 z-0 opacity-25">
+        <img src="../image/about/carousel.jpg" alt="Dental Clinic Header" class="w-full h-full object-cover">
+      </div>
+
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/80 to-sky-900/70 z-0"></div>
+
+      <div class="absolute -top-12 -left-12 w-64 h-64 bg-sky-500/10 rounded-full blur-3xl pointer-events-none">
+      </div>
+
+      <div class="absolute -bottom-12 -right-12 w-64 h-64 bg-sky-400/10 rounded-full blur-3xl pointer-events-none">
+      </div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 text-center">
+
+        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-sky-500/10 
+        text-sky-400 border border-sky-500/20 uppercase tracking-widest mb-4 backdrop-blur-sm">
+          <i class="fa-solid fa-hospital-user text-xs"></i> Know More About Us </span>
+
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+          About Our Dental Clinic </h1>
+
+        <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-8 font-normal leading-relaxed">
+          Dedicated to providing world-class dental care with modern technology, gentle treatments, and
+          certified specialists. </p>
+
+        <!-- Home Link -->
+        <nav class="inline-flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md px-5 
+              py-2.5 rounded-full text-xs sm:text-sm font-semibold">
+          <a href="../index.html" class="text-slate-300 hover:text-sky-400 transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-house text-xs"></i> Home </a>
+
+          <!-- About Link -->
+          <span class="text-slate-500"><i class="fa-solid fa-chevron-right text-[10px]"></i></span>
+          <span class="text-sky-400 font-bold">About Us</span>
+        </nav>
+      </div>
+    </section>
+    <!-------------- HERO BANNER SECTION END -------------->
+
+
+    <!-------------- ABOUT US SECTION START -------------->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div class="lg:col-span-5 flex flex-col justify-center">
+
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-100
+             text-sky-600 text-xs font-bold uppercase tracking-wider w-fit mb-3">
+            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            About Our Clinic
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight tracking-tight mb-4">
+            Best Dental Clinic <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">That You
+              Can Trust</span>
+          </h2>
+
+          <p class="text-slate-600 text-base sm:text-lg leading-relaxed mb-6 font-normal">
+            We deliver modern, gentle, and comprehensive dental care for your entire family. Utilizing
+            cutting-edge technology, our certified specialists ensure pain-free treatments with exceptional
+            results. </p>
+
+          <!-- Feature 1 -->
+          <div class="group flex items-start gap-4 p-3.5 rounded-2xl bg-slate-50/60 hover:bg-white border 
+           border-slate-100 hover:border-sky-100 hover:shadow-lg hover:shadow-sky-500/5 transition-all 
+           duration-300 mb-3 cursor-pointer">
+
+            <div class="w-11 h-11 rounded-xl bg-sky-500 text-white flex items-center justify-center text-lg 
+              shrink-0 shadow-md shadow-sky-500/20 group-hover:scale-110 transition-transform duration-300">
+              <i class="fa-solid fa-tooth text-3xl"></i>
+            </div>
+            <div>
+
+              <h4 class="font-bold text-sm sm:text-base text-slate-900 group-hover:text-sky-600 transition-colors">
+                Complete Dental Care</h4>
+
+              <p class="text-slate-500 text-sm mt-1 leading-relaxed">
+                From routine checkups to complex surgeries, all your dental needs under one roof.
+              </p>
+            </div>
+          </div>
+
+          <!-- Feature 2 -->
+          <div class="group flex items-start gap-4 p-3.5 rounded-2xl bg-slate-50/60 hover:bg-white border
+            border-slate-100 hover:border-sky-100 hover:shadow-lg hover:shadow-sky-500/5 transition-all
+            duration-300 cursor-pointer">
+
+            <div class="w-11 h-11 rounded-xl bg-white text-sky-500 border border-slate-200/80 flex items-center 
+              justify-center text-lg shrink-0 shadow-sm group-hover:bg-sky-500 group-hover:text-white 
+              group-hover:border-sky-500 group-hover:scale-110 transition-all duration-300">
+              <i class="fa-solid fa-hand-holding-dollar text-3xl"></i>
+            </div>
+
+            <div>
+              <h4 class="font-bold text-sm sm:text-base text-slate-900 group-hover:text-sky-600 transition-colors">
+                Affordable Pricing</h4>
+              <p class="text-slate-500 text-sm mt-1 leading-relaxed">
+                Premium quality dental treatments tailored to match your budget seamlessly.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Video Feature Image -->
+        <div class="lg:col-span-4 relative group">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl border border-slate-100">
+            <img src="../image/about/about.jpg" class="w-full h-[360px] sm:h-[440px] lg:h-[480px] object-cover 
+            group-hover:scale-105 transition-transform duration-700 ease-out" alt="Patient at dentist office" />
+
+            <div class="absolute inset-0 bg-slate-900/20 group-hover:bg-slate-900/10 transition-colors duration-300">
+            </div>
+
+            <!-- Play Button -->
+            <div class="absolute inset-0 flex items-center justify-center">
+              <button aria-label="Play Video" class="relative group/btn flex items-center justify-center">
+                <span class="absolute w-16 h-16 rounded-full bg-sky-500/40 animate-ping"></span>
+                <span class="relative w-14 h-14 rounded-full bg-sky-500 text-white flex items-center justify-center 
+                  text-lg shadow-xl shadow-sky-500/40 group-hover/btn:scale-110 transition-transform duration-300">
+                  <i class="fa-solid fa-play ml-1"></i>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="lg:col-span-3 flex flex-col justify-start space-y-4">
+          <div class="relative overflow-hidden rounded-3xl shadow-xl border border-slate-100 group">
+            <img src="../image/about/about-1.jpg" class="w-full h-[280px] sm:h-[350px] lg:h-[390px] object-cover 
+            group-hover:scale-105 transition-transform duration-700 ease-out" alt="New teeth treatment" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent">
+            </div>
+          </div>
+
+          <!-- Button -->
+          <a href="../Contact/contact.html" class="inline-flex items-center justify-center gap-2.5 bg-sky-500
+           hover:bg-sky-600 text-white font-bold px-6 py-3.5 rounded-2xl shadow-md shadow-sky-500/20
+           hover:shadow-sky-500/35 hover:-translate-y-0.5 transition-all duration-300 text-center text-xs uppercase
+           tracking-wider w-full">
+            <span>Learn About Us</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-------------- ABOUT US SECTION END -------------->
+
+
+  <!-------------- COUNTER STATS SECTION START -------------->
+  <section class="relative bg-slate-900 py-16 sm:py-20 w-full overflow-hidden">
+
+    <!-- Dark Background -->
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900"></div>
+    <div class="absolute top-1/2 left-1/4 -translate-y-1/2 w-72 h-72 bg-sky-500/10 rounded-full blur-[100px]
+      pointer-events-none">
+    </div>
+
+    <div class="absolute top-1/2 right-1/4 -translate-y-1/2 w-72 h-72 bg-blue-500/10 rounded-full blur-[100px]
+       pointer-events-none">
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 divide-y lg:divide-y-0 lg:divide-x divide-slate-800">
+
+        <!-- Happy Patients -->
+        <div class="flex flex-col items-center text-center p-4 group cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex  items-center
+            justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white
+            group-hover:shadow-lg group-hover:shadow-sky-500/30 transition-all duration-300">
+            <i class="fa-solid fa-users"></i>
+          </div>
+
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r 
+            from-white via-slate-100 to-sky-400 tracking-tight">
+            1,452<span class="text-sky-400">+</span>
+          </h3>
+
+          <p class="text-slate-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-2 
+            group-hover:text-sky-300 transition-colors">
+            Happy Patients
+          </p>
+        </div>
+
+        <!-- Online Appointments -->
+        <div class="flex flex-col items-center text-center p-4 pt-8 lg:pt-4 group cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center 
+            justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white
+            group-hover:shadow-lg group-hover:shadow-sky-500/30 transition-all duration-300">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r 
+            from-white via-slate-100 to-sky-400 tracking-tight">
+            342<span class="text-sky-400">+</span>
+          </h3>
+
+          <p class="text-slate-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-2 
+            group-hover:text-sky-300 transition-colors">
+            Online Appointments </p>
+        </div>
+
+        <!-- Years Of Experience -->
+        <div class="flex flex-col items-center text-center p-4 pt-8 lg:pt-4 group cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center 
+            justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white
+            group-hover:shadow-lg group-hover:shadow-sky-500/30 transition-all duration-300">
+            <i class="fa-solid fa-award"></i>
+          </div>
+
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r 
+            from-white via-slate-100 to-sky-400 tracking-tight">
+            15<span class="text-sky-400">+</span>
+          </h3>
+
+          <p class="text-slate-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-2 
+            group-hover:text-sky-300 transition-colors">
+            Years Experience </p>
+        </div>
+
+        <!-- Doctors & Staff -->
+        <div class="flex flex-col items-center text-center p-4 pt-8 lg:pt-4 group cursor-pointer">
+          <div class="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-400 flex items-center
+             justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-sky-500 group-hover:text-white 
+             group-hover:shadow-lg group-hover:shadow-sky-500/30 transition-all duration-300">
+            <i class="fa-solid fa-user-doctor"></i>
+          </div>
+
+          <h3 class="text-3xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r
+             from-white via-slate-100 to-sky-400 tracking-tight">
+            72<span class="text-sky-400">+</span>
+          </h3>
+
+          <p class="text-slate-400 font-medium text-xs sm:text-sm tracking-wide uppercase mt-2 
+            group-hover:text-sky-300 transition-colors">
+            Doctors & Staff
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- COUNTER STATS SECTION END -------------->
+
+
+  <!-------------- HIGH END EQUIPMENTS SECTION START -------------->
+  <section id="equipment-section" class="py-16 sm:py-24 w-full bg-slate-50/50 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+
+        <div class="lg:col-span-5 relative w-full max-w-lg mx-auto lg:max-w-none group">
+
+          <!-- Image Card -->
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-white/80">
+            <img src="../image/about/Surgical.jpg  " alt="Female Dentist" class="w-full h-[400px] sm:h-[480px] 
+            lg:h-[520px] object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/20 via-transparent to-transparent">
+            </div>
+          </div>
+
+          <div class="absolute -bottom-6 -right-2 sm:-bottom-8 sm:right-6 bg-white/95 backdrop-blur-md w-20
+             h-20 sm:w-24 sm:h-24 rounded-3xl shadow-xl shadow-sky-500/10 flex items-center justify-center 
+             text-sky-500 text-3xl sm:text-4xl border border-sky-100 group-hover:rotate-6 transition-transform
+             duration-300">
+            <i class="fa-solid fa-tooth"></i>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 w-full mt-4 lg:mt-0">
+
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-50 border border-sky-100 
+            text-sky-600 text-xs font-bold uppercase tracking-wider w-fit mb-3">
+            <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+            Best Of The Best
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 mb-4 leading-tight tracking-tight">
+            High End <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">
+              Equipments</span>
+          </h2>
+
+          <p class="text-slate-600 mb-8 leading-relaxed text-base font-normal">
+            We utilize world-class diagnostic tools, surgical instruments, and ergonomic systems to ensure
+            unmatched precision, accuracy, and maximum patient comfort during every procedure. </p>
+
+          <div class="space-y-6 mb-8">
+
+            <!-- Progress Bar 1 -->
+            <div class="progress-item w-full">
+              <div class="flex justify-between mb-2 text-sm sm:text-base font-bold text-slate-800">
+                <span>Endodontic Equipment</span>
+                <span class="text-sky-600 font-extrabold percent">0%</span>
+              </div>
+
+              <div class="w-full bg-slate-200/80 rounded-full h-3 p-0.5 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-400 to-sky-600 h-2 rounded-full w-0 progress-bar shadow-sm 
+                  transition-all duration-1000 ease-out" data-progress="86"></div>
+              </div>
+            </div>
+
+            <!-- Progress Bar 2 -->
+            <div class="progress-item w-full">
+              <div class="flex justify-between mb-2 text-sm sm:text-base font-bold text-slate-800">
+                <span>Operatory Cabinetry</span>
+                <span class="text-sky-600 font-extrabold percent">0%</span>
+              </div>
+
+              <div class="w-full bg-slate-200/80 rounded-full h-3 p-0.5 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-400 to-sky-600 h-2 rounded-full w-0 progress-bar shadow-sm
+                   transition-all duration-1000 ease-out" data-progress="90"></div>
+              </div>
+            </div>
+
+            <!-- Progress Bar 3 -->
+            <div class="progress-item w-full">
+              <div class="flex justify-between mb-2 text-sm sm:text-base font-bold text-slate-800">
+                <span>Surgical Microscopes</span>
+                <span class="text-sky-600 font-extrabold percent">0%</span>
+              </div>
+
+              <div class="w-full bg-slate-200/80 rounded-full h-3 p-0.5 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-400 to-sky-600 h-2 rounded-full w-0 progress-bar shadow-sm 
+                  transition-all duration-1000 ease-out" data-progress="87"></div>
+              </div>
+            </div>
+
+            <!-- Progress Bar 4 -->
+            <div class="progress-item w-full">
+              <div class="flex justify-between mb-2 text-sm sm:text-base font-bold text-slate-800">
+                <span>Dental Operatory Lights</span>
+                <span class="text-sky-600 font-extrabold percent">0%</span>
+              </div>
+
+              <div class="w-full bg-slate-200/80 rounded-full h-3 p-0.5 overflow-hidden">
+                <div class="bg-gradient-to-r from-sky-400 to-sky-600 h-2 rounded-full w-0 progress-bar shadow-sm
+                   transition-all duration-1000 ease-out" data-progress="90"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <a href="#" class="inline-flex items-center justify-center gap-3 bg-sky-500 hover:bg-sky-600 text-white
+             font-bold px-8 py-3.5 rounded-2xl shadow-lg shadow-sky-500/20 hover:shadow-sky-500/35
+             hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto text-center">
+            <span>Learn More</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- HIGH END EQUIPMENTS SECTION END -------------->
+
+
+  <!-------------- SECTION SIX START -------------->
+  <section class="relative bg-slate-950 py-20 sm:py-28 w-full overflow-hidden text-white">
+
+    <!-- Effects Background -->
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none">
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+
+      <!-- Header Section -->
+      <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 sm:mb-20 gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 
+            text-sky-400 text-xs font-bold uppercase tracking-widest mb-3">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+            Our Seamless Process
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight">
+            Unfolds How Your Journey <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-blue-500">
+              At Dentcare</span>
+          </h2>
+        </div>
+
+        <a href="../Contact/contact.html" class="group inline-flex items-center justify-center gap-3 bg-gradient-to-r 
+           from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-bold px-8 py-4
+           rounded-2xl shadow-lg shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 transition-all
+           duration-300 w-full sm:w-auto text-center">
+          <span>Book Consultation</span>
+          <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+        </a>
+      </div>
+
+      <!-- Timeline Wrapper -->
+      <div class="relative w-full">
+
+        <div class="hidden md:block absolute top-12 left-10 right-10 h-0.5 bg-gradient-to-r from-sky-500/0
+           via-sky-500/40 to-blue-500/0 z-0">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 lg:gap-8 relative z-10">
+
+          <!-- STEP 1 -->
+          <div class="group relative bg-slate-900/60 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-slate-800
+             hover:border-sky-500/50 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2 transition-all 
+             duration-500 overflow-hidden cursor-pointer">
+
+            <!-- Background Watermark Number -->
+            <span class="absolute -right-2 -bottom-6 text-8xl font-black text-slate-800/30 group-hover:text-sky-500/10 
+              transition-colors duration-500 select-none">01</span>
+
+            <!-- Step Badge -->
+            <div class="relative z-10 w-14 h-14 bg-slate-800 group-hover:bg-sky-500 text-sky-400 group-hover:text-white 
+              rounded-2xl border border-slate-700 group-hover:border-sky-400 flex items-center justify-center text-lg
+               font-black mb-8 shadow-lg transition-all duration-500 group-hover:scale-110">
+              01
+            </div>
+
+            <h3 class="relative z-10 font-bold text-xl text-white mb-3 group-hover:text-sky-400 transition-colors">
+              Easy Booking
+            </h3>
+
+            <p class="relative z-10 text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+              Select your preferred time slot online with instant confirmation and automated reminders.
+            </p>
+          </div>
+
+          <!-- STEP 2 -->
+          <div class="group relative bg-slate-900/60 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-slate-800 
+            hover:border-sky-500/50 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2 transition-all 
+            duration-500 overflow-hidden cursor-pointer">
+
+            <!-- Background Watermark Number -->
+            <span class="absolute -right-2 -bottom-6 text-8xl font-black text-slate-800/30 group-hover:text-sky-500/10 
+              transition-colors duration-500 select-none">02</span>
+
+            <div class="relative z-10 w-14 h-14 bg-slate-800 group-hover:bg-sky-500 text-sky-400 
+              group-hover:text-white rounded-2xl border border-slate-700 group-hover:border-sky-400 flex items-center 
+              justify-center text-lg font-black mb-8 shadow-lg transition-all duration-500 group-hover:scale-110">
+              02 </div>
+
+            <h3 class="relative z-10 font-bold text-xl text-white mb-3 group-hover:text-sky-400 transition-colors">
+              Meet Specialist </h3>
+
+            <p class="relative z-10 text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+              In-depth consultation to understand your dental history and specific treatment goals.
+            </p>
+          </div>
+
+          <!-- STEP 3 -->
+          <div class="group relative bg-slate-900/60 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-slate-800
+             hover:border-sky-500/50 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2 transition-all 
+             duration-500 overflow-hidden cursor-pointer">
+
+            <!-- Background Watermark Number -->
+            <span class="absolute -right-2 -bottom-6 text-8xl font-black text-slate-800/30 group-hover:text-sky-500/10
+               transition-colors duration-500 select-none">03</span>
+
+            <div class="relative z-10 w-14 h-14 bg-slate-800 group-hover:bg-sky-500 text-sky-400 group-hover:text-white 
+              rounded-2xl border border-slate-700 group-hover:border-sky-400 flex items-center justify-center text-lg 
+              font-black mb-8 shadow-lg transition-all duration-500 group-hover:scale-110">
+              03 </div>
+
+            <h3 class="relative z-10 font-bold text-xl text-white mb-3 group-hover:text-sky-400 transition-colors">
+              Full Scan & Check </h3>
+
+            <p class="relative z-10 text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+              Painless HD 3D digital imaging to spot minor issues before they become major problems.
+            </p>
+          </div>
+
+          <!-- STEP 4 -->
+          <div class="group relative bg-slate-900/60 backdrop-blur-xl p-6 sm:p-8 rounded-3xl border border-slate-800 
+            hover:border-sky-500/50 hover:shadow-2xl hover:shadow-sky-500/10 hover:-translate-y-2 transition-all 
+            duration-500 overflow-hidden cursor-pointer">
+
+            <!-- Background Watermark Number -->
+            <span class="absolute -right-2 -bottom-6 text-8xl font-black text-slate-800/30 group-hover:text-sky-500/10
+              transition-colors duration-500 select-none">04</span>
+
+            <div class="relative z-10 w-14 h-14 bg-slate-800 group-hover:bg-sky-500 text-sky-400 group-hover:text-white
+               rounded-2xl border border-slate-700 group-hover:border-sky-400 flex items-center justify-center text-lg
+               font-black mb-8 shadow-lg transition-all duration-500 group-hover:scale-110">
+              04 </div>
+
+            <h3 class="relative z-10 font-bold text-xl text-white mb-3 group-hover:text-sky-400 transition-colors">
+              Care & Follow-up </h3>
+
+            <p class="relative z-10 text-slate-400 text-xs sm:text-sm leading-relaxed font-normal">
+              Personalized treatment roadmap with clear pricing and effortless checkout process.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- SECTION SIX END -------------->
+
+
+  <!-------------- MEET OUR TEAM SECTION START -------------->
+  <section class="py-16 sm:py-24 bg-gradient-to-b from-slate-50 via-sky-50/30 to-white w-full overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+
+      <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100/70 border border-sky-200/60 
+          text-sky-600 text-xs font-bold uppercase tracking-wider mb-4">
+          <span class="w-2 h-2 rounded-full bg-sky-500 animate-pulse"></span>
+          Our Doctors
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          Meet Our
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-500 to-blue-600">Specialists</span>
+        </h2>
+
+        <p class="text-slate-500 text-sm sm:text-base leading-relaxed">
+          Our team of dedicated dental professionals brings years of expertise, gentle care, and advanced technology to
+          ensure your best smile.
+        </p>
+      </div>
+
+      <!-- Doctors Cards Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-8">
+
+        <!-- DOCTOR CARD 1 -->
+        <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl 
+          hover:shadow-sky-500/15 border border-sky-100/80 transition-all duration-500 hover:-translate-y-2">
+
+          <!-- Image -->
+          <div class="relative h-[380px] sm:h-[420px] overflow-hidden">
+            <img src="../image/about/team-1.jpg"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              alt="Dr. Maya Navarro" />
+
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent 
+              opacity-60 group-hover:opacity-40 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4 p-5 rounded-2xl bg-white/90 backdrop-blur-md border 
+            border-white/50 shadow-lg group-hover:bg-white transition-all duration-300">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                  Maya Navarro </h3>
+
+                <p class="text-xs font-semibold text-sky-500 uppercase tracking-wider mt-0.5">
+                  Orthodontist </p>
+              </div>
+
+              <div class="w-9 h-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center
+                 group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <i class="fa-solid fa-plus text-xs group-hover:rotate-45 transition-transform duration-300"></i>
+              </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 pt-0 group-hover:pt-4 transition-all duration-300">
+                <div class="flex items-center gap-2 border-t border-slate-100 pt-3">
+
+                  <!-- Facebook -->
+                  <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a href="https://www.instagram.com/zahid_hussain1512" class="w-8 h-8 rounded-lg bg-slate-100 
+                   hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+
+                  <!-- Linkedin -->
+                  <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+
+                  <!-- Twitter -->
+                  <a href="https://x.com/" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-500 
+                    hover:text-white text-slate-600 flex items-center justify-center text-xs transition-colors">
+                    <i class="fab fa-x-twitter"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCTOR CARD 2 -->
+        <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl 
+          hover:shadow-sky-500/15 border border-sky-100/80 transition-all duration-500 hover:-translate-y-2">
+
+          <!-- Image -->
+          <div class="relative h-[380px] sm:h-[420px] overflow-hidden">
+            <img src="../image/about/team-2.jpg"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              alt="Dr. Roseanna Sykes" />
+
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent
+               opacity-60 group-hover:opacity-40 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4 p-5 rounded-2xl bg-white/90 backdrop-blur-md border
+             border-white/50 shadow-lg group-hover:bg-white transition-all duration-300">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                  Roseanna Sykes </h3>
+
+                <p class="text-xs font-semibold text-sky-500 uppercase tracking-wider mt-0.5">
+                  Senior Dentist
+                </p>
+              </div>
+
+              <div class="w-9 h-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center 
+                group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <i class="fa-solid fa-plus text-xs group-hover:rotate-45 transition-transform duration-300"></i>
+              </div>
+            </div>
+
+            <!-- Socail Link -->
+            <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 pt-0 group-hover:pt-4 transition-all duration-300">
+                <div class="flex items-center gap-2 border-t border-slate-100 pt-3">
+
+                  <!-- Facebook -->
+                  <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a href="https://www.instagram.com/zahid_hussain1512" class="w-8 h-8 rounded-lg bg-slate-100 
+                   hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+
+                  <!-- Linkedin -->
+                  <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+
+                  <!-- Twitter -->
+                  <a href="https://x.com/" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-500 
+                    hover:text-white text-slate-600 flex items-center justify-center text-xs transition-colors">
+                    <i class="fab fa-x-twitter"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCTOR CARD 3 -->
+        <div class="group relative bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl 
+          hover:shadow-sky-500/15 border border-sky-100/80 transition-all duration-500 hover:-translate-y-2">
+
+          <!-- Image -->
+          <div class="relative h-[380px] sm:h-[420px] overflow-hidden">
+            <img src="../image/about/team-3.jpg"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              alt="Dr. Luisa Haworth" />
+
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent 
+              opacity-60 group-hover:opacity-40 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <div class="absolute bottom-4 left-4 right-4 p-5 rounded-2xl bg-white/90 backdrop-blur-md border 
+            border-white/50 shadow-lg group-hover:bg-white transition-all duration-300">
+            <div class="flex items-center justify-between">
+
+              <div>
+                <h3 class="text-lg font-bold text-slate-900 group-hover:text-sky-600 transition-colors">
+                  Luisa Haworth </h3>
+
+                <p class="text-xs font-semibold text-sky-500 uppercase tracking-wider mt-0.5">
+                  Pediatric Dentist
+                </p>
+              </div>
+
+              <div class="w-9 h-9 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center 
+                group-hover:bg-sky-500 group-hover:text-white transition-all duration-300 shadow-sm">
+                <i class="fa-solid fa-plus text-xs group-hover:rotate-45 transition-transform duration-300"></i>
+              </div>
+            </div>
+
+            <!-- Socail Link -->
+            <div class="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-all duration-300 overflow-hidden">
+              <div class="min-h-0 pt-0 group-hover:pt-4 transition-all duration-300">
+                <div class="flex items-center gap-2 border-t border-slate-100 pt-3">
+
+                  <!-- Facebook -->
+                  <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-facebook-f"></i>
+                  </a>
+
+                  <!-- Instagram -->
+                  <a href="https://www.instagram.com/zahid_hussain1512" class="w-8 h-8 rounded-lg bg-slate-100 
+                   hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+
+                  <!-- Linkedin -->
+                  <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" class="w-8 h-8 rounded-lg 
+                   bg-slate-100 hover:bg-sky-500 hover:text-white text-slate-600 flex items-center justify-center
+                   text-xs transition-colors">
+                    <i class="fab fa-linkedin-in"></i>
+                  </a>
+
+                  <!-- Twitter -->
+                  <a href="https://x.com/" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-sky-500 
+                    hover:text-white text-slate-600 flex items-center justify-center text-xs transition-colors">
+                    <i class="fab fa-x-twitter"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- MEET OUR TEAM SECTION END -------------->
+
+
+  <!-------------- NEWSLETTER & FOOTER SECTION START -------------->
+  <section class="relative -mb-20 z-10 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto bg-sky-500 p-6 sm:p-10 flex justify-center rounded-lg shadow-xl">
+
+      <form class="flex flex-col sm:flex-row w-full max-w-3xl gap-0">
+        <input type="email" placeholder="Your Email" required class="w-full px-6 py-4 outline-none rounded-t
+           sm:rounded-t-none sm:rounded-l-lg bg-white text-slate-800 text-sm sm:text-base">
+
+        <button type="submit" class="bg-slate-900 text-white px-8 py-4 sm:py-0 rounded-b sm:rounded-b-none
+           sm:rounded-r-lg font-bold hover:bg-slate-800 transition whitespace-nowrap text-sm sm:text-base">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 text-white pt-32 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-16">
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Quick Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="../Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Laatest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="../Contact/contact.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Popular Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Popular Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="../Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Latest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="../Contact/contact.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get In Touch -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Get In Touch</h3>
+        <ul class="space-y-4 text-slate-300 text-sm sm:text-base">
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-sky-400 mt-1"></i>
+            <span>123 Street, New York, USA</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-envelope text-sky-400 mt-1"></i>
+            <span>info@example.com</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-phone text-sky-400 mt-1"></i>
+            <span>+012 345 67890</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Follow Us</h3>
+        <div class="flex gap-3">
+
+          <!-- Twitter Icon -->
+          <a href="https://twitter.com/yourusername" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+           w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <!-- Facebook Icon -->
+          <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="bg-sky-500 
+           hover:bg-sky-600 text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <!-- Linkedin Icon -->
+          <a href="https://www.linkedin.com/feed/" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+             w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <!-- Instagram Icon -->
+          <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="bg-sky-500 hover:bg-sky-600
+           text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800">
+      <div class="max-w-6xl mx-auto py-6 flex flex-col sm:flex-row justify-between items-center text-center 
+        sm:text-left gap-2 text-sm text-slate-400">
+        <p>© Your Site Name. All Rights Reserved.</p>
+        <p>
+          Designed by <span class="text-white font-semibold">HTML Codex</span> |
+          Distributed by <span class="text-white font-semibold">ThemeWagon</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./about.js"></script>
+
+  <!-------------- NEWSLETTER & FOOTER SECTION END -------------->
+
+
+
+</body>
+
+</html>

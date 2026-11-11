@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-950">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClinicBook - Doctor Portal</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100
+  100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+  <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+  fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+  5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#ecfeff',
+              500: '#06b6d4',
+              600: '#0891b2',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="h-full bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500 selection:text-white">
+
+  <!-------------- NAVBAR SECTION START -------------->
+  <div class="min-h-screen flex flex-col lg:flex-row overflow-x-hidden">
+
+    <!-- MOBILE NAVIGATION HEADER -->
+    <header class="lg:hidden bg-slate-900/80 backdrop-blur-md border-b border-slate-800 text-white p-4
+     flex items-center justify-between sticky top-0 z-40">
+
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500
+         flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-tooth text-base"></i>
+        </div>
+
+        <div class="truncate">
+          <h1 class="text-base font-black tracking-tight text-white truncate leading-none">
+            Clinic<span class="text-cyan-400">Book</span>
+          </h1>
+
+          <p class="text-[9px] text-cyan-400/90 uppercase tracking-widest font-semibold truncate mt-1">
+            DOCTOR PORTAL</p>
+        </div>
+      </div>
+
+      <button id="mobileMenuBtn" aria-label="Open Navigation Menu" class="p-2 text-slate-300 hover:text-white
+       hover:bg-slate-800 rounded-lg transition-colors focus:outline-none shrink-0 cursor-pointer">
+        <i class="fas fa-bars-staggered text-xl"></i>
+      </button>
+    </header>
+
+    <!-- SIDEBAR OVERLAY (MOBILE) -->
+    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-40 hidden
+       lg:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-screen w-72 bg-slate-900 border-r border-slate-800/80 
+      text-slate-300 p-6 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform 
+      duration-300 ease-in-out">
+
+      <!-- Mobile Close Button -->
+      <button id="closeSidebarBtn" aria-label="Close Navigation Menu" class="lg:hidden absolute top-5
+         right-5 text-slate-400 hover:text-white p-1 cursor-pointer">
+        <i class="fas fa-xmark text-xl"></i>
+      </button>
+
+      <!-- Desktop Header -->
+      <div class="mb-8 flex items-center gap-3.5 px-2">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 flex items-center
+            justify-center text-white font-bold text-xl shadow-xl shadow-cyan-500/20 shrink-0">
+          <i class="fa-solid fa-tooth text-lg"></i>
+        </div>
+
+        <div>
+          <h1 class="text-xl font-black tracking-tight text-white flex items-center leading-none">
+            Clinic<span class="bg-gradient-to-r from-cyan-400 to-cyan-400 bg-clip-text text-transparent">
+              Book</span>
+          </h1>
+
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase 
+           tracking-widest text-cyan-400 mt-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> DOCTOR PORTAL
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Clinical Controls</div>
+      <nav class="space-y-1.5 flex-1 overflow-y-auto pr-1">
+
+        <!-- Appointments -->
+        <a href="index.html?tab=appointmentsTab" class="nav-link flex items-center gap-3.5 px-3.5 py-3 rounded-xl 
+           text-slate-400 hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-calendar-check w-5 text-center text-slate-500 group-hover:text-cyan-400
+             transition-colors"></i>
+          <span>Appointments</span>
+        </a>
+
+        <!-- Prescriptions -->
+        <a href="./prescriptions/prescription.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl
+           text-slate-400 hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-pills w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Prescriptions</span>
+        </a>
+
+        <!-- My Patients -->
+        <a href="./my-patients/patients.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl 
+           text-slate-400 hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-hospital-user w-5 text-center text-slate-500 group-hover:text-cyan-400
+             transition-colors"></i>
+          <span>My Patients</span>
+        </a>
+
+        <!-- Account Settings Heading -->
+        <div class="pt-4 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3">
+          Account Settings
+        </div>
+
+        <!-- Security & Password -->
+        <a href="index.html?tab=securityTab" class="nav-link flex items-center gap-3.5 px-3.5 py-3 rounded-xl
+           text-slate-400 hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-shield-halved w-5 text-center text-slate-500
+             group-hover:text-cyan-400 transition-colors"></i>
+          <span>Security & Password</span>
+        </a>
+
+        <!-- Profile & Settings -->
+        <a href="index.html?tab=profileTab" class="nav-link flex items-center gap-3.5 px-3.5 py-3 rounded-xl 
+          text-slate-400 hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-user-gear w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Profile & Settings</span>
+        </a>
+
+      </nav>
+
+      <!-- Logout Component -->
+      <div class="pt-4 mt-auto border-t border-slate-800">
+        <button id="logoutBtn" class="logout-btn w-full flex items-center justify-between px-4 py-3 rounded-xl 
+           bg-slate-950/60 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/30 text-slate-400
+           hover:text-rose-400 transition-all text-xs font-semibold group cursor-pointer">
+
+          <span class="flex items-center gap-3">
+            <i class="fas fa-arrow-right-from-bracket group-hover:translate-x-0.5 transition-transform"></i>
+            <span>Sign Out</span>
+          </span>
+
+          <span class="bg-slate-800 group-hover:bg-rose-500/20 text-slate-400 group-hover:text-rose-300 
+            text-[10px] px-2 py-0.5 rounded-md transition-colors">End Shift</span>
+        </button>
+      </div>
+    </aside>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!------------- MAIN CONTENT START ------------->
+    <main class="flex-1 lg:ml-72 p-3 sm:p-6 lg:p-8 space-y-6 w-full min-w-0">
+
+      <!-- APPOINTMENTS TAB CONTENT -->
+      <div id="appointmentsTab" class="tab-content space-y-6">
+
+        <!-- DOCTOR AVATAR -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-900/60
+           border border-slate-800 p-4 sm:p-6 rounded-2xl gap-4 backdrop-blur-md w-full">
+
+          <div class="flex items-center gap-3.5 sm:gap-4 min-w-0 w-full">
+
+            <!-- Avatar Image -->
+            <img id="headerDoctorAvatar"
+              src="https://ui-avatars.com/api/?name=Doctor&background=0891b2&color=fff&size=128" alt="Doctor Profile"
+              class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl object-cover border-2 border-cyan-500/40 shadow-lg shrink-0" />
+
+            <div class="min-w-0 flex-1">
+              <h2 class="text-base sm:text-2xl font-bold tracking-tight text-white flex flex-wrap
+                 items-center gap-1.5 sm:gap-2 break-words">
+                <span>Welcome back,</span>
+
+                <span id="currentDoctorName" class="text-cyan-400 font-extrabold break-all inline-block">
+                  <i class="fa-solid fa-spinner fa-spin text-sm"></i> Loading...
+                </span>
+              </h2>
+
+              <p class="text-xs text-slate-400 mt-1 line-clamp-1 sm:line-clamp-none">Manage assigned patients, review
+                complete medical histories, and issue prescriptions.</p>
+            </div>
+          </div>
+
+          <span class="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs 
+            font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span> Doctor Workspace
+          </span>
+        </div>
+
+        <!-- STATS CARDS -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+          <div class="bg-slate-900/60 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 bg-amber-500/10 border border-amber-500/20 text-amber-400 
+              rounded-xl flex items-center justify-center text-xl shrink-0">
+              <i class="fas fa-clock"></i>
+            </div>
+
+            <!-- Pending Requests Card -->
+            <div>
+              <p class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Pending Requests</p>
+              <h3 id="statPending" class="text-2xl font-black text-white mt-0.5">0</h3>
+            </div>
+          </div>
+
+          <!-- Approved Bookings Card -->
+          <div class="bg-slate-900/60 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 
+              rounded-xl flex items-center justify-center text-xl shrink-0">
+              <i class="fas fa-check-circle"></i>
+            </div>
+
+            <div>
+              <p class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Approved Bookings</p>
+              <h3 id="statApproved" class="text-2xl font-black text-white mt-0.5">0</h3>
+            </div>
+          </div>
+
+          <!-- Total Requests Card -->
+          <div class="bg-slate-900/60 border border-slate-800 p-4 sm:p-5 rounded-2xl flex items-center gap-4">
+            <div class="w-12 h-12 bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 rounded-xl 
+              flex items-center justify-center text-xl shrink-0">
+              <i class="fas fa-file-prescription"></i>
+            </div>
+
+            <div>
+              <p class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Total Requests</p>
+              <h3 id="statTotal" class="text-2xl font-black text-white mt-0.5">0</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- TABLE CONTAINER -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl backdrop-blur-xl">
+          <div class="p-4 sm:p-5 border-b border-slate-800/80 flex flex-col sm:flex-row justify-between 
+            sm:items-center gap-4 bg-slate-950/40">
+
+            <div>
+              <h3 class="text-lg font-bold text-white tracking-tight">Patient Appointments</h3>
+              <p class="text-xs text-slate-400 mt-0.5">Review schedule, verify entries, and update clinical statuses</p>
+            </div>
+
+            <div class="flex items-center gap-3 w-full sm:w-auto">
+              <div class="relative flex-1 sm:w-64">
+                <i class="fas fa-search absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="text" id="searchInput" aria-label="Search appointments"
+                  placeholder="Search patient, doctor, reason..." class="w-full bg-slate-950 border border-slate-800 
+                  rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500/50
+                  focus:ring-1 focus:ring-cyan-500/50 transition-all placeholder:text-slate-600" />
+              </div>
+
+              <!-- Dropdown Container -->
+              <div class="relative inline-block text-left select-none">
+
+                <!-- Select Button -->
+                <button id="statusFilterBtn" type="button" aria-label="Filter by status" class="flex items-center 
+                  justify-between gap-3 bg-slate-950 border border-cyan-500/80 rounded-xl px-3 py-1.5 text-xs 
+                  font-medium text-slate-300 focus:outline-none focus:ring-1 focus:ring-cyan-400 transition-all
+                  cursor-pointer min-w-[130px]">
+                  <span id="statusFilterSelected">All Status</span>
+
+                  <!-- Chevron Icon -->
+                  <svg id="statusFilterArrow" class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+
+                <!-- Box -->
+                <div id="statusFilterMenu" class="hidden absolute left-0 w-full mt-2 bg-slate-950 border 
+                  border-slate-800/90 rounded-2xl shadow-2xl overflow-visible z-50 p-2 transition-all h-auto">
+
+                  <div class="status-option px-3 py-2 text-xs text-slate-300 hover:bg-cyan-500/20 
+                    hover:text-cyan-400 rounded-xl cursor-pointer transition" data-value="all">
+                    All Status </div>
+
+                  <div class="status-option px-3 py-2 text-xs text-slate-300 hover:bg-cyan-500/20 
+                    hover:text-cyan-400 rounded-xl cursor-pointer transition" data-value="pending">
+                    Pending </div>
+
+                  <div class="status-option px-3 py-2 text-xs text-slate-300 hover:bg-cyan-500/20
+                     hover:text-cyan-400 rounded-xl cursor-pointer transition" data-value="approved">
+                    Approved </div>
+
+                  <div class="status-option px-3 py-2 text-xs text-slate-300 hover:bg-cyan-500/20 
+                    hover:text-cyan-400 rounded-xl cursor-pointer transition" data-value="rejected">
+                    Rejected </div>
+                </div>
+
+                <!-- Hidden Input-->
+                <input type="hidden" id="statusFilter" name="statusFilter" value="all">
+              </div>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-300 min-w-[850px] border-collapse">
+              <thead class="bg-slate-950/80 text-[11px] font-bold uppercase tracking-wider text-slate-400 
+                border-b border-slate-800/80">
+                <tr>
+                  <th class="py-4 px-5 pl-6 w-[18%]">Patient</th>
+                  <th class="py-4 px-4 w-[16%]">Doctor</th>
+                  <th class="py-4 px-4 w-[14%]">Schedule</th>
+                  <th class="py-4 px-4 w-[24%]">Reason</th>
+                  <th class="py-4 px-4 w-[12%] text-center">Status</th>
+                  <th class="py-4 px-5 pr-6 w-[16%] text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="appointmentsTable" class="divide-y divide-slate-800/50">
+                <tr>
+                  <td colspan="6" class="py-10 text-center text-slate-500">
+                    <i class="fas fa-spinner fa-spin text-2xl text-cyan-400 mb-3 block"></i>
+                    <span class="text-xs font-medium">Loading clinical records...</span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- =================  SECURITY & PASSWORD TAB CONTENT ================= -->
+      <div id="securityTab" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-slate-900/60 
+           border border-slate-800 p-4 sm:p-6 rounded-2xl gap-4 backdrop-blur-md w-full shadow-xl">
+
+          <div>
+            <h2 class="text-lg sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+              <i class="fa-solid fa-shield-halved text-cyan-400"></i> Security & Password Settings
+            </h2>
+            <p class="text-xs text-slate-400 mt-1">Manage your authentication and keep your credentials secure.</p>
+          </div>
+
+          <span class="shrink-0 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold
+                  bg-rose-500/10 text-rose-400 border border-rose-500/20 shadow-sm">
+            <i class="fa-solid fa-lock text-[10px]"></i> Authentication
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+          <!-- Password Form Section -->
+          <div class="lg:col-span-2 bg-slate-900/80 border border-slate-800
+             rounded-2xl p-6 shadow-2xl backdrop-blur-xl">
+            <form id="passwordUpdateForm" class="space-y-5">
+
+              <!-- CURRENT PASSWORD -->
+              <div>
+                <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                  CURRENT / TEMPORARY PASSWORD <span class="text-cyan-400">*</span>
+                </label>
+
+                <div class="relative">
+                  <input type="password" id="currentPasswordInput" required placeholder="Enter current password" class="w-full
+                   bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30
+                   rounded-xl pl-4 pr-10 py-3 text-xs text-slate-200  outline-none transition-all
+                   placeholder:text-slate-600" />
+
+                  <button type="button" class="toggle-password-btn absolute right-3 top-1/2 -translate-y-1/2
+                     text-slate-500 hover:text-cyan-400 p-1 cursor-pointer transition">
+                    <i class="fa-solid fa-eye-slash text-xs"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- NEW & CONFIRM PASSWORDS -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                    NEW PASSWORD <span class="text-cyan-400">*</span>
+                  </label>
+
+                  <div class="relative">
+                    <input type="password" id="newPasswordInput" required placeholder="Enter new password" class="w-full
+                       bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 pl-4 pr-10 py-3 text-xs text-slate-200 
+                       rounded-xl outline-none transition-all placeholder:text-slate-600" />
+
+                    <button type="button" class="toggle-password-btn absolute right-3 top-1/2 -translate-y-1/2 
+                       text-slate-500 hover:text-cyan-400 p-1 cursor-pointer transition">
+                      <i class="fa-solid fa-eye-slash text-xs"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+                    CONFIRM NEW PASSWORD <span class="text-cyan-400">*</span>
+                  </label>
+
+                  <div class="relative">
+                    <input type="password" id="confirmPasswordInput" required placeholder="Re-enter new password" class="w-full
+                        bg-slate-950 border border-slate-800 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 
+                        rounded-xl pl-4 pr-10 py-3 text-xs text-slate-200 outline-none transition-all
+                        placeholder:text-slate-600" />
+
+                    <button type="button" class="toggle-password-btn absolute right-3 top-1/2 -translate-y-1/2
+                      text-slate-500 hover:text-cyan-400 p-1 cursor-pointer transition">
+                      <i class="fa-solid fa-eye-slash text-xs"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <div class="flex items-center gap-3 pt-2">
+                <button type="submit" id="updatePasswordBtn" class="bg-gradient-to-r from-cyan-500 to-cyan-600 
+                 hover:from-cyan-400 hover:to-cyan-500 text-white font-extrabold px-6 py-3 rounded-xl shadow-lg
+                 shadow-cyan-500/20 hover:shadow-cyan-500/40 transition-all text-xs tracking-wider uppercase
+                 cursor-pointer flex items-center gap-2">
+                  Update Password
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Security Guidelines Card -->
+          <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl
+             backdrop-blur-xl flex flex-col justify-between">
+
+            <div>
+              <h3 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-cyan-400"></i> Password Guidelines
+              </h3>
+
+              <ul class="space-y-3 text-xs text-slate-400">
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-cyan-400 text-xs mt-0.5"></i>
+                  <span>Must be at least 6 characters long.</span>
+                </li>
+
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-cyan-400 text-xs mt-0.5"></i>
+                  <span>Match new password with confirmation.</span>
+                </li>
+
+                <li class="flex items-start gap-2">
+                  <i class="fa-solid fa-check text-cyan-400 text-xs mt-0.5"></i>
+                  <span>Re-authentication required with current password.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-800/80 text-[11px] text-slate-500">
+              Secured via Firebase Auth credentials.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ================= DOCTOR PROFILE ================= -->
+      <div id="profileTab" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center 
+          bg-slate-900/60 border border-slate-800 p-4 sm:p-6 rounded-2xl gap-4 backdrop-blur-md w-full">
+
+          <div>
+            <h2 class="text-lg sm:text-2xl font-bold tracking-tight text-white">Profile Picture & Display Settings</h2>
+            <p class="text-xs text-slate-400 mt-1">Upload your avatar picture and manage quick display preferences.</p>
+          </div>
+
+          <span class="shrink-0 inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs
+             font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+            <i class="fa-solid fa-user-circle"></i> Profile & Settings
+          </span>
+        </div>
+
+        <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 shadow-2xl backdrop-blur-xl max-w-2xl">
+          <form id="doctorProfileForm" class="space-y-6">
+
+            <!-- PROFILE IMAGE UPLOAD -->
+            <div>
+              <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-3">
+                PROFILE PICTURE *</label>
+
+              <div class="flex flex-col sm:flex-row items-start sm:items-center gap-5">
+                <div class="relative group shrink-0">
+                  <img id="doctorAvatarPreview"
+                    src="https://ui-avatars.com/api/?name=Doctor&background=0891b2&color=fff&size=128"
+                    alt="Doctor Avatar" class="w-20 h-20 rounded-2xl object-cover border-2
+                     border-cyan-500/40 shadow-xl" />
+
+                  <div class="absolute inset-0 bg-slate-950/60 rounded-2xl opacity-0 group-hover:opacity-100 
+                    flex items-center justify-center transition-opacity pointer-events-none">
+                    <i class="fa-solid fa-camera text-white text-lg"></i>
+                  </div>
+                </div>
+
+                <div class="space-y-2.5">
+                  <div class="flex flex-wrap items-center gap-2.5">
+                    <label for="doctorAvatarInput" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl
+                       bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700
+                       transition-all cursor-pointer">
+                      <i class="fa-solid fa-upload text-cyan-400"></i>
+                      <span>Choose Image</span>
+                    </label>
+                    <input type="file" id="doctorAvatarInput" accept="image/*" class="hidden" />
+
+                    <!-- REMOVE IMAGE BUTTON -->
+                    <button type="button" id="removeAvatarBtn" class="inline-flex items-center gap-2 px-4 py-2.5 
+                      rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 hover:text-rose-300 text-xs
+                      font-semibold border border-rose-500/30 transition-all cursor-pointer">
+                      <i class="fa-solid fa-trash-can text-xs"></i>
+                      <span>Remove Image</span>
+                    </button>
+                  </div>
+                  <p class="text-[11px] text-slate-500">JPG, PNG, or WEBP (Max size 2MB)</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CLINIC STATUS -->
+            <div class="border-t border-slate-800/80 pt-5">
+              <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-3">
+                CLINICAL STATUS / AVAILABILITY</label>
+              <div class="flex items-center justify-between p-4 rounded-xl bg-slate-950 border border-slate-800">
+
+                <div>
+                  <h4 class="text-xs font-bold text-slate-200">Available for Appointments</h4>
+                  <p class="text-[11px] text-slate-500 mt-0.5">Show active status to patients on booking portal.</p>
+                </div>
+
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="availabilityToggle" class="sr-only peer" checked>
+                  <div class="w-11 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer 
+                    peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] 
+                    after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border
+                    after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-cyan-500">
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" id="updateProfileBtn" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold 
+              px-6 py-3 rounded-xl shadow-lg shadow-cyan-600/30 transition-all text-xs tracking-wider uppercase 
+              cursor-pointer">
+              Save Profile & Settings
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!------------- MAIN CONTENT END ------------->
+
+  <!------------- PRESCRIPTION MODAL START ------------->
+  <div id="prescriptionModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex 
+    items-center justify-center p-3 sm:p-4 hidden">
+
+    <div class="bg-[#080e1a] border border-slate-800/80 rounded-2xl w-full max-w-4xl
+        max-h-[92vh] overflow-y-auto custom-scrollbar p-4 sm:p-6 shadow-2xl relative text-slate-200">
+
+      <div class="flex items-center justify-between border-b border-slate-800/80 pb-4 mb-5">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center 
+            justify-center text-cyan-400">
+            <i class="fa-solid fa-file-invoice text-base"></i>
+          </div>
+
+          <div>
+            <h3 class="text-base font-bold text-white tracking-wide">Dr Prescription</h3>
+            <p class="text-[11px] text-slate-400">Complete patient clinical metrics and medication schedule.</p>
+          </div>
+        </div>
+
+        <button type="button" id="closeModalBtn" aria-label="Close modal" class="w-7 h-7 rounded-full bg-slate-800/50 
+          hover:bg-slate-700 text-slate-400 hover:text-white transition-all flex items-center justify-center 
+          cursor-pointer">
+          <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+      </div>
+
+      <form id="prescriptionForm" class="space-y-5">
+        <input type="hidden" id="modalAppId" />
+        <input type="hidden" id="modalPatientId" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- PATIENT ROPDOWN -->
+          <div class="relative">
+            <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              PATIENT NAME * </label>
+
+            <input type="hidden" id="patientSelect" required />
+            <div id="patientSelectBtn" class="w-full bg-[#050811] border border-slate-800
+             rounded-xl px-4 py-3 text-xs text-slate-200 flex items-center justify-between cursor-pointer 
+             transition-all select-none">
+
+              <span id="patientSelectSelected">Select Patient</span>
+              <i id="patientSelectArrow" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform 
+              duration-200"></i>
+            </div>
+
+            <div id="patientSelectMenu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#050811]
+              border border-slate-800 rounded-xl shadow-2xl z-50 max-h-48 overflow-y-auto custom-scrollbar p-1.5">
+              <div id="patientSelectOptionsList"></div>
+            </div>
+            <input type="hidden" id="modalPatientNameInput" />
+          </div>
+
+          <!-- DOCTOR DROPDOWN -->
+          <div class="relative">
+            <label class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              DOCTOR NAME * </label>
+
+            <input type="hidden" id="doctorSelect" required />
+            <div id="doctorSelectBtn" class="w-full bg-[#050811] border border-slate-800
+            rounded-xl px-4 py-3 text-xs text-slate-200 flex items-center justify-between cursor-pointer 
+            transition-all select-none">
+
+              <span id="doctorSelectSelected">Select Doctor</span>
+              <i id="doctorSelectArrow" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform
+               duration-200"></i>
+            </div>
+
+
+            <div id="doctorSelectMenu" class="hidden absolute left-0 right-0 top-full mt-1.5 bg-[#050811]
+             border border-slate-800 rounded-xl shadow-2xl z-50 max-h-48 overflow-y-auto custom-scrollbar p-1.5">
+              <div id="doctorSelectOptionsList"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="patientAgeSexInput" class="block text-[10px] font-extrabold text-slate-300
+               uppercase tracking-wider mb-2">
+              PATIENT AGE / SEX *</label>
+
+            <input type="text" id="patientAgeSexInput" placeholder="e.g. 28 Yrs / Male" required class="w-full
+               bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none 
+               focus:border-cyan-500" />
+          </div>
+
+          <div>
+            <label for="patientAddressInput" class="block text-[10px] font-extrabold text-slate-300 uppercase 
+              tracking-wider mb-2">PATIENT ADDRESS *</label>
+
+            <input type="text" id="patientAddressInput" placeholder="e.g. Clifton Block 5, Karachi" required class="w-full 
+              bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none 
+              focus:border-cyan-500" />
+          </div>
+        </div>
+
+        <div class="p-4 rounded-xl bg-[#080e1a] border border-slate-800/80">
+          <p class="text-[10px] font-extrabold uppercase text-cyan-400 tracking-wider mb-3 flex items-center gap-1.5">
+            <i class="fa-solid fa-heart-pulse"></i> PATIENT VITALS (OPTIONAL)
+          </p>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div>
+              <label for="vitalBP" class="block text-[10px] text-slate-400 mb-1">Blood Pressure</label>
+              <input type="text" id="vitalBP" placeholder="120/80 mmHg" class="w-full bg-[#050811] border 
+                border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500" />
+            </div>
+
+            <div>
+              <label for="vitalPulse" class="block text-[10px] text-slate-400 mb-1">Pulse Rate</label>
+              <input type="text" id="vitalPulse" placeholder="72 bpm" class="w-full bg-[#050811] border 
+                border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500" />
+            </div>
+
+            <div>
+              <label for="vitalWeight" class="block text-[10px] text-slate-400 mb-1">Weight</label>
+              <input type="text" id="vitalWeight" placeholder="70 kg" class="w-full bg-[#050811] border 
+                border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500" />
+            </div>
+
+            <div>
+              <label for="vitalTemp" class="block text-[10px] text-slate-400 mb-1">Temp</label>
+              <input type="text" id="vitalTemp" placeholder="98.6 °F" class="w-full bg-[#050811] border 
+                border-slate-800 rounded-lg px-3 py-2 text-xs text-slate-200 outline-none focus:border-cyan-500" />
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="sm:col-span-2">
+            <label for="diagnosis" class="block text-[10px] font-extrabold text-slate-300 uppercase 
+              tracking-wider mb-2">DIAGNOSIS / MEDICAL CONDITION *</label>
+
+            <input type="text" id="diagnosis" placeholder="e.g. Acute Upper Respiratory Infection" required class="w-full
+               bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none
+               focus:border-cyan-500" />
+          </div>
+
+          <div>
+            <label for="prescriptionDate"
+              class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              PRESCRIPTION DATE *</label>
+
+            <input type="date" id="prescriptionDate" required class="w-full bg-[#050811] border border-slate-800
+               rounded-xl px-4 py-3 text-xs text-slate-200 outline-none focus:border-cyan-500" />
+          </div>
+        </div>
+
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[10px] font-extrabold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+              <i class="fa-solid fa-pills text-cyan-400"></i> PRESCRIBED MEDICATIONS (RX) </span>
+
+            <button type="button" id="addMedicineBtn" class="text-xs text-cyan-400 hover:text-cyan-300 
+              font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/25
+               transition-all cursor-pointer">
+              <i class="fa-solid fa-plus text-xs"></i> Add Medicine
+            </button>
+
+          </div>
+          <div id="medicinesContainer" class="space-y-2.5"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="pharmacyDirectiveInput"
+              class="block text-[10px] font-extrabold text-slate-300 uppercase tracking-wider mb-2">
+              PHARMACY DIRECTIVE</label>
+
+            <input type="text" id="pharmacyDirectiveInput" placeholder="e.g. Dispense 1 Pack / Original Brand Only"
+              class="w-full bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200
+              outline-none focus:border-cyan-500" />
+          </div>
+
+          <div>
+            <label for="signaturaInput" class="block text-[10px] font-extrabold text-slate-300 uppercase 
+              tracking-wider mb-2">DOSAGE ADVICE (SIGNATURA)</label>
+
+            <input type="text" id="signaturaInput" placeholder="e.g. Take with water after meals twice daily" class="w-full
+               bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none 
+               focus:border-cyan-500" />
+          </div>
+        </div>
+
+        <div>
+          <label for="renewalInput" class="block text-[10px] font-extrabold text-slate-300 uppercase 
+            tracking-wider mb-2">REFILL / RENEWAL INFO</label>
+
+          <input type="text" id="renewalInput" placeholder="e.g. 1 Refill allowed within 30 days" class="w-full 
+            bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none 
+            focus:border-cyan-500" />
+        </div>
+
+        <div>
+          <label for="labTests" class="block text-[10px] font-extrabold text-slate-300 uppercase 
+            tracking-wider mb-2">REQUESTED LAB TESTS / INVESTIGATIONS</label>
+
+          <input type="text" id="labTests" placeholder="e.g. Complete Blood Count (CBC), Chest X-Ray" class="w-full 
+            bg-[#050811] border border-slate-800 rounded-xl px-4 py-3 text-xs text-slate-200 outline-none
+             focus:border-cyan-500" />
+        </div>
+
+        <div>
+          <label for="instructions" class="block text-[10px] font-extrabold text-slate-300 uppercase
+             tracking-wider mb-2">CLINICAL ADVICE & SPECIAL INSTRUCTIONS</label>
+
+          <textarea id="instructions" rows="2"
+            placeholder="e.g. Drink warm fluids, avoid physical exertion, return if fever persists above 101°F." class="w-full
+             bg-[#050811] border border-slate-800 rounded-xl p-3.5 text-xs text-slate-200 outline-none 
+             focus:border-cyan-500 resize-none"></textarea>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3.5 
+          rounded-xl shadow-lg shadow-cyan-600/30 transition-all text-xs tracking-wider uppercase cursor-pointer">
+          SAVE & SYNC PRESCRIPTION
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./index.js"></script>
+
+  <!------------- PRESCRIPTION MODAL END ------------->
+
+</body>
+
+</html>

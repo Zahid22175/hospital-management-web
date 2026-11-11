@@ -1,0 +1,1936 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ClinicBook | Healthcare & Appointment Portal </title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+    100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+    <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+    fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+    5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- STYLE CSS LINK -->
+  <link rel="stylesheet" href="./style.css" />
+
+</head>
+
+<body class="selection:bg-cyan-500 selection:text-white">
+
+  <div class="w-full max-w-full">
+
+    <!-------------- NAVBAR SECTION START -------------->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 sticky top-0 z-50 w-full shadow-xs">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center gap-4">
+
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-2xl
+             flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+            <i class="fa-solid fa-tooth text-lg"></i>
+          </div>
+
+          <div class="flex flex-col">
+            <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+              Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+            </span>
+            <span class="text-[9px] font-bold tracking-widest text-cyan-600 uppercase mt-0.5">
+              Dental & Smile Care</span>
+          </div>
+        </a>
+
+        <!-- Hamburger Button -->
+        <button id="menu-toggle" aria-label="Toggle navigation menu" class="lg:hidden text-slate-700 hover:text-cyan-600
+         w-10 h-10 rounded-xl hover:bg-slate-100 flex items-center justify-center text-xl transition cursor-pointer">
+          <i id="menu-icon" class="fa-solid fa-bars"></i>
+        </button>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+
+          <!-- Home -->
+          <a href="./index.html" class="px-3 py-2 text-s font-bold text-sky-500 bg-blue-50 rounded-xl 
+          transition">Home</a>
+
+          <!-- About -->
+          <a href="./About/about.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500 
+          hover:bg-slate-100/80 rounded-xl transition">About</a>
+
+          <!-- Services -->
+          <a href="./Service/service.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+          hover:bg-slate-100/80 rounded-xl transition">Services</a>
+
+          <!-- Contact -->
+          <a href="./Contact/contact.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+          hover:bg-slate-100/80 rounded-xl  transition">Contact</a>
+        </div>
+
+        <!-- Book Now Btn -->
+        <div class="hidden lg:flex items-center gap-3">
+          <a href="./book-Appointment/book.html" class="popup-book-btn inline-flex items-center gap-2
+           bg-gradient-to-r from-sky-500 to-sky-500 hover:from-sky-700 hover:to-sky-600 text-white text-s font-bold
+           px-4 py-2.5 rounded-xl shadow-md shadow-sky-500/20 transition transform active:scale-95">
+            <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+          <div class="h-4 w-px bg-slate-200 my-auto"></div>
+
+          <!-- Login Btn -->
+          <a id="login-btn" href="./login/login.html" class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600
+          text-white text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-sky-500/20 transition transform
+          active:scale-95">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            <span>Login</span>
+          </a>
+
+          <!-- Logout Btn -->
+          <button id="logout-btn" class="hidden inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white 
+          text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-red-500/20 transition active:scale-95
+          cursor-pointer">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div id="mobile-menu" class="lg:hidden fixed top-0 left-0 h-screen w-72 bg-white shadow-2xl z-50 
+        transform -translate-x-full transition-transform duration-300 ease-in-out p-5 flex flex-col justify-between
+        overflow-y-auto">
+
+        <div class="p-4 space-y-3">
+
+          <!-- Logo & Close Button ) -->
+          <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+            <div class="flex items-center gap-2">
+
+              <div class="w-8 h-8 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-xl 
+                flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105
+                 transition-transform">
+                <i class="fa-solid fa-tooth text-sm"></i>
+              </div>
+              <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+                Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+              </span>
+            </div>
+
+            <!-- Close Button Icon -->
+            <button id="close-menu-btn" class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg flex
+               items-center justify-center transition cursor-pointer">
+              <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Home -->
+          <a href="./index.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold
+          text-sky-500 bg-blue-50 rounded-xl">Home</a>
+
+          <!-- About -->
+          <a href="./About/about.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600 
+          hover:text-sky-500 rounded-xl transition">About</a>
+
+          <!-- Service -->
+          <a href="./Service/service.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600 
+          hover:text-sky-500 rounded-xl transition">Services</a>
+
+          <!-- Conatct -->
+          <a href="./Contact/contact.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600
+          hover:text-sky-500  rounded-xl transition">Contact</a>
+
+          <!-- Book Now Btn -->
+          <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <a href="./book-Appointment/book.html" class="popup-book-btn flex items-center justify-center gap-2
+             w-full bg-gradient-to-r from-sky-500 to-sky-600 text-white text-xs font-bold py-3 rounded-xl shadow-md
+             shadow-sky-500/20">
+              <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+            <div class="grid grid-cols-2 gap-2 mt-1">
+
+              <!-- Login Btn -->
+              <a id="login-btn-mobile" href="./login/login.html" class="flex items-center justify-center gap-2 py-2.5 
+              bg-sky-500 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20
+              transition active:scale-95">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+              </a>
+
+              <!-- Logout Btn -->
+              <button id="logout-btn-mobile" class="hidden text-center py-2.5 bg-red-600 text-white text-xs font-bold 
+              rounded-xl hover:bg-red-700 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!-------------- HERO & CARDS SECTION START ------------->
+    <section class="relative w-full">
+
+      <!-- Hero Banner -->
+      <div style="background-image: url('./image/home/carousel.jpg');" class="relative min-h-[60vh] sm:min-h-[70vh]
+         lg:min-h-[75vh] flex items-center justify-center text-center bg-cover bg-center px-4 py-16 w-full">
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-blue-900/75"></div>
+
+        <div class="relative z-10 text-white w-full max-w-3xl mx-auto px-2">
+          <p class="uppercase tracking-widest mb-3 text-xs sm:text-sm font-medium">
+            Keep Your Teeth Healthy </p>
+
+          <h1 class="text-2xl sm:text-4xl md:text-5xl font-extrabold leading-tight mb-8">
+            The Best Quality Dental <br class="hidden sm:inline"> Treatment for Your Smile
+          </h1>
+
+          <div class="flex flex-col sm:flex-row justify-center items-center gap-4 w-full 
+            max-w-xs sm:max-w-none mx-auto">
+
+            <!-- Appointment Btn -->
+            <a href="./book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-orange-500 px-8 py-3  
+               font-semibold rounded-md transition text-center w-full sm:w-auto text-white">
+              Book Appointment </a>
+
+            <!-- Contact Btn -->
+            <a href="./Contact/contact.html" class="bg-orange-500 hover:bg-sky-500 px-8 py-3 font-semibold 
+              rounded-md transition text-center w-full sm:w-auto text-white">
+              Contact Us
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="relative lg:-mt-20 z-20 px-4 sm:px-6 max-w-6xl mx-auto w-full">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-white rounded-lg 
+          overflow-visible z-10 shadow-2xl">
+
+          <!-- Opening Hours Card -->
+          <div class="bg-sky-500 p-6 sm:p-8 rounded-2xl shadow-xl text-white flex flex-col justify-between">
+            <div>
+
+              <h3 class="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white text-base">
+                  <i class="fa-regular fa-clock"></i>
+                </div>
+                <span>Opening Hours</span>
+              </h3>
+
+              <ul class="space-y-3.5 text-sm">
+
+                <!-- Mon - Fri -->
+                <li class="flex items-center justify-between border-b border-sky-400/40 pb-3">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-sky-200 text-xs"></i>
+                    <span class="font-medium text-sky-50">Mon - Fri</span>
+                  </div>
+                  <span class="font-bold bg-white/10 px-2.5 py-1 rounded-lg text-xs tracking-wide">
+                    8:00am - 9:00pm</span>
+                </li>
+
+                <!-- Saturday -->
+                <li class="flex items-center justify-between border-b border-sky-400/40 pb-3">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-sky-200 text-xs"></i>
+                    <span class="font-medium text-sky-50">Saturday</span>
+                  </div>
+                  <span class="font-bold bg-white/10 px-2.5 py-1 rounded-lg text-xs tracking-wide">
+                    8:00am - 7:00pm</span>
+                </li>
+
+                <!-- Sunday -->
+                <li class="flex items-center justify-between border-b border-sky-400/40 pb-3">
+                  <div class="flex items-center gap-2">
+                    <i class="fa-regular fa-calendar text-sky-200 text-xs"></i>
+                    <span class="font-medium text-sky-50">Sunday</span>
+                  </div>
+                  <span class="font-bold bg-white/10 px-2.5 py-1 rounded-lg text-xs tracking-wide">
+                    8:00am - 5:00pm</span>
+                </li>
+              </ul>
+            </div>
+
+            <!--Book Appointment Btn -->
+            <div class="mt-8">
+              <a href="../book-Appointment/book.html" class="popup-book-btn w-full bg-white text-slate-900 
+                hover:bg-slate-900 hover:text-white font-bold py-3.5 rounded-xl shadow-lg shadow-black/5 transition-all 
+                duration-200 flex items-center justify-center gap-2 active:scale-95 text-sm cursor-pointer">
+                <i class="fa-solid fa-calendar-plus text-xs"></i>
+                <span>Book Appointment</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Search Doctor Box -->
+          <div class="bg-blue-950 p-6 sm:p-8 rounded-2xl shadow-xl flex flex-col justify-between relative
+             overflow-visible z-30">
+
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-6 text-white flex items-center gap-2">
+                <i class="fa-solid fa-user-doctor text-sky-400"></i> Search A Doctor
+              </h3>
+
+              <form id="doctorSearchForm" class="space-y-4 flex-1 flex flex-col justify-between">
+                <div class="space-y-4">
+
+                  <!-- Date Input -->
+                  <div>
+                    <label for="searchAppointmentDate" class="block text-xs text-blue-200 mb-1 font-medium">
+                      Select Date </label>
+                    <input type="date" id="searchAppointmentDate" name="searchAppointmentDate" class="w-full p-3 
+                      rounded-xl text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white 
+                      shadow-sm font-medium text-xs sm:text-sm" required />
+                  </div>
+
+                  <!-- Doctor Dropdown -->
+                  <div class="relative" id="customDropdownContainer">
+                    <label class="block text-xs text-blue-200 mb-1 font-medium">Select Doctor</label>
+
+                    <button type="button" id="docSelectTrigger" class="w-full p-3 bg-white hover:bg-slate-50 border
+                     border-slate-200 rounded-xl shadow-sm flex items-center justify-between text-left transition-all
+                     duration-200 focus:outline-none focus:ring-2 focus:ring-sky-400 cursor-pointer">
+
+                      <span id="docSelectedName" class="text-xs sm:text-sm font-medium text-slate-700 truncate">
+                        Select A Doctor</span>
+
+                      <i id="docArrowIcon" class="fa-solid fa-chevron-down text-slate-400 text-xs ml-2
+                         transition-transform duration-200"></i>
+                    </button>
+
+                    <input type="hidden" id="searchDoctorSelect" name="searchDoctor" required />
+
+                    <!-- Dropdown Menu -->
+                    <div id="docMenuPopover" class="hidden absolute left-0 right-0 top-full mt-1 bg-white rounded-xl 
+                      shadow-2xl border border-slate-200 z-[9999] overflow-hidden">
+                      <div id="docListContainer"
+                        class="max-h-36 overflow-y-auto divide-y divide-slate-100 custom-scrollbar">
+                        <!-- Doctors dynamically render -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Search Btn -->
+                <div class="pt-6 sm:pt-8">
+                  <button type="submit" class="w-full bg-sky-500 hover:bg-sky-600 text-white font-bold py-3.5 
+                    rounded-xl shadow-lg shadow-sky-500/30 transition-all duration-200 flex items-center 
+                    justify-center gap-2 active:scale-95 cursor-pointer text-xs sm:text-sm">
+                    <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    <span>Search Doctor</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Doctor Details Popup Modal -->
+          <div id="doctorModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center 
+          justify-center p-4 hidden">
+
+            <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden 
+            transform transition-all">
+
+              <!-- Modal Header -->
+              <div class="bg-gradient-to-r from-blue-950 to-sky-900 text-white p-5 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sky-300 text-lg">
+                    <i class="fa-solid fa-user-doctor"></i>
+                  </div>
+
+                  <div>
+                    <h4 id="modalDoctorName" class="font-bold text-lg leading-tight">Dr. Name</h4>
+                    <p id="modalDoctorSpecialty" class="text-xs text-sky-200">Specialist</p>
+                  </div>
+                </div>
+
+                <!-- Close Button -->
+                <button id="closeModalBtn" class="text-slate-300 hover:text-white w-8 h-8 rounded-full 
+                hover:bg-white/10 flex items-center justify-center transition">
+                  <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+              </div>
+
+              <!-- Modal Body -->
+              <div class="p-6 space-y-4">
+
+                <!-- Selected Date Info -->
+                <div class="bg-sky-50 border border-sky-100 rounded-xl p-3 flex items-center gap-3">
+                  <i class="fa-regular fa-calendar-check text-sky-600 text-xl"></i>
+                  <div>
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                      Searched Date</span>
+                    <span id="modalSelectedDate" class="text-sm font-bold text-slate-800">2026-09-03</span>
+                  </div>
+                </div>
+
+                <!-- Schedule Info Grid -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-slate-50 border border-slate-100 rounded-xl p-3">
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                      Available Days</span>
+
+                    <span id="modalAvailableDays" class="text-xs font-bold text-slate-800 mt-1 block">
+                      Mon, Wed, Fri </span>
+                  </div>
+
+                  <div class="bg-slate-50 border border-slate-100 rounded-xl p-3">
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">Timings</span>
+                    <span id="modalTiming" class="text-xs font-bold text-slate-800 mt-1 block">
+                      02:00 PM - 08:00 PM</span>
+                  </div>
+                </div>
+
+                <!-- Doctor Room & Extra Info -->
+                <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 flex items-start gap-3">
+                  <i class="fa-solid fa-circle-info text-slate-400 text-base mt-0.5"></i>
+                  <div>
+
+                    <span class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
+                      Additional Details</span>
+
+                    <p id="modalExtraInfo" class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Room 102, 1st Floor. OPD Consultation available on arrival.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Footer Actions -->
+              <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-3">
+
+                <button id="closeModalFooter" class="px-4 py-2 text-xs font-semibold text-slate-600
+                  hover:bg-slate-200 rounded-xl transition"> Close </button>
+
+                <a id="bookDirectBtn" href="./login/login.html" class="popup-book-btn px-5 py-2 text-xs font-semibold 
+                text-white bg-sky-500 hover:bg-sky-600 rounded-xl shadow-md shadow-sky-500/20 transition">
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Make Appointment Card -->
+          <div class="bg-orange-500 p-6 sm:p-8 rounded-2xl shadow-xl text-white flex flex-col justify-between 
+           md:col-span-2 lg:col-span-1">
+
+            <div>
+              <h3 class="text-xl sm:text-2xl font-bold mb-4 flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center text-white text-base 
+                 shrink-0">
+                  <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <span>Need an Appointment</span>
+              </h3>
+
+              <p class="text-sm text-amber-50 leading-relaxed mb-6 font-normal">
+                Schedule your visit with our experienced dental team and take the first step toward a healthier,
+                brighter smile.
+              </p>
+            </div>
+
+            <!-- Contact & Call Support -->
+            <div class="pt-6 border-t border-white/20 mt-4">
+              <span class="text-xs font-semibold text-amber-100 uppercase tracking-wider block mb-1">
+                Direct Support Call </span>
+
+              <a href="tel:+0123456789" class="inline-flex items-center gap-3 text-2xl sm:text-3xl font-extrabold 
+              tracking-tight hover:opacity-95 transition-opacity">
+                <i class="fa-solid fa-phone-volume text-xl sm:text-2xl animate-pulse"></i>
+                <span>+012 345 6789</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-------------- HERO & CARDS SECTION END -------------->
+
+
+    <!-------------- ABOUT US SECTION START -------------->
+    <section class="animate-section w-full py-16 lg:py-24">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+
+        <div class="animate-bottom">
+          <p class="text-sky-500 font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
+            ABOUT OUR CLINIC
+            <span class="inline-block w-8 h-[2px] bg-sky-500"></span>
+          </p>
+
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight mb-6">
+            The World’s Best Dental Clinic That You Can Trust
+          </h2>
+
+          <p class="text-gray-600 italic font-semibold mb-4 text-base">
+            ClinicBook is a reliable dental clinic offering professional care.
+          </p>
+
+          <p class="text-gray-600 mb-8 text-sm sm:text-base leading-relaxed">
+            At BrightSmile Dental, we provide high-quality dental care using modern techniques and advanced equipment.
+            Our experienced dental professionals focus on making every patient's visit comfortable, safe, and
+            stress-free.
+          </p>
+
+          <!-- Features Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 mb-8 font-bold text-gray-800">
+            <p class="flex items-center text-base animate-bottom">
+              <i class="fa-solid fa-check text-sky-500 mr-3"></i> Award Winning
+            </p>
+
+            <p class="flex items-center text-base animate-bottom">
+              <i class="fa-solid fa-check text-sky-500 mr-3"></i> 24/7 Opened
+            </p>
+
+            <p class="flex items-center text-base animate-bottom">
+              <i class="fa-solid fa-check text-sky-500 mr-3"></i> Professional Staff
+            </p>
+
+            <p class="flex items-center text-base animate-bottom">
+              <i class="fa-solid fa-check text-sky-500 mr-3"></i> Fair Prices
+            </p>
+          </div>
+
+          <!-- Button -->
+          <a href="#" class="animate-bottom inline-block bg-sky-500 hover:bg-orange-500 
+          text-white font-bold px-8 py-3 rounded-md transition text-center w-full sm:w-auto shadow-md">
+            Learn More About Us
+          </a>
+        </div>
+
+        <!-- Image -->
+        <div class="flex justify-center animate-pop w-full">
+          <img src="./image/home/about.jpg" class="rounded-xl w-full max-w-md object-cover shadow-lg" alt="Dentists">
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-------------- ABOUT US SECTION END -------------->
+
+
+  <!-------------- CERTIFIED & AWARD SECTION START -------------->
+  <section class="relative bg-cover bg-center w-full py-12 lg:py-16">
+
+    <!-- Background Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-950/95 via-blue-900/90 to-sky-950/90"></div>
+
+    <!-- Main Wrapper -->
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+      <!-- Left Content -->
+      <div class="lg:col-span-7 text-white space-y-5">
+
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold
+           bg-sky-500/20 text-sky-300 border border-sky-400/30">
+          <i class="fa-solid fa-award text-amber-400"></i> Certified Dental Care
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight">
+          We Are A Certified and <span class="text-sky-400">Award Winning</span> Dental Clinic You Can Trust
+        </h2>
+
+        <p class="text-slate-300 leading-relaxed text-sm sm:text-base max-w-xl">
+          We are dedicated to delivering trusted, high-quality dental care. Our experienced team, modern technology,
+          and patient-focused approach ensure safe treatments and excellent results for every smile.
+        </p>
+
+        <div class="flex items-center gap-8 pt-2">
+          <div class="flex items-center gap-3">
+
+            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center
+               justify-center font-bold shrink-0 border border-sky-400/20">
+              <i class="fa-solid fa-shield-halved text-lg"></i>
+            </div>
+            <span class="text-xs sm:text-sm font-semibold text-slate-200">100% Safe <br>Treatments</span>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center 
+              justify-center font-bold shrink-0 border border-sky-400/20">
+              <i class="fa-solid fa-user-doctor text-lg"></i>
+            </div>
+            <span class="text-xs sm:text-sm font-semibold text-slate-200">Expert <br>Doctors</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Booking Card -->
+      <div class="lg:col-span-5 w-full">
+        <div class="bg-slate-900/80 backdrop-blur-xl p-6 sm:p-8 rounded-3xl shadow-2xl 
+          shadow-sky-950/80 border border-slate-800 text-center relative overflow-hidden group">
+
+          <div class="absolute -top-24 -right-24 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl
+             group-hover:bg-sky-500/20 transition-all duration-500">
+          </div>
+
+          <div class="w-14 h-14 bg-sky-500/10 text-sky-400 rounded-2xl flex items-center 
+            justify-center mx-auto mb-4 border border-sky-500/20 shadow-inner">
+            <i class="fa-solid fa-calendar-check text-2xl"></i>
+          </div>
+
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight mb-2">
+            Schedule Your Visit
+          </h3>
+
+          <p class="text-xs sm:text-sm text-slate-400 mb-6 leading-relaxed">
+            Skip the paperwork. Choose your preferred doctor, select a time slot, and confirm your appointment
+            instantly.
+          </p>
+
+          <div class="space-y-3">
+
+            <!-- Book Appointment Btn -->
+            <a href="../book-Appointment/book.html" class="popup-book-btn w-full bg-sky-500 hover:bg-sky-400
+               text-slate-950 font-extrabold py-4 px-6 rounded-2xl shadow-lg shadow-sky-500/25 text-xs sm:text-sm
+               uppercase tracking-wider flex items-center justify-center gap-2 transition-all duration-200
+               cursor-pointer">
+              <span>Book Appointment Now</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+
+            <div class="flex items-center justify-center gap-2 text-[11px] text-slate-400 pt-2">
+              <i class="fa-solid fa-lock text-emerald-400"></i>
+              <span>Secure Patient Portal & Instant Confirmation</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- CERTIFIED & AWARD SECTION END -------------->
+
+  <!-------------- OUR SERVICES SECTION START -------------->
+  <section id="serviceSection" class="w-full py-12 lg:py-16 bg-slate-50/50 relative overflow-hidden">
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="lg:col-span-5 relative opacity-0 -translate-x-24 transition-all duration-700 ease-out" data-animate>
+        <div class="absolute -top-4 -left-4 w-60 h-60 bg-sky-400/20 rounded-full blur-3xl -z-10"></div>
+
+        <!-- Image Card -->
+        <div class="relative overflow-hidden rounded-2xl shadow-xl border-4 border-white bg-white group">
+          <img src="./image/home/after-before.jpg" class="w-full h-[350px] sm:h-[420px] 
+            object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            alt="Before and after treatment">
+
+          <!-- Center Divider Line -->
+          <div class="absolute top-0 left-1/2 -translate-x-1/2 h-full w-1 bg-white/90 backdrop-blur-md shadow-lg 
+          flex items-center justify-center">
+            <div class="w-7 h-7 rounded-full bg-sky-500 text-white text-[10px] font-bold flex items-center 
+            justify-center shadow-md border-2 border-white">
+              <i class="fa-solid fa-code-compare"></i>
+            </div>
+          </div>
+
+          <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold
+             px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+            Before
+          </span>
+
+          <span class="absolute top-3 right-3 bg-sky-500/90 backdrop-blur-md text-white text-[10px] font-bold
+             px-2.5 py-1 rounded-full uppercase tracking-wider shadow">
+            After
+          </span>
+        </div>
+      </div>
+
+      <!-- Services Content & Cards -->
+      <div class="lg:col-span-7 opacity-0 translate-x-24 transition-all duration-700 ease-out" data-animate>
+        <div class="mb-6">
+
+          <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10
+             text-sky-600 border border-sky-200 uppercase tracking-wider mb-2">
+            <i class="fa-solid fa-tooth text-sky-500"></i> Our Services
+          </span>
+
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
+            We Offer The <span class="text-sky-500">Best Quality</span> Dental Services
+          </h2>
+        </div>
+
+        <!-- Grid Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+
+          <!-- CARD 1 -->
+          <div class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl border border-slate-100
+             transition-all duration-300 hover:-translate-y-1 opacity-0 translate-y-10 duration-700 ease-out delay-200"
+            data-child>
+
+            <div class="relative overflow-hidden h-40 sm:h-44">
+              <img src="./image/home/price-3.jpg" class="w-full h-full object-cover transition-transform 
+                duration-500 group-hover:scale-110" alt="Cosmetic Dentistry">
+            </div>
+
+            <div class="p-4 flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm sm:text-base group-hover:text-sky-600 transition-colors">
+                  Cosmetic Dentistry </h3>
+
+                <p class="text-[11px] text-slate-500 mt-0.5">Smile Enhancement</p>
+              </div>
+
+              <a href="#" class="w-8 h-8 rounded-full bg-sky-50 text-sky-600 group-hover:bg-sky-500
+               group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div class="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl border border-slate-100
+             transition-all duration-300 hover:-translate-y-1 opacity-0 translate-y-10 duration-700 ease-out delay-400"
+            data-child>
+
+            <div class="relative overflow-hidden h-40 sm:h-44">
+              <img src="./image/home/price-4.jpg" class="w-full h-full object-cover transition-transform 
+                duration-500 group-hover:scale-110" alt="Dental Implants">
+            </div>
+
+            <div class="p-4 flex items-center justify-between">
+              <div>
+                <h3 class="font-bold text-slate-800 text-sm sm:text-base group-hover:text-sky-600 transition-colors">
+                  Dental Implants </h3>
+
+                <p class="text-[11px] text-slate-500 mt-0.5">Permanent Replacement</p>
+              </div>
+
+              <a href="#" class="w-8 h-8 rounded-full bg-sky-50 text-sky-600 group-hover:bg-sky-500 
+              group-hover:text-white flex items-center justify-center transition-all duration-300 shrink-0">
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- OUR SERVICES SECTION END -------------->
+
+
+  <!-------------- DENTAL BRIDGES SECTION START -------------->
+  <section class="animate-section py-12 lg:py-8 bg-white w-full">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+
+        <!-- Card 1 -->
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-slate-100 
+          transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between animate-left">
+
+          <!-- Image -->
+          <div class="relative overflow-hidden h-48 sm:h-52">
+            <img src="./image/home/service-3.jpg" alt="Dental Bridges"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0
+               group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <div class="p-5 bg-white flex items-center justify-between border-t border-slate-50">
+            <div>
+              <h3 class="font-bold text-slate-800 text-base sm:text-lg group-hover:text-sky-600 transition-colors">
+                Dental Bridges </h3>
+
+              <p class="text-xs text-slate-500 mt-0.5">Restorative Dentistry</p>
+            </div>
+            <a href="#" class="w-9 h-9 rounded-full bg-sky-50 text-sky-600 group-hover:bg-sky-500 group-hover:text-white 
+              flex items-center justify-center transition-all duration-300 shrink-0">
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl border border-slate-100
+           transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between animate-bottom">
+
+          <!-- Image -->
+          <div class="relative overflow-hidden h-48 sm:h-52">
+            <img src="./image/home/service-4.jpg" alt="Teeth Whitening"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 
+              group-hover:opacity-100 transition-opacity duration-300">
+            </div>
+          </div>
+
+          <div class="p-5 bg-white flex items-center justify-between border-t border-slate-50">
+            <div>
+              <h3 class="font-bold text-slate-800 text-base sm:text-lg group-hover:text-sky-600 transition-colors">
+                Teeth Whitening </h3>
+
+              <p class="text-xs text-slate-500 mt-0.5">Aesthetic Treatment</p>
+            </div>
+            <a href="#" class="w-9 h-9 rounded-full bg-sky-50 text-sky-600 group-hover:bg-sky-500 group-hover:text-white 
+              flex items-center justify-center transition-all duration-300 shrink-0">
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-gradient-to-br from-sky-500 to-sky-600 text-white rounded-2xl p-6 sm:p-8 text-center flex 
+        flex-col justify-between items-center shadow-lg shadow-sky-500/20 animate-right sm:col-span-2 lg:col-span-1
+        border border-sky-400/40 relative overflow-hidden group">
+
+          <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+          <div>
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-white/15 
+              text-white border border-white/20 mb-3">
+              <i class="fa-solid fa-calendar-check text-amber-300"></i> Easy Scheduling
+            </span>
+
+            <h3 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
+              Make Appointment </h3>
+
+            <p class="text-xs text-sky-50 opacity-90 leading-relaxed max-w-xs mx-auto">
+              Book your dental appointment quickly. Select your preferred time, and our team will confirm your visit.
+            </p>
+          </div>
+
+          <div class="mt-6 w-full">
+            <a href="tel:+0123456789" class="inline-flex items-center justify-center gap-3 w-full py-3.5 px-4 bg-white
+             hover:bg-sky-50 text-sky-600 font-bold rounded-xl shadow-md transition-all duration-200 text-sm 
+             group-hover:scale-[1.02]">
+              <div class="w-7 h-7 rounded-lg bg-sky-500 text-white flex items-center justify-center text-xs">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+              <span>+012 345 6789</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- DENTAL BRIDGES SECTION END -------------->
+
+
+  <!-------------- SPECIAL OFFER SECTION START -------------->
+  <section class="animate-section relative py-16 sm:py-20 lg:py-24 min-h-[480px] sm:min-h-[520px] flex items-center
+     justify-center w-full overflow-hidden">
+
+    <!-- Background Image with Overlay -->
+    <div class="absolute inset-0 animate-pop">
+      <img src="./image/home/carousel.jpg" class="w-full h-full object-cover" alt="Dental Care Background">
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/75 via-slate-900/60 to-slate-950/75"></div>
+    </div>
+
+    <!-- Content Box -->
+    <div class="relative z-10 flex items-center justify-center w-full px-4 sm:px-6 animate-bottom max-w-6xl mx-auto">
+      <div class="bg-sky-500/85 text-white text-center p-6 sm:p-10 md:p-12 max-w-2xl w-full rounded-2xl shadow-2xl
+         backdrop-blur-md border border-sky-400/30">
+
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold bg-white/20 text-white
+           border border-white/30 uppercase tracking-wider mb-4 shadow-sm">
+          <i class="fa-solid fa-tag text-amber-300"></i> Special Offer
+        </span>
+
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 leading-tight tracking-tight">
+          Save <span class="text-amber-300">30% Off</span> On Your First <br class="hidden sm:inline"> Dental Checkup
+        </h2>
+
+        <p class="text-xs sm:text-sm md:text-base mb-6 sm:mb-8 text-sky-50 leading-relaxed max-w-xl mx-auto
+           font-normal">
+          Take the first step toward a healthy and confident smile. Enjoy professional care, modern treatment, and a
+          comfortable experience at an affordable price.
+        </p>
+
+        <!-- Button -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center w-full max-w-xs sm:max-w-none mx-auto">
+          <a href="./book-Appointment/book.html" class="popup-book-btn inline-flex items-center justify-center gap-2
+             bg-slate-900 hover:bg-slate-800 text-white px-6 py-3.5 rounded-xl font-bold transition-all duration-200 
+             text-xs  sm:text-sm shadow-lg hover:shadow-slate-900/40 active:scale-95 w-full sm:w-auto">
+            <i class="fa-solid fa-calendar-check text-sky-400"></i>
+            <span>Book Appointment</span>
+          </a>
+
+          <!-- Button -->
+          <a href="#" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-sky-50 text-slate-900 
+            px-6 py-3.5 rounded-xl font-bold transition-all duration-200 text-xs sm:text-sm shadow-md active:scale-95 
+            w-full sm:w-auto">
+            <span>Read More</span>
+            <i class="fa-solid fa-arrow-right text-xs text-sky-600"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- SPECIAL OFFER SECTION END -------------->
+
+
+  <!-------------- PRICING PLAN SECTION START -------------->
+  <section class="py-12 lg:py-20 bg-slate-50/50 w-full relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row gap-10 lg:gap-12 items-center lg:items-center">
+
+      <div class="w-full lg:w-5/12 text-center lg:text-left">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-sky-500/10
+           text-sky-600 border border-sky-200 uppercase tracking-wider mb-3">
+          <i class="fa-solid fa-tags text-sky-500"></i> Pricing Plan
+        </span>
+
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
+          We Offer <span class="text-sky-500">Fair Prices</span> for Dental Treatment
+        </h2>
+
+        <p class="text-slate-600 mt-4 leading-relaxed text-xs sm:text-sm">
+          We provide high-quality dental treatments at fair and transparent prices, ensuring everyone can access
+          professional care without compromise.
+        </p>
+
+        <div class="mt-8 p-4 bg-white rounded-2xl shadow-md border border-slate-100 flex items-center justify-center 
+          lg:justify-start gap-4 max-w-sm mx-auto lg:mx-0">
+
+          <div class="w-11 h-11 rounded-xl bg-sky-500 text-white flex items-center justify-center text-lg shrink-0 
+            shadow-md shadow-sky-500/20">
+            <i class="fa-solid fa-phone-volume"></i>
+          </div>
+
+          <div class="text-left">
+            <p class="text-[11px] font-bold text-sky-600 uppercase tracking-wider">Call For Appointment</p>
+            <a href="tel:+0123456789"
+              class="text-base sm:text-lg font-extrabold text-slate-900 hover:text-sky-500 transition-colors">
+              +012 345 6789
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full lg:w-7/12 relative group/slider py-4 px-2">
+
+        <!-- Left Arrow Icon -->
+        <button id="pricePrevBtn" aria-label="Previous" class="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 
+          z-20 w-10 h-10 rounded-full bg-white text-slate-700 hover:bg-sky-500 hover:text-white shadow-xl border 
+          border-slate-200/80 flex items-center justify-center transition-all duration-200 active:scale-95">
+          <i class="fa-solid fa-chevron-left text-xs"></i>
+        </button>
+
+        <!-- Right Arrow Icon -->
+        <button id="priceNextBtn" aria-label="Next" class="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 
+          z-20 w-10 h-10 rounded-full bg-white text-slate-700 hover:bg-sky-500 hover:text-white shadow-xl border
+          border-slate-200/80 flex items-center justify-center transition-all duration-200 active:scale-95">
+          <i class="fa-solid fa-chevron-right text-xs"></i>
+        </button>
+
+        <div class="overflow-hidden rounded-2xl p-1">
+          <div id="priceSliderTrack" class="flex gap-6">
+            <div class="price-card w-full sm:w-[calc(52%-12px)] shrink-0 group/card bg-white rounded-2xl 
+              overflow-hidden shadow-md hover:shadow-xl border border-slate-100 flex flex-col justify-between">
+
+              <div class="relative pb-5">
+                <div class="h-[185px] overflow-hidden">
+                  <img src="./image/home/price-1.jpg" class="w-full h-full object-cover group-hover/card:scale-105
+                   transition-transform duration-500" alt="Teeth Whitening">
+                </div>
+
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-sky-50 text-sky-500 text-2xl sm:text-xl 
+                  font-extrabold px-6 py-1 sm:py-2 rounded-xl shadow-sm border border-sky-100 z-10">
+                  $35
+                </div>
+              </div>
+
+              <!-- Card 1 -->
+              <div class="pt-4 pb-5 px-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 text-center mb-4 text-xl">Teeth Whitening</h3>
+
+                  <ul class="space-y-2 font-medium text-slate-600 text-xs mb-6">
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Modern Equipment</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Professional Dentist</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Enamel Protection</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Quick 45-Min Session</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>24/7 Call Support</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Button -->
+                <a href="./book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 text-white 
+                   font-bold py-2.5 rounded-xl text-xs transition text-center shadow-md shadow-sky-500/20">
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="price-card w-full sm:w-[calc(52%-12px)] shrink-0 group/card bg-white rounded-2xl overflow-hidden
+               shadow-md hover:shadow-xl border border-slate-100 flex flex-col justify-between">
+              <div class="relative pb-5">
+
+                <div class="h-[185px] overflow-hidden">
+                  <img src="./image/home/price-2.jpg" class="w-full h-full object-cover group-hover/card:scale-105
+                     transition-transform duration-500" alt="Dental Implant">
+                </div>
+
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-sky-50 text-sky-500 text-2xl sm:text-xl 
+                  font-extrabold px-6 py-1 sm:py-2 rounded-xl shadow-sm border border-sky-100 z-10">
+                  $49
+                </div>
+              </div>
+
+              <div class="pt-4 pb-5 px-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 text-center mb-4 text-xl">Dental Implant</h3>
+
+                  <ul class="space-y-2 font-medium text-slate-600 text-xs mb-6">
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Modern Equipment</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Professional Dentist</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Premium Crown Material</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Free X-Ray Scan</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>24/7 Call Support</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Button -->
+                <a href="./book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 text-white 
+                   font-bold py-2.5 rounded-xl text-xs transition text-center shadow-md shadow-sky-500/20">
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="price-card w-full sm:w-[calc(52%-12px)] shrink-0 group/card bg-white rounded-2xl overflow-hidden
+               shadow-md hover:shadow-xl border border-slate-100 flex flex-col justify-between">
+              <div class="relative pb-5">
+
+                <div class="h-[185px] overflow-hidden">
+                  <img src="./image/home/price-3.jpg" class="w-full h-full object-cover group-hover/card:scale-105
+                     transition-transform duration-500" alt="Root Canal">
+                </div>
+
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-sky-50 text-sky-500 text-2xl 
+                  sm:text-xl font-extrabold px-6 py-1 sm:py-2 rounded-xl shadow-sm border border-sky-100 z-10">
+                  $65
+                </div>
+              </div>
+
+              <div class="pt-4 pb-5 px-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 text-center mb-4 text-xl">Root Canal</h3>
+
+                  <ul class="space-y-2 font-medium text-slate-600 text-xs mb-6">
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Pain Free Care</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Expert Doctor</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Infection Removal</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Tooth Sealing</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Free Follow Up</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Button -->
+                <a href="./book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 text-white 
+                   font-bold py-2.5 rounded-xl text-xs transition text-center shadow-md shadow-sky-500/20">
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="price-card w-full sm:w-[calc(52%-12px)] shrink-0 group/card bg-white rounded-2xl overflow-hidden
+               shadow-md hover:shadow-xl border border-slate-100 flex flex-col justify-between">
+              <div class="relative pb-5">
+
+                <div class="h-[185px] overflow-hidden">
+                  <img src="./image/home/price-4.jpg" class="w-full h-full object-cover group-hover/card:scale-105
+                     transition-transform duration-500" alt="Teeth Cleaning">
+                </div>
+
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-sky-50 text-sky-500 text-2xl sm:text-xl 
+                  font-extrabold px-6 py-1 sm:py-2 rounded-xl shadow-sm border border-sky-100 z-10">
+                  $29
+                </div>
+              </div>
+
+              <div class="pt-4 pb-5 px-6 flex-grow flex flex-col justify-between">
+                <div>
+                  <h3 class="text-base font-bold text-slate-900 text-center mb-4 text-xl">Teeth Cleaning</h3>
+
+                  <ul class="space-y-2 font-medium text-slate-600 text-xs mb-6">
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Plaque Removal</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Gum Polishing</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Tartar Cleaning</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Cavity Inspection</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+
+                    <li class="flex justify-between items-center border-b border-slate-100 pb-1.5">
+                      <span>Fresh Breath Treatment</span>
+                      <i class="fa-solid fa-check text-sky-500 text-xs"></i>
+                    </li>
+                  </ul>
+                </div>
+
+                <!-- Button -->
+                <a href="./book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 text-white 
+                   font-bold py-2.5 rounded-xl text-xs transition text-center shadow-md shadow-sky-500/20">
+                  Book Appointment
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- PRICING PLAN SECTION END -------------->
+
+
+  <!-------------- TESTIMONIALS SLIDER SECTION START -------------->
+  <section class="relative w-full min-h-[580px] lg:min-h-[640px] flex items-center justify-center overflow-hidden 
+    py-16 lg:py-24">
+
+    <div class="absolute inset-0 z-0">
+      <img src="./image/home/testimonial-bg.jpg" class="w-full h-full object-cover" alt="Testimonials Background" />
+      <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-[1px]"></div>
+    </div>
+
+    <div class="relative z-10 w-full max-w-3xl px-4 sm:px-10">
+
+      <!-- Left Arrow Icon -->
+      <button id="prev" aria-label="Previous slide" class="absolute left-2 sm:-left-4 top-1/2 -translate-y-1/2
+       z-30 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-white/20 hover:bg-sky-500 text-white backdrop-blur-md
+       border border-white/30 flex items-center justify-center shadow-2xl transition-all duration-300 active:scale-90
+       hover:scale-105">
+        <i class="fa-solid fa-chevron-left text-sm sm:text-base"></i>
+      </button>
+
+      <!-- Right Arrow Icon -->
+      <button id="next" aria-label="Next slide" class="absolute right-2 sm:-right-4 top-1/2 -translate-y-1/2
+         z-30 w-10 sm:w-12 h-10 sm:h-12 rounded-full bg-white/20 hover:bg-sky-500 text-white backdrop-blur-md 
+         border border-white/30 flex items-center justify-center shadow-2xl transition-all duration-300
+         active:scale-90 hover:scale-105">
+        <i class="fa-solid fa-chevron-right text-sm sm:text-base"></i>
+      </button>
+
+      <div class="overflow-hidden rounded-3xl border border-white/20 bg-sky-500/30 backdrop-blur-md shadow-2xl">
+        <div id="slider" class="flex transition-transform duration-500 ease-out">
+
+          <!-- Testimonials 1 -->
+          <div class="min-w-full text-white text-center p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center">
+            <div class="relative mb-6">
+
+              <!-- Image -->
+              <img src="./image/home/testimonial-1.jpg" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full
+                 border-4 border-white/80 object-cover shadow-xl" alt="Emily Smith" />
+
+              <div class="absolute -bottom-2 -right-1 bg-sky-500 text-white w-7 h-7 rounded-full flex items-center
+                 justify-center text-xs shadow-md">
+                <i class="fa-solid fa-quote-right"></i>
+              </div>
+            </div>
+
+            <p class="text-sm sm:text-base md:text-lg font-medium mb-6 leading-relaxed italic max-w-xl text-slate-100">
+              "Excellent dental clinic! The staff is friendly, professional, and made me feel completely comfortable
+              during my treatment. Highly recommended!"
+            </p>
+            <h3 class="font-extrabold text-base sm:text-xl tracking-wide">Emily Smith</h3>
+            <p class="text-xs text-sky-200 mt-0.5">Satisfied Patient</p>
+          </div>
+
+          <!-- Testimonials 2 -->
+          <div class="min-w-full text-white text-center p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center">
+            <div class="relative mb-6">
+
+              <!-- Image -->
+              <img src="./image/home/testimonial-2.jpg" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full 
+                border-4 border-white/80 object-cover shadow-xl" alt="David Johnson" />
+
+              <div class="absolute -bottom-2 -right-1 bg-sky-500 text-white w-7 h-7 rounded-full flex items-center
+                 justify-center text-xs shadow-md">
+                <i class="fa-solid fa-quote-right"></i>
+              </div>
+            </div>
+
+            <p class="text-sm sm:text-base md:text-lg font-medium mb-6 leading-relaxed italic max-w-xl text-slate-100">
+              "Very satisfied with my visit. The clinic is clean, modern, and the treatment was pain-free. I will
+              definitely come back for future checkups."
+            </p>
+            <h3 class="font-extrabold text-base sm:text-xl tracking-wide">David Johnson</h3>
+            <p class="text-xs text-sky-200 mt-0.5">Dental Implant Patient</p>
+          </div>
+
+          <!-- Testimonials 3 -->
+          <div class="min-w-full text-white text-center p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center">
+            <div class="relative mb-6">
+
+              <!-- Image -->
+              <img src="./image/home/testimonial-3.jpg" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full 
+                border-4 border-white/80 object-cover shadow-xl" alt="Sophia Brown" />
+
+              <div class="absolute -bottom-2 -right-1 bg-sky-500 text-white w-7 h-7 rounded-full flex items-center
+                 justify-center text-xs shadow-md">
+                <i class="fa-solid fa-quote-right"></i>
+              </div>
+            </div>
+
+            <p class="text-sm sm:text-base md:text-lg font-medium mb-6 leading-relaxed italic max-w-xl text-slate-100">
+              "Amazing experience! The dentists explained everything clearly and ensured I was relaxed throughout the
+              procedure. Great service!"
+            </p>
+            <h3 class="font-extrabold text-base sm:text-xl tracking-wide">Sophia Brown</h3>
+            <p class="text-xs text-sky-200 mt-0.5">Teeth Whitening</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- TESTIMONIALS SLIDER SECTION END -------------->
+
+  <!-------------- OUR DENTISTS SECTION START -------------->
+  <section class="py-12 lg:py-20 bg-slate-50/60 w-full relative">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
+
+        <div class="bg-gradient-to-br from-sky-500 to-sky-600 p-8 sm:p-10 flex flex-col justify-between rounded-2xl
+           shadow-lg shadow-sky-500/20 text-white relative overflow-hidden group">
+          <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150
+             transition-transform duration-700">
+          </div>
+          <div>
+
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/20 
+              text-white uppercase tracking-wider mb-4 border border-white/20">
+              <i class="fa-solid fa-user-doctor text-xs"></i> Our Dentist
+            </span>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight">
+              Meet Our Certified & Experienced Dentists
+            </h2>
+
+            <p class="text-sky-100 text-xs sm:text-sm mt-3 leading-relaxed">
+              Our team of highly qualified specialists is dedicated to providing gentle, personalized, and world-class
+              dental care.
+            </p>
+          </div>
+
+          <div class="mt-8">
+
+            <!-- Button -->
+            <a href="./book-Appointment/book.html" class="popup-book-btn inline-flex items-center justify-center gap-2  
+             bg-white text-sky-600 hover:bg-slate-900 hover:text-white px-6 py-3.5 rounded-xl font-extrabold text-xs 
+             uppercase tracking-wider transition-all duration-300 shadow-md active:scale-95">
+              <span>Book Appointment</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dr Card 1 -->
+        <div class="js-app-dr-card cursor-pointer bg-white text-center pb-6 rounded-2xl overflow-hidden shadow-sm 
+          hover:shadow-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 flex flex-col
+          justify-between group" data-name="Dr. James Miller" data-badge="SENIOR ORTHODONTIST (BRACES SPECIALIST)"
+          data-specialty="Orthodontist (Braces & Alignment)" data-image="./image/home/team-1.jpg"
+          data-degrees="BDS, FCPS (Orthodontics), MOrth RCSED (UK), Certified Invisalign Provider"
+          data-rating="4.9/5.0 - 240+ Reviews" data-experience="15+ Years" data-patients="2,500+"
+          data-hours="Mon, Wed, Fri (09:00 AM - 04:00 PM)" data-bio="Experienced Senior Orthodontist specializing in 
+          teeth alignment, traditional braces, and modern invisible aligners. Dedicated to designing beautiful, healthy 
+          smiles and correcting complex jaw issues using advanced, patient-focused dental techniques." data-services='["Traditional Metal & Ceramic Braces",
+          "Clear Aligners (Invisalign)", "Complex Jaw Realignment", "Pediatric & Adult Orthodontics",
+          "Retainers & Post-Treatment Care", "Smile Design & Bite Correction"]'>
+          <div>
+            <div class="relative overflow-hidden h-72 sm:h-80">
+
+              <!-- Image -->
+              <img src="./image/home/team-1.jpg" class="w-full h-full object-cover group-hover:scale-105
+                 transition-transform duration-500" alt="Dr. James Miller">
+
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity
+                 duration-300 flex items-center justify-center">
+                <span class="bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transform 
+                translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
+                  <i class="fa-regular fa-eye"></i> View Profile
+                </span>
+              </div>
+
+              <!-- Social Media Icons -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 
+                backdrop-blur-md p-1.5 rounded-full shadow-lg border border-slate-100 z-10">
+
+                <!-- Twitter Icon -->
+                <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600
+                   hover:bg-sky-500 hover:text-white flex items-center justify-center transition-all text-xs">
+                  <i class="fab fa-twitter"></i></a>
+
+                <!-- Facebook Icon -->
+                <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-facebook-f"></i></a>
+
+                <!-- Linkedin Icon -->
+                <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-8 h-8 rounded-full
+                   bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center
+                   transition-all text-xs">
+                  <i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+
+            <h3 class="mt-5 font-bold text-lg text-slate-900 px-2 group-hover:text-sky-500 transition-colors">
+              Dr. James Miller</h3>
+          </div>
+
+          <div class="px-4 mt-2">
+            <span class="inline-block bg-sky-50 text-sky-600 font-semibold text-xs px-3 py-1.5 rounded-lg border b
+              order-sky-100">
+              Orthodontist (Braces & Alignment)
+            </span>
+          </div>
+        </div>
+
+        <!-- Dr Card 2 -->
+        <div class="js-app-dr-card cursor-pointer bg-white text-center pb-6 rounded-2xl overflow-hidden shadow-sm 
+          hover:shadow-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 flex flex-col
+          justify-between group" data-name="Dr. Olivia Taylor" data-badge="COSMETIC DENTAL SURGEON (SMILE DESIGN)"
+          data-specialty="Cosmetic Dentist (Smile Design)" data-image="./image/home/team-2.jpg"
+          data-degrees="BDS, AACD Fellow (USA), Certified Aesthetic Dentist, Diploma in Cosmetic Dentistry (UK)"
+          data-rating="5.0/5.0 - 310+ Reviews" data-experience="10+ Years" data-patients="1,800+"
+          data-hours="Tue, Thu, Sat (10:00 AM - 05:00 PM)" data-bio="Expert Cosmetic Dental Surgeon specializing 
+          in aesthetic smile transformations and advanced restorative procedures. Passionate about creating natural, 
+          confident smiles using  cutting-edge dental technology and personalized treatment plans tailored to each 
+          patient's unique  facial features." data-services='["Digital Smile Design (DSD)", "Porcelain Veneers & Laminates", "Professional Teeth Whitening", 
+          "Composite Bonding & Tooth Reshaping", "Full Mouth Aesthetic Rehabilitation", 
+          "Gummy Smile Correction & Laser Contouring"]'>
+          <div>
+            <div class="relative overflow-hidden h-72 sm:h-80">
+
+              <!-- Image -->
+              <img src="./image/home/team-2.jpg" class="w-full h-full object-cover group-hover:scale-105 
+                transition-transform duration-500" alt="Dr. Olivia Taylor">
+
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity 
+                duration-300 flex items-center justify-center">
+
+                <span class="bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transform
+                   translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center
+                   gap-1.5">
+                  <i class="fa-regular fa-eye"></i> View Profile
+                </span>
+              </div>
+
+              <!-- Social Media Icons -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 
+                backdrop-blur-md p-1.5 rounded-full shadow-lg border border-slate-100 z-10">
+
+                <!-- Twitter Icon -->
+                <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600
+                   hover:bg-sky-500 hover:text-white flex items-center justify-center transition-all text-xs">
+                  <i class="fab fa-twitter"></i></a>
+
+                <!-- Facebook Icon -->
+                <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-facebook-f"></i></a>
+
+                <!-- Linkedin Icon -->
+                <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-8 h-8 rounded-full
+                   bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center
+                   transition-all text-xs">
+                  <i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+
+            <h3 class="mt-5 font-bold text-lg text-slate-900 px-2 group-hover:text-sky-500 transition-colors">
+              Dr. Olivia Taylor</h3>
+          </div>
+
+          <div class="px-4 mt-2">
+            <span class="inline-block bg-sky-50 text-sky-600 font-semibold text-xs px-3 py-1.5 rounded-lg border 
+              border-sky-100">
+              Cosmetic Dentist (Smile Design)
+            </span>
+          </div>
+        </div>
+
+        <!-- Dr Card 3 -->
+        <div class="js-app-dr-card cursor-pointer bg-white text-center pb-6 rounded-2xl overflow-hidden shadow-sm 
+          hover:shadow-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 flex flex-col
+          justify-between group" data-name="Dr. Michael Johnson" data-badge="PEDIATRIC DENTIST & IMPLANT SPECIALIST"
+          data-specialty="Pediatric & Implant Specialist" data-image="./image/home/team-3.jpg"
+          data-degrees="BDS, FCPS (Pediatric Dentistry), Dip. Implantology (ICOI, USA), Certified Laser Dentist"
+          data-rating="4.9/5.0 - 190+ Reviews" data-experience="8+ Years" data-patients="1,900+"
+          data-hours="Mon - Thu (11:00 AM - 06:00 PM)" data-bio="Dual-specialized dental surgeon expertise in 
+          comprehensive child dental care and modern dental implantology. Dedicated to providing gentle, painless 
+          treatments for kids while restoring adult smiles through permanent, natural-looking tooth replacement
+          procedures." data-services='["Pediatric Tooth Care & Fillings", "Dental Implants", "Preventive Braces for Kids", 
+          "Tooth Extraction & Trauma Care", "Painless Root Canals", "Laser Gum Treatment"]'>
+          <div>
+            <div class="relative overflow-hidden h-72 sm:h-80">
+
+              <!-- Image -->
+              <img src="./image/home/team-3.jpg" class="w-full h-full object-cover group-hover:scale-105
+                 transition-transform duration-500" alt="Dr. Michael Johnson">
+
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity
+                 duration-300 flex items-center justify-center">
+
+                <span class="bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transform 
+                  translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
+                  <i class="fa-regular fa-eye"></i> View Profile
+                </span>
+              </div>
+
+              <!-- Social Media Icons -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 
+                backdrop-blur-md p-1.5 rounded-full shadow-lg border border-slate-100 z-10">
+
+                <!-- Twitter Icon -->
+                <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600
+                   hover:bg-sky-500 hover:text-white flex items-center justify-center transition-all text-xs">
+                  <i class="fab fa-twitter"></i></a>
+
+                <!-- Facebook Icon -->
+                <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-facebook-f"></i></a>
+
+                <!-- Linkedin Icon -->
+                <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-8 h-8 rounded-full
+                   bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center
+                   transition-all text-xs">
+                  <i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+
+            <h3 class="mt-5 font-bold text-lg text-slate-900 px-2 group-hover:text-sky-500 transition-colors">
+              Dr. Michael Johnson </h3>
+          </div>
+
+          <div class="px-4 mt-2">
+            <span class="inline-block bg-sky-50 text-sky-600 font-semibold text-xs px-3 py-1.5 rounded-lg border 
+              border-sky-100">
+              Pediatric & Implant Specialist
+            </span>
+          </div>
+        </div>
+
+        <!-- card 4 -->
+        <div class="js-app-dr-card cursor-pointer bg-white text-center pb-6 rounded-2xl overflow-hidden shadow-sm 
+          hover:shadow-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 flex flex-col
+          justify-between group" data-name="Dr. Isabella Martinez" data-badge="PERIODONTIST & GUM SPECIALIST"
+          data-specialty="Periodontist (Gum Disease Care)" data-image="./image/home/team-4.jpg"
+          data-degrees="BDS, MSP (Periodontology), Dip. Periodontics (USA), Certified Laser Periodontist"
+          data-rating="4.8/5.0 - 150+ Reviews" data-experience="12+ Years" data-patients="2,100+"
+          data-hours="Tue, Thu, Sat (09:00 AM - 03:00 PM)" data-bio="Specialized gum care expert focused on diagnosing,  
+          preventing, and treating complex periodontal diseases. Skilled in advanced gum surgeries and regenerative  
+          procedures to ensure strong foundations for teeth and implants." data-services='["Deep Scaling & Root Planing", 
+          "Gum Disease & Bleeding Care", "Laser Gum Surgery", "Gum Grafting & Receding Gum Care", "Crown Lengthening",
+          "Periodontal Maintenance & Flap Surgery"]'>
+          <div>
+            <div class="relative overflow-hidden h-72 sm:h-80">
+
+              <!-- Image -->
+              <img src="./image/home/team-4.jpg" class="w-full h-full object-cover group-hover:scale-105
+                 transition-transform duration-500" alt="Dr. Alexander Wright">
+
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity
+                 duration-300 flex items-center justify-center">
+
+                <span class="bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transform 
+                translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
+                  <i class="fa-regular fa-eye"></i> View Profile
+                </span>
+              </div>
+
+              <!-- Social Media Icons -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90
+                 backdrop-blur-md p-1.5 rounded-full shadow-lg border border-slate-100 z-10">
+
+                <!-- Twitter Icon -->
+                <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600
+                   hover:bg-sky-500 hover:text-white flex items-center justify-center transition-all text-xs">
+                  <i class="fab fa-twitter"></i></a>
+
+                <!-- Facebook Icon -->
+                <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-facebook-f"></i></a>
+
+                <!-- Linkedin Icon -->
+                <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-8 h-8 rounded-full
+                   bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center
+                   transition-all text-xs">
+                  <i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+
+            <h3 class="mt-5 font-bold text-lg text-slate-900 px-2 group-hover:text-sky-500 transition-colors">
+              Dr. Isabella Martinez</h3>
+          </div>
+
+          <div class="px-4 mt-2">
+            <span class="inline-block bg-sky-50 text-sky-600 font-semibold text-xs px-3 py-1.5 rounded-lg border 
+              border-sky-100">
+              Periodontist (Gum Care)
+            </span>
+          </div>
+        </div>
+
+        <!-- card 5 -->
+        <div class="js-app-dr-card cursor-pointer bg-white text-center pb-6 rounded-2xl overflow-hidden shadow-sm
+           hover:shadow-xl border border-slate-100 transition-all duration-300 hover:-translate-y-1.5 flex flex-col
+           justify-between group" data-name="Dr. William Brown" data-badge="ENDODONTIST & ROOT CANAL SPECIALIST"
+          data-specialty="Endodontist (Root Canal Specialist)" data-image="./image/home/team-5.jpg"
+          data-degrees="BDS, FCPS (Endodontics), MSc (Endodontics, UK), Certified Micro-Endodontics Specialist"
+          data-rating="4.9/5.0 - 280+ Reviews" data-experience="11+ Years" data-patients="3,000+"
+          data-hours="Mon, Wed, Fri (01:00 PM - 08:00 PM)" data-bio="Dedicated specialist focused on saving natural 
+          teeth through advanced, painless root canal therapies and restorative procedures. Expert in high-precision 
+          microscopic endodontics and managing complex tooth infections." data-services='["Painless Root Canal Treatment", 
+          "Single-Visit Root Canals", "Root Canal Retreatment", "Microscopic Endodontics", "Dental Trauma Care",
+          "Dental Abscess Treatment"]'>
+          <div>
+            <div class="relative overflow-hidden h-72 sm:h-80">
+
+              <!-- Image -->
+              <img src="./image/home/team-5.jpg" class="w-full h-full object-cover group-hover:scale-105 
+                transition-transform duration-500" alt="Dr. Maya Patel">
+
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity 
+                duration-300 flex items-center justify-center">
+
+                <span class="bg-sky-500 text-white text-xs font-bold px-4 py-2 rounded-xl shadow-lg transform 
+                  translate-y-2 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-1.5">
+                  <i class="fa-regular fa-eye"></i> View Profile
+                </span>
+              </div>
+
+              <!-- Social Media Icons -->
+              <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-white/90 
+                backdrop-blur-md p-1.5 rounded-full shadow-lg border border-slate-100 z-10">
+
+                <!-- Twitter Icon -->
+                <a href="https://twitter.com" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600
+                   hover:bg-sky-500 hover:text-white flex items-center justify-center transition-all text-xs">
+                  <i class="fab fa-twitter"></i></a>
+
+                <!-- Facebook Icon -->
+                <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-facebook-f"></i></a>
+
+                <!-- Linkedin Icon -->
+                <a href="https://www.linkedin.com/in/zahid-hussain-88035533a/" target="_blank" class="w-8 h-8 
+                   rounded-full bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center
+                   justify-center transition-all text-xs">
+                  <i class="fab fa-linkedin-in"></i></a>
+
+                <!-- Instagram icon -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-8 h-8 rounded-full
+                   bg-slate-100 text-slate-600 hover:bg-sky-500 hover:text-white flex items-center justify-center
+                   transition-all text-xs">
+                  <i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+
+            <h3 class="mt-5 font-bold text-lg text-slate-900 px-2 group-hover:text-sky-500 transition-colors">Dr.
+              William Brown </h3>
+          </div>
+
+          <div class="px-4 mt-2">
+            <span class="inline-block bg-sky-50 text-sky-600 font-semibold text-xs px-3 py-1.5 rounded-lg border
+               border-sky-100">
+              Endodontist (Root Canal)
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dr Details Modal -->
+    <div id="fullDetailDrModal" class="fixed inset-0 z-50 overflow-y-auto hidden opacity-0 transition-all 
+      duration-300 ease-out" role="dialog" aria-modal="true">
+
+      <div id="fullDetailDrBackdrop" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
+
+      <div class="flex min-h-full items-center justify-center p-3 sm:p-5 relative z-10">
+        <div id="fullDetailDrPanel" class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl
+           overflow-hidden transition-all transform translate-y-4 scale-95 duration-300 my-auto">
+
+          <button id="fullDrCloseX" class="absolute right-5 top-5 z-20 w-9 h-9 rounded-full bg-slate-100/80 
+          hover:bg-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition-colors">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+
+          <div class="grid grid-cols-1 md:grid-cols-12 min-h-[520px]">
+
+            <div class="md:col-span-5 bg-sky-50/40 p-6 sm:p-8 flex flex-col justify-between items-center text-center
+               border-b md:border-b-0 md:border-r border-slate-100 relative">
+
+              <div class="w-full flex flex-col items-center">
+                <div class="w-40 h-40 sm:w-44 sm:h-44 rounded-full ring-4 ring-white shadow-xl overflow-hidden
+                   bg-white mb-5 shrink-0">
+                  <img id="fullDrImg" src="" class="w-full h-full object-cover" alt="Doctor Image">
+                </div>
+
+                <div class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-amber-50 border 
+                  border-amber-200 text-amber-700 text-xs font-bold shadow-sm mb-6">
+                  <div class="flex text-amber-400 text-xs gap-0.5">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                  </div>
+                  <span id="fullDrRating">(4.9/5.0 - 240+ Reviews)</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 w-full">
+                  <div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">EXPERIENCE</p>
+                    <p id="fullDrExp" class="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">15+ Years</p>
+                  </div>
+
+                  <div class="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm text-center">
+                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">PATIENTS</p>
+                    <p id="fullDrPatients" class="text-sm sm:text-base font-extrabold text-slate-900 mt-0.5">2,500+</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="w-full mt-6 pt-5 border-t border-slate-200/60 text-left">
+                <p class="text-[10px] font-bold uppercase tracking-wider text-sky-600 flex items-center gap-1.5">
+                  <i class="fa-regular fa-clock text-xs"></i> REGULAR HOURS
+                </p>
+                <p id="fullDrHours" class="text-xs font-semibold text-slate-700 mt-1 leading-snug">
+                  Clinic Regular Hours: Mon, Wed, Fri (09:00 AM - 04:00 PM)
+                </p>
+              </div>
+            </div>
+
+            <div class="md:col-span-7 p-6 sm:p-8 flex flex-col justify-between space-y-5">
+
+              <div class="space-y-4">
+                <div>
+                  <span id="fullDrBadge" class="inline-block bg-sky-100/70 text-sky-600 font-extrabold text-[10px]
+                   sm:text-xs px-3.5 py-1 rounded-full uppercase tracking-wider">
+                    SENIOR ORTHODONTIST (BRACES SPECIALIST)
+                  </span>
+                </div>
+
+                <div>
+                  <h3 id="fullDrName" class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">ف
+                    Dr. Olivia Miller</h3>
+
+                  <p id="fullDrDegrees" class="text-xs text-slate-500 font-semibold mt-1 flex items-start gap-1.5">
+                    <i class="fa-solid fa-graduation-cap text-sky-500 text-sm mt-0.5 shrink-0"></i>
+                    <span>BDS, MDS (Orthodontics), FCPS (Orthodontics), Registered PMDC Dentist</span>
+                  </p>
+                </div>
+
+                <div class="pt-2">
+                  <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1">ABOUT DOCTOR</p>
+                  <p id="fullDrBio" class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    Dr. James Miller is a leading expert in Orthodontics with over 15 years of dedicated practice. He
+                    specializes in advanced clear aligner therapies, traditional braces, jaw alignment, and corrective
+                    surgeries.
+                  </p>
+                </div>
+
+                <div class="pt-2">
+                  <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">KEY SERVICES</p>
+                  <div id="fullDrServices" class="grid grid-cols-2 gap-2">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Book Appointment Btn -->
+              <div class="pt-4 border-t border-slate-100 flex items-center gap-2">
+                <a href="./book-Appointment/book.html" class="popup-book-btn uppercase flex-1 bg-[#00a8ea] 
+                 hover:bg-[#0092cd] py-3 px-4 rounded-xl font-extrabold text-xs tracking-wider uppercase flex
+                 items-center justify-center text-white gap-2 shadow-md shadow-sky-500/20 transition-all
+                 active:scale-95">
+                  <i class="fa-regular fa-calendar-check text-sm ml-2"></i>
+                  <span>BOOK APPOINTMENT</span>
+                </a>
+
+                <!-- Action Button -->
+                <a href="tel:+92 3492947989" class="w-11 h-11 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700
+                 flex items-center justify-center transition-colors shrink-0">
+                  <i class="fa-solid fa-phone text-sm"></i>
+                </a>
+
+                <!-- Instagram Butt -->
+                <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="w-11 h-11 rounded-xl 
+                  bg-pink-50 hover:bg-pink-100 text-pink-600 flex items-center justify-center transition-colors border
+                  border-pink-100 shrink-0">
+                  <i class="fa-brands fa-instagram text-base"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- OUR DENTISTS SECTION END -------------->
+
+
+  <!-------------- NEWSLETTER & FOOTER SECTION START -------------->
+  <section class="relative -mb-20 z-10 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto bg-sky-500 p-6 sm:p-10 flex justify-center rounded-lg shadow-xl">
+
+      <form class="flex flex-col sm:flex-row w-full max-w-3xl gap-0">
+        <input type="email" placeholder="Your Email" required class="w-full px-6 py-4 outline-none rounded-t
+           sm:rounded-t-none sm:rounded-l-lg bg-white text-slate-800 text-sm sm:text-base">
+
+        <button type="submit" class="bg-slate-900 text-white px-8 py-4 sm:py-0 rounded-b sm:rounded-b-none
+           sm:rounded-r-lg font-bold hover:bg-slate-800 transition whitespace-nowrap text-sm sm:text-base">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 text-white pt-32 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-16">
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Quick Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="./index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="./About/about.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="./Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Laatest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="./Contact/contact.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Popular Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Popular Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="./index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="./About/about.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="./Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Latest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="./Contact/contact.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get In Touch -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Get In Touch</h3>
+        <ul class="space-y-4 text-slate-300 text-sm sm:text-base">
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-sky-400 mt-1"></i>
+            <span>123 Street, New York, USA</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-envelope text-sky-400 mt-1"></i>
+            <span>info@example.com</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-phone text-sky-400 mt-1"></i>
+            <span>+012 345 67890</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Follow Us</h3>
+        <div class="flex gap-3">
+
+          <!-- Twitter Icon -->
+          <a href="https://twitter.com/yourusername" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+           w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <!-- Facebook Icon -->
+          <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="bg-sky-500 
+           hover:bg-sky-600 text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <!-- Linkedin Icon -->
+          <a href="https://www.linkedin.com/feed/" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+             w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <!-- Instagram Icon -->
+          <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="bg-sky-500 hover:bg-sky-600
+           text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800">
+      <div class="max-w-6xl mx-auto py-6 flex flex-col sm:flex-row justify-between items-center text-center 
+        sm:text-left gap-2 text-sm text-slate-400">
+        <p>© Your Site Name. All Rights Reserved.</p>
+        <p>
+          Designed by <span class="text-white font-semibold">HTML Codex</span> |
+          Distributed by <span class="text-white font-semibold">ThemeWagon</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./index.js"></script>
+
+  <!-------------- NEWSLETTER & FOOTER SECTION END -------------->
+
+</body>
+
+</html>

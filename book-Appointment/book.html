@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Appointment - ClinicBook</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+    100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%230284c7;'/>
+    <stop offset='100%' style='stop-color:%232563eb;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+    fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1
+    4 2 11 5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-50 min-h-screen text-slate-800 selection:bg-sky-500 selection:text-white relative overflow-x-hidden">
+
+  <!-- Background Glows -->
+  <div class="fixed top-0 left-1/4 w-[600px] h-[600px] bg-sky-200/40 rounded-full blur-[140px] pointer-events-none">
+  </div>
+
+  <div class="fixed bottom-0 right-1/4 w-[600px] h-[600px] bg-blue-100/50 rounded-full 
+    blur-[140px] pointer-events-none">
+  </div>
+
+  <!-------------- NAVBAR SECTION START -------------->
+  <header class="pt-4 sm:top-4 z-50 px-3 sm:px-6 max-w-6xl mx-auto w-full relative">
+    <nav class="bg-white/80 backdrop-blur-xl border border-slate-200/80 shadow-xl shadow-sky-500/5
+       rounded-2xl sm:rounded-3xl px-4 py-3 flex items-center justify-between transition-all duration-300">
+
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-3 group shrink-0">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-600 flex items-center
+          justify-center text-white shadow-lg shadow-sky-500/25 group-hover:scale-105 transition-transform
+          duration-300">
+          <i class="fa-solid fa-tooth text-lg"></i>
+        </div>
+
+        <div class="flex flex-col">
+          <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+            Clinic<span class="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">Book</span>
+          </span>
+          <span class="text-[9px] font-extrabold tracking-widest text-slate-400 uppercase mt-0.5">Dental & Smile
+            Care</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+
+      <!-- Home -->
+      <div class="hidden md:flex items-center gap-3">
+        <a href="../index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 
+           hover:text-sky-600 px-4 py-2.5 rounded-xl hover:bg-slate-100 transition-all duration-300">
+          <i class="fa-solid fa-house text-slate-400"></i>
+          <span>Home</span></a>
+
+        <!-- My Appointment -->
+        <a href="../Patient/index.html" class="inline-flex items-center gap-2 text-xs font-bold text-slate-600 
+           hover:text-sky-600 px-4 py-2.5 rounded-xl hover:bg-slate-100 transition-all duration-300">
+          <i class="fa-regular fa-calendar-check text-slate-400"></i>
+          <span>My Appointments</span></a>
+
+        <!-- Logout Button -->
+        <button id="logout-btn" class="inline-flex items-center gap-2 bg-rose-600 hover:bg-rose-700 text-white 
+          text-xs font-bold px-4 py-2.5 rounded-xl shadow-md shadow-rose-500/20 transition active:scale-95
+          cursor-pointer">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+      <!-- Hamburger Button -->
+      <button id="mobile-menu-btn" type="button" aria-label="Toggle Navigation" class="md:hidden w-10 h-10 rounded-xl 
+        bg-slate-100 border border-slate-200 text-slate-700 hover:text-sky-600 flex items-center justify-center
+        text-lg transition-colors focus:outline-none cursor-pointer">
+        <i class="fa-solid fa-bars" id="menu-icon"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Overlay -->
+    <div id="mobile-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-40 opacity-0 
+      pointer-events-none transition-opacity duration-300 md:hidden">
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div id="mobile-drawer" class="fixed top-0 left-0 h-full w-72 bg-white/95 backdrop-blur-2xl
+       z-50 shadow-2xl border-r border-slate-100 p-6 transform -translate-x-full transition-transform
+       duration-300 ease-out md:hidden flex flex-col justify-between">
+
+      <div>
+        <div class="flex items-center justify-between pb-5 border-b border-slate-100">
+          <a href="../index.html" class="flex items-center gap-2.5 group">
+
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 flex 
+              items-center justify-center text-white shadow-md shadow-sky-500/20">
+              <i class="fa-solid fa-tooth text-base"></i>
+            </div>
+
+            <div class="flex flex-col">
+              <span class="text-base font-black tracking-tight text-slate-900 leading-none">
+                Clinic<span class="text-sky-600">Book</span>
+              </span>
+              <span class="text-[8px] font-bold tracking-widest text-slate-400 uppercase mt-0.5">
+                Dental & Smile Care</span>
+            </div>
+          </a>
+
+          <button id="close-drawer-btn" type="button" aria-label="Close Navigation Drawer" class="w-8 h-8 rounded-lg
+             bg-slate-100 text-slate-500 hover:text-slate-800 flex items-center justify-center transition-colors 
+             cursor-pointer">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Home -->
+        <div class="flex flex-col gap-2 mt-6">
+          <a href="../index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-slate-700
+             hover:bg-sky-50 hover:text-sky-600 transition-all">
+            <i class="fa-solid fa-house text-slate-400 w-5"></i>
+            <span>Home</span></a>
+
+          <!-- My Appointment -->
+          <a href="../Patient/index.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold
+             text-sky-600 bg-sky-50 transition-all">
+            <i class="fa-regular fa-calendar-check text-sky-500 w-5"></i>
+            <span>My Appointments</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <div class="pt-4 border-t border-slate-100 flex flex-col gap-3">
+        <button id="logout-btn-mobile" class="w-full inline-flex items-center justify-center gap-2 bg-rose-600
+           hover:bg-rose-700 text-white text-sm font-bold py-3 rounded-xl shadow-md shadow-rose-500/20 
+           transition active:scale-95 cursor-pointer">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+        <p class="text-[10px] text-slate-400 font-medium text-center">ClinicBook Dental Care</p>
+      </div>
+    </div>
+  </header>
+  <!-------------- NAVBAR SECTION END -------------->
+
+  <!-------------- MAIN CARD CONTAINER START -------------->
+  <section class="max-w-6xl mx-auto my-8 sm:my-14 px-4 sm:px-6 relative z-10">
+    <div class="bg-white rounded-[2.5rem] shadow-2xl shadow-sky-900/10 border border-slate-200/80 
+      overflow-hidden grid grid-cols-1 lg:grid-cols-12 relative">
+
+      <!-- SIDEBAR PANEL -->
+      <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950
+         p-8 sm:p-12 text-white flex flex-col justify-between relative border-b lg:border-b-0 lg:border-r 
+         border-slate-800">
+
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/20 border 
+            border-sky-400/30 text-sky-300 text-xs font-black uppercase tracking-widest mb-8">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+            Instant Medical Booking
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-none text-white mb-4">
+            Book Your <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-sky-200">
+              Visit Now</span>
+          </h2>
+
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-10 font-normal">
+            Experience seamless healthcare booking. Select your preferred doctor and slot in less than 60 seconds.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10
+               backdrop-blur-md shadow-sm group hover:bg-white/10 transition-all duration-300">
+
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center 
+                justify-center text-white text-base font-bold shadow-md shadow-sky-500/20 shrink-0">
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-bold text-white">Instant Confirmation</h4>
+                <p class="text-xs text-slate-300 mt-0.5">No waiting time for approval</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 
+              backdrop-blur-md shadow-sm group hover:bg-white/10 transition-all duration-300">
+
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center 
+                justify-center text-white text-base font-bold shadow-md shadow-sky-500/20 shrink-0">
+                <i class="fa-solid fa-user-doctor"></i>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-bold text-white">Certified Specialists</h4>
+                <p class="text-xs text-slate-300 mt-0.5">Top medical professionals</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10
+               backdrop-blur-md shadow-sm group hover:bg-white/10 transition-all duration-300">
+
+              <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-sky-400 to-blue-600 flex items-center 
+                justify-center text-white text-base font-bold shadow-md shadow-sky-500/20 shrink-0">
+                <i class="fa-solid fa-shield-halved"></i>
+              </div>
+
+              <div>
+                <h4 class="text-sm font-bold text-white">Private & Secure</h4>
+                <p class="text-xs text-slate-300 mt-0.5">Your health data is protected</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative z-10 mt-10 pt-6 border-t border-slate-800 flex items-center justify-between 
+          text-xs text-slate-400">
+          <span class="flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-sky-400"></i> Verified Dental Clinic
+          </span>
+          <span class="font-semibold text-slate-300">Open 7 Days a Week</span>
+        </div>
+      </div>
+
+      <!-- FORM PANEL -->
+      <div class="lg:col-span-7 bg-white p-8 sm:p-12 flex flex-col justify-center relative">
+
+        <div class="mb-8">
+          <div class="flex items-center gap-3">
+            <div class="w-2.5 h-8 bg-gradient-to-b from-sky-500 to-blue-600 rounded-full"></div>
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">Appointment Details</h3>
+              <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Fill out the fields below to book your appointment
+                slot.</p>
+            </div>
+          </div>
+        </div>
+
+        <form id="bookingForm" class="space-y-6">
+
+          <!-- Patient Name Field -->
+          <div class="space-y-2">
+            <label for="patientName" class="block text-xs font-extrabold text-slate-700 uppercase 
+              tracking-widest flex items-center gap-2">
+              <i class="fa-regular fa-user text-sky-600"></i> Full Name
+            </label>
+
+            <div class="relative">
+              <input type="text" id="patientName" name="patientName" readonly placeholder="Fetching patient profile..."
+                class="w-full bg-slate-100 border border-slate-200 rounded-2xl px-4 py-4 text-sm font-semibold 
+                text-slate-800 outline-none cursor-not-allowed transition-all">
+
+              <div class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs font-bold 
+                bg-slate-200/80 px-2.5 py-1 rounded-lg pointer-events-none">
+                Auto-Filled
+              </div>
+            </div>
+          </div>
+
+          <!-- Select Doctor Field -->
+          <div class="space-y-2 relative" id="customDropdownContainer">
+            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider">
+              Select Doctor
+            </label>
+
+            <select id="doctor" name="doctor" required class="hidden">
+              <option value="">Choose Specialist</option>
+            </select>
+
+            <!-- Custom Button -->
+            <div id="dropdownToggle" class="w-full bg-white border border-slate-200 rounded-2xl px-4 py-3.5
+               text-sm font-semibold text-slate-800 flex items-center justify-between cursor-pointer
+               hover:border-sky-500 focus:ring-4 focus:ring-sky-500/10 transition-all shadow-sm">
+
+              <span id="selectedDoctorText" class="text-slate-400">Choose Specialist</span>
+              <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300"
+                id="dropdownArrow"></i>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <div id="dropdownMenu" class="absolute top-full left-0 w-full mt-2 bg-white border border-slate-100  
+              rounded-2xl shadow-xl shadow-slate-200/50 max-h-60 overflow-y-auto z-50 hidden divide-y divide-slate-50">
+              <!-- JavaScript dynamically inject -->
+            </div>
+          </div>
+
+          <!-- Appointment Date & Time Field -->
+          <div class="space-y-2">
+            <label for="datetime" class="block text-xs font-extrabold text-slate-700 uppercase
+               tracking-widest flex items-center gap-2">
+              <i class="fa-regular fa-calendar-days text-sky-600"></i> Appointment Date & Time
+            </label>
+
+            <div class="relative">
+              <input type="datetime-local" id="datetime" name="datetime" required class="w-full bg-slate-50 border
+                 border-slate-200 rounded-2xl px-4 py-4 text-sm font-semibold text-slate-900 outline-none 
+                 focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all 
+                 duration-300 cursor-pointer">
+            </div>
+          </div>
+
+          <!-- Medical Concern / Reason Field -->
+          <div class="space-y-2">
+            <label for="reason" class="block text-xs font-extrabold text-slate-700 uppercase
+               tracking-widest flex items-center gap-2">
+              <i class="fa-regular fa-comment-dots text-sky-600"></i> Reason / Medical Concern
+            </label>
+
+            <textarea id="reason" name="reason" rows="3"
+              placeholder="Briefly describe what you'd like to consult about..." required class="w-full bg-slate-50 
+              border border-slate-200 rounded-2xl p-4 text-sm font-medium text-slate-900 placeholder-slate-400
+              outline-none focus:border-sky-500 focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all
+              duration-300 resize-none"></textarea>
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-sky-500 via-blue-600 to-sky-600 
+             hover:from-sky-600 hover:to-blue-700 text-white font-extrabold text-base py-4 rounded-2xl
+             shadow-xl shadow-sky-500/25 hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0
+             transition-all duration-300 flex items-center justify-center gap-3 mt-6 cursor-pointer">
+            <span>Confirm & Schedule</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./book.js"></script>
+
+  <!-------------- MAIN CARD CONTAINER END -------------->
+
+</body>
+
+</html>

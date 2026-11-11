@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - ClinicBook Portal</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+  100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+  <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+  fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+  5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Google Fonts (Plus Jakarta Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    /* Gradient Background */
+    .bg-mesh {
+      background-color: #030712;
+      background-image:
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(99, 102, 241, 0.18) 0px, transparent 50%),
+        radial-gradient(at 50% 100%, rgba(168, 85, 247, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Glass Input Box Styling */
+    .glass-input {
+      background: rgba(2, 6, 23, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .glass-input:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .glass-input:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 20px -3px rgba(56, 189, 248, 0.3);
+      background: rgba(15, 23, 42, 0.95);
+      outline: none;
+    }
+
+    /* Active Role Tab Highlight */
+    .tab-active {
+      background: linear-gradient(135deg, #0284c7, #2563eb);
+      color: #ffffff !important;
+      box-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+    }
+
+    /* Doctor Available Days Checkbox Styling */
+    .day-checkbox-label {
+      transition: all 0.2s ease;
+    }
+
+    .day-checkbox-label:has(input:checked) {
+      background: rgba(14, 165, 233, 0.2);
+      border-color: #38bdf8;
+      color: #38bdf8;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #030712;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+
+<body class="bg-mesh text-slate-100 antialiased min-h-screen flex items-center justify-center p-4 
+    sm:p-6 lg:p-10 relative selection:bg-cyan-500 selection:text-white overflow-x-hidden">
+
+  <!-- BACKGROUND -->
+  <div class="fixed top-10 left-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+  <div class="fixed bottom-10 right-10 w-96 h-96 bg-indigo-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+  <!-- MAIN CONTAINER -->
+  <div class="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10 my-auto items-stretch">
+
+    <div class="lg:col-span-5 glass-panel p-6 lg:p-8 rounded-3xl flex flex-col justify-between relative
+    overflow-hidden group border border-cyan-500/20 shadow-2xl shadow-cyan-950/40 backdrop-blur-2xl">
+
+      <!-- Background Effects -->
+      <div class="absolute -top-24 -left-24 w-72 h-72 bg-cyan-500/15 rounded-full blur-[100px]
+         pointer-events-none group-hover:bg-cyan-500/25 transition-all duration-700">
+      </div>
+
+      <div class="absolute -bottom-24 -right-24 w-72 h-72 bg-teal-500/10 rounded-full blur-[100px] pointer-events-none">
+      </div>
+
+      <!-- Background Grid Overlay -->
+      <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),
+        linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none">
+      </div>
+
+      <div class="relative z-10">
+
+        <!-- Logo -->
+        <a href="../index.html" class="inline-flex items-center gap-3 group/logo">
+          <div class="w-11 h-11 bg-gradient-to-tr from-cyan-400 via-cyan-500 to-teal-500 
+            text-slate-950 rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/30 
+            group-hover/logo:scale-105 group-hover/logo:rotate-3 transition-all duration-300">
+            <i class="fa-solid fa-hospital-user text-lg"></i>
+          </div>
+
+          <span class="text-xl font-black tracking-tight text-white">Clinic<span class="text-transparent bg-clip-text 
+            bg-gradient-to-r from-cyan-400 to-teal-400">Book</span></span>
+        </a>
+
+        <!-- Dynamic Portal Info -->
+        <div class="mt-6 space-y-4">
+
+          <!-- Role Badge -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30
+              text-cyan-400 text-[11px] font-bold tracking-wider uppercase shadow-inner shadow-cyan-500/20">
+
+            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#22d3ee]"></span>
+            <span id="roleBadge">Patient Portal Registration</span>
+          </div>
+
+          <h1 class="text-2xl sm:text-3xl font-extrabold text-white leading-snug tracking-tight" id="dynamicTitle">
+            Streamlined Healthcare Experience
+          </h1>
+
+          <p class="text-xs sm:text-sm text-slate-400 leading-relaxed font-medium" id="dynamicDesc">
+            Join thousands of users managing their medical consultations, appointments, and hospital workflows
+            seamlessly.
+          </p>
+
+          <!-- Feature Bullet Points -->
+          <ul class="space-y-2.5 pt-2 text-xs sm:text-sm font-medium text-slate-300" id="featureList">
+            <li class="flex items-center gap-2.5 group/item">
+
+              <div class="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 
+              flex items-center justify-center text-xs group-hover/item:bg-cyan-500/20 transition-colors">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              Instant online doctor booking
+            </li>
+
+            <li class="flex items-center gap-2.5 group/item">
+              <div class="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 
+                flex items-center justify-center text-xs group-hover/item:bg-cyan-500/20 transition-colors">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              24/7 Access to medical records
+            </li>
+
+            <li class="flex items-center gap-2.5 group/item">
+              <div class="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400
+                 flex items-center justify-center text-xs group-hover/item:bg-cyan-500/20 transition-colors">
+                <i class="fa-solid fa-check text-[10px]"></i>
+              </div>
+              Automated appointment reminders
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Security Compliance Footer Box -->
+      <div class="pt-4 mt-6 border-t border-white/10 flex items-center gap-3.5 relative z-10 
+        bg-slate-900/40 p-3.5 rounded-2xl border border-white/5 backdrop-blur-sm">
+
+        <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center
+           justify-center text-emerald-400 shrink-0 shadow-lg shadow-emerald-950/30">
+          <i class="fa-solid fa-shield-halved text-sm"></i>
+        </div>
+
+        <div>
+          <h4 class="text-[11px] font-bold text-white uppercase tracking-wider flex items-center gap-1.5">
+            HIPAA Compliant & Secure
+            <i class="fa-solid fa-lock text-[9px] text-emerald-400"></i>
+          </h4>
+          <p class="text-[10px] text-slate-400">Your personal & medical data is 256-bit encrypted.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIGNUP FORM CARD    -->
+    <div class="lg:col-span-7 glass-panel p-6 sm:p-10 rounded-3xl flex flex-col justify-center">
+
+      <!-- ACCOUNT TYPE SELECTOR -->
+      <div class="mb-8">
+        <label class="block text-[11px] font-extrabold text-slate-400 uppercase tracking-widest
+           mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-shield-halved text-cyan-400"></i> Select Account Type
+        </label>
+
+        <div class="grid grid-cols-3 p-1.5 bg-slate-950/90 border border-slate-800/80 
+          rounded-2xl relative shadow-inner">
+
+          <!-- Patient Tab -->
+          <button type="button" id="patientTabBtn" class="py-3 text-xs sm:text-sm font-bold rounded-xl 
+              transition-all duration-300 flex items-center justify-center gap-2 bg-cyan-400 text-slate-950 
+              shadow-lg shadow-cyan-400/30 cursor-pointer">
+            <i class="fa-solid fa-user"></i> <span>Patient</span>
+          </button>
+
+          <!-- Doctor Tab -->
+          <button type="button" id="doctorTabBtn" class="py-3 text-xs sm:text-sm font-bold rounded-xl 
+            transition-all duration-300 text-slate-400 hover:text-white hover:bg-slate-900/50 flex items-center
+             justify-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-user-doctor"></i> <span>Doctor</span>
+          </button>
+
+          <!-- Staff Tab -->
+          <button type="button" id="staffTabBtn" class="py-3 text-xs sm:text-sm font-bold rounded-xl 
+            transition-all duration-300 text-slate-400 hover:text-white hover:bg-slate-900/50 flex items-center 
+            justify-center gap-2 cursor-pointer">
+            <i class="fa-solid fa-id-badge"></i> <span>Staff</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ERROR ALERT BOX -->
+      <div id="error-box" class="hidden mb-6 p-4 rounded-2xl bg-rose-500/10 backdrop-blur-md border
+         border-rose-500/30 text-rose-300 text-xs sm:text-sm font-medium flex items-center gap-3 shadow-xl 
+         shadow-rose-950/20 animate-shake">
+
+        <div class="w-8 h-8 rounded-xl bg-rose-500/20 border border-rose-500/30 flex items-center 
+          justify-center shrink-0">
+          <i class="fa-solid fa-circle-exclamation text-sm text-rose-400"></i>
+        </div>
+        <span id="error-message">Something went wrong. Please try again.</span>
+      </div>
+
+      <!-- MAIN FORM -->
+      <form id="signupForm" class="space-y-4">
+
+        <input type="hidden" id="role" value="patient">
+
+        <!-- FULL NAME & EMAIL -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Name -->
+          <div>
+            <label for="name" class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
+              Full Name</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="text" id="name" placeholder="John Doe" required class="w-full pl-10 pr-4 
+                py-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-800/80 focus:border-cyan-500/50 
+                rounded-xl text-xs sm:text-sm font-medium text-slate-200 placeholder-slate-600 outline-none
+                transition-all" />
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
+              Email Address</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="email" id="email" placeholder="name@example.com" required class="w-full pl-10 pr-4 
+                py-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-800/80 focus:border-cyan-500/50
+                rounded-xl text-xs sm:text-sm font-medium text-slate-200 placeholder-slate-600 outline-none 
+                transition-all" />
+            </div>
+          </div>
+        </div>
+
+        <!-- PHONE NUMBER & PASSWORD -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Phone Number -->
+          <div>
+            <label for="phoneNumber" class="block text-[11px] font-bold text-slate-300 uppercase
+               tracking-wider mb-2">Phone Number</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-phone absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="tel" id="phoneNumber" placeholder="+92 300 1234567" required class="w-full pl-10 pr-4
+                 py-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-800/80 focus:border-cyan-500/50
+                 rounded-xl text-xs sm:text-sm font-medium text-slate-200 placeholder-slate-600 outline-none 
+                 transition-all" />
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="password" class="block text-[11px] font-bold text-slate-300 uppercase
+               tracking-wider mb-2">Password</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="password" id="password" placeholder="••••••••" required class="w-full pl-10 pr-11 
+                py-3 bg-slate-950/90 hover:bg-slate-900 border border-slate-800/80 focus:border-cyan-500/50
+                rounded-xl text-xs sm:text-sm font-medium text-slate-200 placeholder-slate-600 outline-none 
+                transition-all" />
+
+              <button type="button" id="togglePassword" class="absolute right-3.5 top-1/2 -translate-y-1/2 
+                text-slate-500 hover:text-white transition p-1">
+                <i class="fa-solid fa-eye" id="eyeIcon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- AGE & GENDER -->
+        <div id="commonPatientDoctorFields" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          <!-- Age -->
+          <div>
+            <label for="age" class="block text-[11px] font-bold text-slate-300 uppercase 
+              tracking-wider mb-2">Age</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-cake-candles absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input type="number" id="age" placeholder="25" min="1" max="120" class="w-full pl-10 pr-4 py-3 
+                bg-slate-950/90 hover:bg-slate-900 border border-slate-800/80 focus:border-cyan-500/50
+                rounded-xl text-xs sm:text-sm font-medium text-slate-200 placeholder-slate-600 outline-none
+                transition-all" />
+            </div>
+          </div>
+
+          <!-- Gender Dropdown -->
+          <div>
+            <label for="gender" class="block text-[11px] font-bold text-slate-300 uppercase 
+              tracking-wider mb-2">Gender</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-venus-mars absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 
+                text-xs z-10 pointer-events-none"></i>
+
+              <select id="gender" class="hidden">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+
+              <button id="genderDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs 
+                sm:text-sm font-medium text-slate-300 flex items-center justify-between transition-all  
+                duration-200 cursor-pointer shadow-sm group">
+
+                <span id="genderSelectedText" class="truncate text-slate-400">Select Gender</span>
+                <i id="genderDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs 
+                  group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+              </button>
+
+              <div id="genderDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95
+                 backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30
+                 z-50 overflow-hidden">
+
+                <ul class="py-1">
+                  <li><button type="button" data-value="Male" class="gender-opt w-full text-left px-4 py-2.5 
+                      text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                      transition-colors">Male</button></li>
+
+                  <li><button type="button" data-value="Female" class="gender-opt w-full text-left px-4 py-2.5
+                       text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium
+                        transition-colors">Female</button></li>
+
+                  <li><button type="button" data-value="Other" class="gender-opt w-full text-left px-4 py-2.5
+                       text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                       transition-colors">Other</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DOCTOR TIMING FIELDS -->
+        <div id="doctorTimingFields" class="hidden space-y-4 pt-4 border-t border-white/10">
+
+          <!-- Specialty Dropdown -->
+          <div>
+            <label for="specialty" class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider
+               mb-2">Specialty Domain</label>
+
+            <div class="relative">
+              <i class="fa-solid fa-stethoscope absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 
+                text-xs z-10 pointer-events-none"></i>
+
+              <select id="specialty" class="hidden">
+                <option value="" disabled selected>Select Specialty</option>
+                <option value="General Dentistry">General Dentistry</option>
+                <option value="Orthodontics">Orthodontics</option>
+                <option value="Endodontics">Endodontics</option>
+                <option value="Periodontics">Periodontics</option>
+                <option value="Prosthodontics">Prosthodontics</option>
+                <option value="Pediatric Dentistry">Pediatric Dentistry</option>
+                <option value="Cosmetic Dentistry">Cosmetic Dentistry</option>
+                <option value="Implant Dentistry">Implant Dentistry</option>
+                <option value="Oral Surgery">Oral Surgery</option>
+                <option value="Dental Radiology">Dental Radiology</option>
+                <option value="Oral Pathology">Oral Pathology</option>
+                <option value="Preventive Dentistry">Preventive Dentistry</option>
+                <option value="Geriatric Dentistry">Geriatric Dentistry</option>
+              </select>
+
+              <button id="formDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs sm:text-sm 
+                font-medium text-slate-300 flex items-center justify-between transition-all duration-200 cursor-pointer
+                 shadow-sm group">
+
+                <span id="formSelectedText" class="truncate text-slate-400">Select Specialty</span>
+                <i id="formDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs 
+                  group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+              </button>
+
+              <div id="formDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95 
+                backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30 z-50
+                 overflow-hidden">
+
+                <ul class="max-h-48 overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-slate-700 
+                  scrollbar-track-transparent">
+
+                  <li><button type="button" data-value="General Dentistry" class="form-opt w-full text-left px-4 py-2.5 
+                      text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                      transition-colors">General Dentistry</button></li>
+
+                  <li><button type="button" data-value="Orthodontics" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400  
+                      font-medium transition-colors">Orthodontics</button></li>
+
+                  <li><button type="button" data-value="Endodontics" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                      font-medium transition-colors">Endodontics</button></li>
+
+                  <li><button type="button" data-value="Periodontics" class="form-opt w-full text-left px-4
+                       py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                       font-medium  transition-colors">Periodontics</button> </li>
+
+                  <li><button type="button" data-value="Prosthodontics" class="form-opt w-full text-left px-4
+                       py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                       font-medium transition-colors">Prosthodontics</button></li>
+
+                  <li><button type="button" data-value="Pediatric Dentistry" class="form-opt w-full text-left
+                       px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                       font-medium transition-colors">Pediatric Dentistry</button></li>
+
+                  <li><button type="button" data-value="Cosmetic Dentistry" class="form-opt w-full text-left
+                       px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                       font-medium transition-colors">Cosmetic Dentistry</button></li>
+
+                  <li><button type="button" data-value="Implant Dentistry" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400  
+                      font-medium transition-colors">Implant Dentistry</button></li>
+
+                  <li><button type="button" data-value="Oral Surgery" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                      font-medium transition-colors">Oral Surgery</button></li>
+
+                  <li><button type="button" data-value="Dental Radiology" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400  
+                      font-medium transition-colors">Dental Radiology</button></li>
+
+                  <li><button type="button" data-value="Oral Pathology" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                      font-medium  transition-colors">Oral Pathology</button></li>
+
+                  <li><button type="button" data-value="Preventive Dentistry" class="form-opt w-full text-left 
+                      px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                      font-medium transition-colors">Preventive Dentistry</button></li>
+
+                  <li><button type="button" data-value="Geriatric Dentistry" class="form-opt w-full text-left px-4 
+                      py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                      transition-colors">Geriatric Dentistry</button></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor Available Days Checkboxes -->
+          <div>
+            <label class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
+              Available Days</label>
+
+            <div class="grid grid-cols-4 sm:grid-cols-7 gap-1.5 text-xs font-semibold">
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90 
+                border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all 
+                text-slate-300">
+                <input type="checkbox" value="Mon" class="hidden day-checkbox"> Mon
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90
+                 border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all 
+                 text-slate-300">
+                <input type="checkbox" value="Tue" class="hidden day-checkbox"> Tue
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90
+                 border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all 
+                 text-slate-300">
+                <input type="checkbox" value="Wed" class="hidden day-checkbox"> Wed
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90 
+                border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all 
+                text-slate-300">
+                <input type="checkbox" value="Thu" class="hidden day-checkbox"> Thu
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90 border
+                 border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all text-slate-300">
+                <input type="checkbox" value="Fri" class="hidden day-checkbox"> Fri
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90 
+                border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all
+                text-slate-300">
+                <input type="checkbox" value="Sat" class="hidden day-checkbox"> Sat
+              </label>
+
+              <label class="day-checkbox-label flex items-center justify-center p-2.5 bg-slate-950/90
+                 border border-slate-800/80 rounded-xl cursor-pointer hover:border-cyan-500/50 transition-all
+                  text-slate-300">
+                <input type="checkbox" value="Sun" class="hidden day-checkbox"> Sun
+              </label>
+            </div>
+          </div>
+
+          <!-- Doctor Timing (Start & End Time) -->
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="startTime" class="block text-[11px] font-bold text-slate-300 uppercase tracking-wider 
+                mb-2">Start Time</label>
+
+              <input type="time" id="startTime" class="w-full px-4 py-3 bg-slate-950/90 hover:bg-slate-900 border
+                 border-slate-800/80 focus:border-cyan-500/50 rounded-xl text-xs sm:text-sm font-medium 
+                 text-slate-200 outline-none transition-all" />
+            </div>
+
+            <div>
+              <label for="endTime" class="block text-[11px] font-bold text-slate-300 uppercase
+               tracking-wider mb-2">End Time</label>
+
+              <input type="time" id="endTime" class="w-full px-4 py-3 bg-slate-950/90 hover:bg-slate-900 border
+                 border-slate-800/80 focus:border-cyan-500/50 rounded-xl text-xs sm:text-sm font-medium 
+                 text-slate-200 outline-none transition-all" />
+            </div>
+          </div>
+        </div>
+
+        <!-- STAFF FIELDS -->
+        <div id="staffFields" class="hidden space-y-4 pt-4 border-t border-white/10">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <!-- Designation Dropdown -->
+            <div>
+              <label for="designation" class="block text-[11px] font-bold text-slate-300 uppercase 
+                tracking-wider mb-2">Designation</label>
+
+              <div class="relative">
+                <i class="fa-solid fa-id-card absolute left-4 top-1/2 -translate-y-1/2 
+                  text-slate-500 text-xs z-10 pointer-events-none"></i>
+
+                <select id="designation" class="hidden">
+                  <option value="" disabled selected>Select Designation</option>
+                  <option value="Receptionist">Receptionist</option>
+                  <option value="Accountant">Accountant</option>
+                  <option value="Office Assistant">Office Assistant</option>
+                  <option value="Hospital Manager">Hospital Manager</option>
+                  <option value="Lab Assistant">Lab Assistant</option>
+                  <option value="Pharmacy Assistant">Pharmacy Assistant</option>
+                  <option value="Ward Boy">Ward Boy</option>
+                  <option value="Security Guard">Security Guard</option>
+                  <option value="Cleaner">Cleaner</option>
+                  <option value="Maintenance Officer">Maintenance Officer</option>
+                </select>
+
+                <button id="desigDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                  hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs
+                   sm:text-sm font-medium text-slate-300 flex items-center justify-between transition-all duration-200
+                   cursor-pointer shadow-sm group">
+
+                  <span id="desigSelectedText" class="truncate text-slate-400">Select Designation</span>
+                  <i id="desigDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs
+                     group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+                </button>
+
+                <div id="desigDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95
+                   backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30 z-50 
+                   overflow-hidden">
+
+                  <ul class="max-h-48 overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-slate-700 
+                    scrollbar-track-transparent">
+
+                    <li><button type="button" data-value="Receptionist" class="desig-opt w-full text-left px-4 py-2.5
+                         text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                         transition-colors">Receptionist</button></li>
+
+                    <li><button type="button" data-value="Accountant" class="desig-opt w-full text-left px-4 py-2.5 
+                        text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                        transition-colors">Accountant</button></li>
+
+                    <li><button type="button" data-value="Office Assistant" class="desig-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Office Assistant</button></li>
+
+                    <li><button type="button" data-value="Hospital Manager" class="desig-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Hospital Manager</button></li>
+
+                    <li><button type="button" data-value="Lab Assistant" class="desig-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400
+                          font-medium transition-colors">Lab Assistant</button></li>
+
+                    <li><button type="button" data-value="Pharmacy Assistant" class="desig-opt w-full text-left
+                         px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Pharmacy Assistant</button></li>
+
+                    <li><button type="button" data-value="Ward Boy" class="desig-opt w-full text-left 
+                        px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                        font-medium transition-colors">Ward Boy</button></li>
+
+                    <li><button type="button" data-value="Security Guard" class="desig-opt w-full text-left 
+                        px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400
+                         font-medium transition-colors">Security Guard</button></li>
+
+                    <li><button type="button" data-value="Cleaner" class="desig-opt w-full text-left 
+                        px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400
+                         font-medium transition-colors">Cleaner</button></li>
+
+                    <li><button type="button" data-value="Maintenance Officer" class="desig-opt w-full text-left
+                         px-4 py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Maintenance Officer</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Department Dropdown -->
+            <div>
+              <label for="department" class="block text-[11px] font-bold text-slate-300 uppercase 
+                tracking-wider mb-2">Department</label>
+
+              <div class="relative">
+                <i class="fa-solid fa-building-user absolute left-4 top-1/2 -translate-y-1/2 
+                  text-slate-500 text-xs z-10 pointer-events-none"></i>
+
+                <select id="department" class="hidden">
+                  <option value="" disabled selected>Select Department</option>
+                  <option value="ICU">ICU</option>
+                  <option value="Laboratory">Laboratory</option>
+                  <option value="Skin">Skin</option>
+                  <option value="Neurology">Neurology</option>
+                  <option value="OPD">OPD</option>
+                  <option value="Emergency">Emergency</option>
+                  <option value="Reception">Reception</option>
+                </select>
+
+                <button id="deptDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                  hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs 
+                  sm:text-sm font-medium text-slate-300 flex items-center justify-between transition-all duration-200 
+                  cursor-pointer shadow-sm group">
+
+                  <span id="deptSelectedText" class="truncate text-slate-400">Select Department</span>
+                  <i id="deptDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs 
+                    group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+                </button>
+
+                <div id="deptDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95 
+                  backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30 z-50 
+                  overflow-hidden">
+
+                  <ul class="max-h-48 overflow-y-auto py-1 scrollbar-thin scrollbar-thumb-slate-700 
+                    scrollbar-track-transparent">
+
+                    <li><button type="button" data-value="ICU" class="dept-opt w-full text-left px-4 py-2.5 text-xs
+                         sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                         transition-colors">ICU</button></li>
+
+                    <li><button type="button" data-value="Laboratory" class="dept-opt w-full text-left px-4 py-2.5
+                         text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                         transition-colors">Laboratory</button></li>
+
+                    <li><button type="button" data-value="Skin" class="dept-opt w-full text-left px-4 py-2.5 text-xs
+                         sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium
+                          transition-colors">Skin</button></li>
+
+                    <li><button type="button" data-value="Neurology" class="dept-opt w-full text-left px-4 py-2.5
+                         text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                         transition-colors">Neurology</button></li>
+
+                    <li><button type="button" data-value="OPD" class="dept-opt w-full text-left px-4 py-2.5 text-xs 
+                        sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                        transition-colors">OPD</button></li>
+
+                    <li><button type="button" data-value="Emergency" class="dept-opt w-full text-left px-4 py-2.5
+                         text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Emergency</button></li>
+
+                    <li><button type="button" data-value="Reception" class="dept-opt w-full text-left px-4 py-2.5 
+                        text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 font-medium 
+                        transition-colors">Reception</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+            <!-- Shift Dropdown -->
+            <div>
+              <label for="shift" class="block text-[11px] font-bold text-slate-300 uppercase 
+                tracking-wider mb-2">Shift</label>
+
+              <div class="relative">
+                <i class="fa-solid fa-clock absolute left-4 top-1/2 -translate-y-1/2 text-slate-500
+                   text-xs z-10 pointer-events-none"></i>
+
+                <select id="shift" class="hidden">
+                  <option value="" disabled selected>Select Shift</option>
+                  <option value="Morning">Morning</option>
+                  <option value="Evening">Evening</option>
+                  <option value="Night">Night</option>
+                </select>
+
+                <button id="shiftDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                  hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs 
+                  font-medium text-slate-300 flex items-center justify-between transition-all duration-200 
+                  sm:text-sm cursor-pointer shadow-sm group">
+
+                  <span id="shiftSelectedText" class="truncate text-slate-400">Select Shift</span>
+                  <i id="shiftDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs 
+                    group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+                </button>
+
+                <div id="shiftDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95 
+                  backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30 z-50 
+                  overflow-hidden">
+
+                  <ul class="py-1">
+                    <li><button type="button" data-value="Morning" class="shift-opt w-full text-left px-4 
+                        py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                        font-medium transition-colors">Morning</button></li>
+
+                    <li><button type="button" data-value="Evening" class="shift-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                         font-medium transition-colors">Evening</button></li>
+
+                    <li><button type="button" data-value="Night" class="shift-opt w-full text-left px-4 
+                        py-2.5 text-xs sm:text-sm text-slate-300 hover:bg-cyan-500/10 hover:text-cyan-400 
+                        font-medium transition-colors">Night</button></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- Status Dropdown -->
+            <div>
+              <label for="status" class="block text-[11px] font-bold text-slate-300 uppercase 
+                tracking-wider mb-2">Status</label>
+
+              <div class="relative">
+                <i class="fa-solid fa-circle-check absolute left-4 top-1/2 -translate-y-1/2 
+                  text-slate-500 text-xs z-10 pointer-events-none"></i>
+
+                <select id="status" class="hidden">
+                  <option value="Active" selected>Active</option>
+                  <option value="On Leave">On Leave</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
+
+                <button id="statusDropdownBtn" type="button" class="w-full pl-10 pr-10 py-3 bg-slate-950/90 
+                  hover:bg-slate-900 border border-slate-800/80 hover:border-cyan-500/50 rounded-xl text-xs
+                   sm:text-sm font-medium text-slate-300 flex items-center justify-between transition-all 
+                   duration-200 cursor-pointer shadow-sm group">
+
+                  <span id="statusSelectedText" class="truncate text-emerald-400 font-semibold">Active</span>
+                  <i id="statusDropdownChevron" class="fa-solid fa-chevron-down text-slate-500 text-xs 
+                    group-hover:text-cyan-400 transition-transform duration-200 shrink-0"></i>
+                </button>
+
+                <div id="statusDropdownMenu" class="hidden absolute top-full left-0 mt-1.5 w-full bg-slate-900/95
+                    backdrop-blur-xl border border-slate-800 rounded-xl shadow-2xl shadow-cyan-950/30 z-50 
+                    overflow-hidden">
+
+                  <ul class="py-1">
+                    <li><button type="button" data-value="Active" class="status-opt w-full text-left px-4 
+                        py-2.5 text-xs sm:text-sm text-emerald-400 hover:bg-cyan-500/10 font-semibold 
+                        transition-colors">Active</button></li>
+
+                    <li><button type="button" data-value="On Leave" class="status-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-amber-400 hover:bg-cyan-500/10 font-semibold 
+                         transition-colors">On Leave</button></li>
+
+                    <li><button type="button" data-value="Inactive" class="status-opt w-full text-left px-4
+                         py-2.5 text-xs sm:text-sm text-rose-400 hover:bg-cyan-500/10 font-semibold 
+                         transition-colors">Inactive</button>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button type="submit" id="signupBtn" class="w-full !mt-6 bg-gradient-to-r from-cyan-400 via-cyan-500 
+          to-teal-300 hover:opacity-90 text-slate-950 text-xs sm:text-sm font-extrabold py-3.5 px-4 rounded-xl
+          shadow-lg shadow-cyan-500/25 transition-all duration-300 flex items-center justify-center gap-2
+          cursor-pointer transform hover:-translate-y-0.5">
+
+          <span id="btnText">Create Patient Account</span>
+          <i class="fa-solid fa-arrow-right text-xs" id="btnIcon"></i>
+          <i class="fa-solid fa-spinner animate-spin hidden" id="btnSpinner"></i>
+        </button>
+      </form>
+
+      <!-- LOGIN PAGE LINK -->
+      <div class="pt-6 mt-6 border-t border-white/10 text-center">
+        <p class="text-xs sm:text-sm text-slate-400 font-medium">
+          Already have an account?
+          <a href="../login/login.html" class="text-cyan-400 hover:text-cyan-300 font-bold transition underline 
+            underline-offset-4 ml-1">
+            Login here
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./signup.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patient Management - Admin Panel</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+ 100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+ <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+ fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+ 5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <style>
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #090d16;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0ea5e9;
+    }
+  </style>
+</head>
+
+<body class="bg-[#07090e] font-sans text-slate-200 antialiased min-h-screen selection:bg-cyan-500 
+      selection:text-white hidden">
+
+  <!-------------- NAVBAR SECTION START -------------->
+  <div class="min-h-screen flex flex-col lg:flex-row">
+
+    <!-- MOBILE NAVIGATION HEADER -->
+    <header class="lg:hidden bg-slate-900/80 backdrop-blur-md border-b border-slate-800 text-white p-4
+       flex items-center justify-between sticky top-0 z-30">
+
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 shrink-0 rounded-xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 
+          flex items-center justify-center text-white shadow-lg shadow-cyan-500/20">
+          <i class="fa-solid fa-tooth text-base"></i>
+        </div>
+
+        <div class="truncate">
+          <h1 class="text-base font-black tracking-tight text-white truncate leading-none">
+            Clinic<span class="text-cyan-400">Book</span> </h1>
+          <p class="text-[9px] text-cyan-400/90 uppercase tracking-widest font-semibold truncate mt-1">PATIENT CARE
+            PORTAL
+          </p>
+        </div>
+      </div>
+
+      <!-- Hamburger Button -->
+      <button id="mobileMenuBtn" class="p-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-lg 
+      transition-colors focus:outline-none shrink-0">
+        <i class="fas fa-bars-staggered text-xl"></i>
+      </button>
+    </header>
+
+    <!-- SIDEBAR OVERLAY (MOBILE) -->
+    <div id="sidebarOverlay"
+      class="fixed inset-0 bg-black/70 backdrop-blur-xs z-40 hidden lg:hidden transition-opacity"></div>
+
+    <aside id="sidebar" class="fixed top-0 left-0 h-screen w-72 bg-slate-900 border-r border-slate-800/80 
+      text-slate-300 p-6 flex flex-col z-50 transform -translate-x-full lg:translate-x-0 transition-transform 
+      duration-300 ease-in-out">
+
+      <!-- Mobile Close Button -->
+      <button id="closeSidebarBtn" class="lg:hidden absolute top-5 right-5 text-slate-400 hover:text-white p-1">
+        <i class="fas fa-xmark text-xl"></i>
+      </button>
+
+      <!-- Dasktop Header -->
+      <div class="mb-10 flex items-center gap-3.5 px-2">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 flex 
+          items-center justify-center text-white font-bold text-xl shadow-xl shadow-cyan-500/20 shrink-0">
+          <i class="fa-solid fa-tooth text-lg"></i>
+        </div>
+
+        <div>
+          <h1 class="text-xl font-black tracking-tight text-white flex items-center leading-none">
+            Clinic<span class="bg-gradient-to-r from-cyan-400 to-cyan-400 bg-clip-text text-transparent">Book</span>
+          </h1>
+          <span
+            class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-widest text-cyan-400 mt-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> PATIENT CARE PORTAL
+          </span>
+        </div>
+      </div>
+
+      <!-- Navigation Section -->
+      <div class="text-[10px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2">Main Navigation</div>
+      <nav class="space-y-1.5 flex-1 overflow-y-auto pr-1">
+
+        <!-- Dashboard -->
+        <a href="../index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400 
+          hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-chart-pie w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <!-- Doctor -->
+        <a href="../doctor/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+           hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-user-doctor w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Doctors</span>
+        </a>
+
+        <!-- Patient -->
+        <a href="#" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl bg-gradient-to-r
+           from-cyan-500/10 to-blue-500/10 text-cyan-400 border border-cyan-500/20 font-semibold text-sm shadow-sm">
+          <i class="fas fa-hospital-user w-5 text-center text-cyan-400"></i>
+          <span>Patients</span>
+        </a>
+
+        <!-- Appointment -->
+        <a href="../appointment/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+           hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-calendar-check w-5 text-center text-slate-500 group-hover:text-cyan-400 
+            transition-colors"></i><span>Appointments</span>
+        </a>
+
+        <!-- Department -->
+        <a href="../department/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400
+           hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-sitemap w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Departments</span>
+        </a>
+
+        <!-- Staff -->
+        <a href="../staff/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400 
+          hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-users-gear w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Staff</span>
+        </a>
+
+        <!-- Messages -->
+        <a href="../messages/index.html" class="flex items-center gap-3.5 px-3.5 py-3 rounded-xl text-slate-400 
+          hover:bg-slate-800/60 hover:text-slate-100 transition-all font-medium text-sm group">
+          <i class="fas fa-comments w-5 text-center text-slate-500 group-hover:text-cyan-400 transition-colors"></i>
+          <span>Messages</span>
+        </a>
+      </nav>
+
+      <!-- Logout Component -->
+      <div class="pt-4 mt-auto border-t border-slate-800">
+        <button class="logout-btn w-full flex items-center justify-between px-4 py-3 rounded-xl bg-slate-950/60
+           hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/30 text-slate-400 hover:text-rose-400 
+           transition-all text-xs font-semibold group cursor-pointer">
+
+          <span class="flex items-center gap-3">
+            <i class="fas fa-arrow-right-from-bracket group-hover:translate-x-0.5 transition-transform"></i>
+            <span>Sign Out</span>
+          </span>
+
+          <span class="bg-slate-800 group-hover:bg-rose-500/20 text-slate-400 group-hover:text-rose-300 
+            text-[10px] px-2 py-0.5 rounded-md transition-colors">Shift End</span>
+        </button>
+      </div>
+    </aside>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!-------------- MAIN CONTENT START -------------->
+    <main class="flex-1 lg:ml-72 p-3 sm:p-6 md:p-8 overflow-x-hidden w-full">
+
+      <div class="relative overflow-hidden bg-slate-900/60 backdrop-blur-xl border border-slate-800/80
+         rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 mb-6 sm:mb-8 shadow-2xl">
+
+        <div class="absolute -top-24 -right-24 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none">
+        </div>
+
+        <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
+          <div>
+
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border 
+              border-cyan-500/20 text-cyan-400 text-xs font-semibold mb-3">
+              <i class="fas fa-user-shield text-[11px]"></i>
+              <span>Patient Directory</span>
+            </div>
+
+            <h1 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight">
+              Patient Management
+            </h1>
+
+            <p class="text-slate-400 text-xs md:text-sm mt-1.5 max-w-2xl leading-relaxed">
+              Manage your hospital patients, records, contact details, and dynamic clinical history in real-time.
+            </p>
+          </div>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+
+            <!-- SEARCH INPUT -->
+            <div class="relative w-full sm:w-64">
+              <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+              <input type="text" id="searchInput" placeholder="Search patient name, phone..." class="w-full pl-10 pr-4 
+                py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-slate-950/60 border border-slate-800 text-xs 
+                md:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-cyan-500/80 
+                focus:ring-2 focus:ring-cyan-500/20 transition-all" />
+            </div>
+
+            <!-- ADD PATIENT BUTTON -->
+            <button id="addPatientBtn" class="group relative inline-flex items-center justify-center gap-2.5 px-5
+               py-2.5 sm:py-3 rounded-xl sm:rounded-2xl bg-gradient-to-r from-cyan-500 via-cyan-600 to-cyan-600
+               text-white text-xs md:text-sm font-bold shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/35
+               hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer whitespace-nowrap">
+              <i class="fas fa-plus text-xs group-hover:rotate-90 transition-transform duration-300"></i>
+              <span>Add Patient</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STATS CARDS -->
+      <div class="grid grid-cols-1 min-[450px]:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4 mb-6 sm:mb-8">
+
+        <!-- Doctor Card -->
+        <div onclick="window.location.href='../doctor/index.html'" class="group relative bg-slate-900/40 
+          backdrop-blur-md border border-slate-800/80 hover:border-cyan-500/50 p-3.5 sm:p-5 rounded-2xl
+           transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-cyan-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 group-hover:text-cyan-400
+               transition-colors truncate">Doctors</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400
+               flex items-center justify-center shrink-0 group-hover:bg-cyan-500 group-hover:text-slate-950 
+               transition-all duration-300 ml-1">
+              <i class="fas fa-user-doctor text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="doctorCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md 
+              border border-cyan-500/20">Active</span>
+          </div>
+        </div>
+
+        <!-- Patients Card -->
+        <div onclick="window.location.href='../paitent/index.html'" class="group relative bg-slate-900/40 
+          backdrop-blur-md border border-slate-800/80 hover:border-emerald-500/50 p-3.5 sm:p-5 rounded-2xl 
+          transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 
+              group-hover:text-emerald-400 transition-colors truncate">Patients</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/20
+               text-emerald-400 flex items-center justify-center shrink-0 group-hover:bg-emerald-500 
+               group-hover:text-slate-950 transition-all duration-300 ml-1">
+              <i class="fas fa-hospital-user text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="patientCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-emerald-400 bg-emerald-500/10 px-2 py-0.5 
+              rounded-md border border-emerald-500/20">Total</span>
+          </div>
+        </div>
+
+        <!-- Appointments Card -->
+        <div onclick="window.location.href='../appointment/index.html'" class="group relative bg-slate-900/40 
+          backdrop-blur-md border border-slate-800/80 hover:border-purple-500/50 p-3.5 sm:p-5 rounded-2xl 
+          transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 
+              group-hover:text-purple-400 transition-colors truncate">Appointments</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-purple-500/10 border border-purple-500/20 
+              text-purple-400 flex items-center justify-center shrink-0 group-hover:bg-purple-500 
+              group-hover:text-slate-950 transition-all duration-300 ml-1">
+              <i class="fas fa-calendar-check text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="appointmentCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-purple-400 bg-purple-500/10 px-2 py-0.5 
+              rounded-md border border-purple-500/20">Booked</span>
+          </div>
+        </div>
+
+        <!-- Department Card -->
+        <div onclick="window.location.href='../department/index.html'" class="group relative bg-slate-900/40
+           backdrop-blur-md border border-slate-800/80 hover:border-amber-500/50 p-3.5 sm:p-5 rounded-2xl 
+           transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 
+              group-hover:text-amber-400 transition-colors truncate">Depts</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-500/10 border border-amber-500/20
+               text-amber-400 flex items-center justify-center shrink-0 group-hover:bg-amber-500 
+               group-hover:text-slate-950 transition-all duration-300 ml-1">
+              <i class="fas fa-building text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="departmentCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md">Units</span>
+          </div>
+        </div>
+
+        <!-- Staff Card -->
+        <div onclick="window.location.href='../staff/index.html'" class="group relative bg-slate-900/40 
+          backdrop-blur-md border border-slate-800/80 hover:border-rose-500/50 p-3.5 sm:p-5 rounded-2xl transition-all
+           duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-rose-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 group-hover:text-rose-400 
+              transition-colors truncate">Staff</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-500/10 border border-rose-500/20 
+              text-rose-400 flex items-center justify-center shrink-0 group-hover:bg-rose-500 
+              group-hover:text-slate-950 transition-all duration-300 ml-1">
+              <i class="fas fa-users text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="staffCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md">Shift</span>
+          </div>
+        </div>
+
+        <!-- Messages Card -->
+        <div onclick="window.location.href='../messages/index.html'" class="group relative bg-slate-900/40 
+          backdrop-blur-md border border-slate-800/80 hover:border-indigo-500/50 p-3.5 sm:p-5 rounded-2xl transition-all
+           duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-indigo-500/5 cursor-pointer">
+
+          <div class="flex items-center justify-between">
+            <span class="text-xs sm:text-sm font-semibold tracking-wide text-slate-400 
+              group-hover:text-indigo-400 transition-colors truncate">Messages</span>
+
+            <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-indigo-500/10 border border-indigo-500/20
+               text-indigo-400 flex items-center justify-center shrink-0 group-hover:bg-indigo-500 
+               group-hover:text-slate-950 transition-all duration-300 ml-1">
+              <i class="fas fa-envelope text-xs sm:text-sm"></i>
+            </div>
+          </div>
+
+          <div class="mt-3 sm:mt-4 flex items-baseline justify-between">
+            <h2 id="messageCount" class="text-2xl sm:text-3xl font-black text-white tracking-tight">0</h2>
+            <span class="text-[10px] font-medium text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded-md
+               border border-cyan-500/20">Inbox</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- PATIENTS TABLE -->
+      <div class="bg-slate-900/90 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-slate-800/80 
+        shadow-2xl overflow-hidden">
+
+        <div class="p-4 sm:p-6 border-b border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-2.5 sm:gap-3">
+            <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-cyan-500 animate-pulse"></div>
+            <h2 class="text-sm sm:text-base font-bold text-white tracking-wide">
+              All Patient Records
+            </h2>
+          </div>
+
+          <span class="text-[10px] sm:text-xs text-slate-400 font-medium bg-slate-800/60 px-2.5 
+            py-0.5 sm:px-3 sm:py-1 rounded-full border border-slate-700/50">
+            Real-time DB
+          </span>
+        </div>
+
+        <div class="overflow-x-auto w-full">
+          <table class="w-full text-left text-xs sm:text-sm text-slate-300 min-w-[600px]">
+            <thead class="bg-slate-950/80 border-b border-slate-800 text-slate-400 uppercase 
+              text-[10px] sm:text-[11px] tracking-wider">
+              <tr>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 text-center font-semibold">#</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 font-semibold">Name</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 font-semibold">Age</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 font-semibold">Gender</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 font-semibold">Phone</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 font-semibold">Email</th>
+                <th class="py-3 sm:py-4 px-4 sm:px-6 text-center font-semibold">Actions</th>
+              </tr>
+            </thead>
+
+            <tbody id="patientTableBody">
+              <tr>
+                <td colspan="6" class="text-center p-10">
+                  <div class="flex flex-col items-center justify-center space-y-3">
+                    <i class="fas fa-spinner fa-spin text-3xl text-cyan-400"></i>
+                    <span class="text-xs text-slate-400 font-medium">Loading Patients database...</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!------------- MAIN CONTENT END ------------->
+
+
+  <!------------- MODAL ADD / EDIT PATIENT START ------------->
+  <div id="addPatientModal" class="fixed inset-0 hidden bg-[#030712]/80 backdrop-blur-md flex items-center 
+    justify-center z-50 p-4 overflow-y-auto transition-all">
+
+    <div class="relative bg-[#0b101d] border border-slate-800/80 w-full max-w-2xl
+       rounded-[2rem] shadow-[0_0_50px_-12px_rgba(6,182,212,0.15)] overflow-visible my-auto transition-all">
+
+      <div class="absolute top-0 right-0 w-48 h-48 bg-cyan-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-slate-800/60 relative z-10 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+
+          <!-- Badge Icon -->
+          <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 
+         flex items-center justify-center text-cyan-400 text-xl shadow-[0_0_15px_rgba(6,182,212,0.2)]">
+            <i class="fa-solid fa-user-injured"></i>
+          </div>
+
+          <div>
+            <h2 id="modalTitle" class="text-xl font-bold text-white tracking-wide">Add New Patient</h2>
+            <p class="text-xs text-slate-400 font-medium mt-0.5">Create or edit a structured clinical profile</p>
+          </div>
+        </div>
+
+        <!-- Close Button -->
+        <button id="closeModalCross" type="button" aria-label="Close modal" class="w-9 h-9 rounded-xl bg-slate-800/50
+        hover:bg-slate-800 border border-slate-700/50 text-slate-400 hover:text-white flex items-center
+         justify-center transition cursor-pointer">
+          <i class="fas fa-times text-sm"></i>
+        </button>
+      </div>
+
+      <!-- Modal Form -->
+      <form id="addPatientForm" class="p-6 space-y-5 relative z-10 text-xs">
+        <input type="hidden" id="editIndex" value="-1" />
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+          <!-- Full Name -->
+          <div>
+            <label for="pName" class="block text-[11px] font-bold text-slate-400 uppercase 
+            tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-user text-cyan-400"></i> Full Name
+            </label>
+
+            <input id="pName" type="text" required placeholder="e.g. John Doe" class="w-full bg-[#050811] border
+            border-slate-800 rounded-2xl px-4 py-3 text-white placeholder:text-slate-600 focus:border-cyan-500/80
+            outline-none transition font-medium">
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="pEmail" class="block text-[11px] font-bold text-slate-400 uppercase 
+            tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-cyan-400"></i> Email Address
+            </label>
+
+            <input id="pEmail" type="email" required placeholder="e.g. patient@email.com" class="w-full bg-[#050811] 
+           border border-slate-800 rounded-2xl px-4 py-3 text-white placeholder:text-slate-600 
+           focus:border-cyan-500/80 outline-none transition font-medium">
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label for="pPassword" class="block text-[11px] font-bold text-slate-400 uppercase 
+              tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-lock text-cyan-400"></i> Account Password
+            </label>
+
+            <input id="pPassword" type="password" required placeholder="Enter secure password" class="w-full 
+            bg-[#050811] border border-slate-800 rounded-2xl px-4 py-3 text-white placeholder:text-slate-600
+            focus:border-cyan-500/80 outline-none transition font-medium">
+          </div>
+
+          <!-- Phone Number -->
+          <div>
+            <label for="pPhone" class="block text-[11px] font-bold text-slate-400 uppercase tracking-wider
+               mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-phone text-cyan-400"></i> Phone Number
+            </label>
+
+            <input id="pPhone" type="tel" required placeholder="+92 300 1234567" class="w-full bg-[#050811] border
+            border-slate-800 rounded-2xl px-4 py-3 text-white placeholder:text-slate-600 focus:border-cyan-500/80
+             outline-none transition font-medium">
+          </div>
+
+          <!-- Age -->
+          <div>
+            <label for="pAge" class="block text-[11px] font-bold text-slate-400 uppercase 
+               tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-calendar-days text-cyan-400"></i> Age
+            </label>
+
+            <input id="pAge" type="number" required placeholder="e.g. 28" class="w-full bg-[#050811] border 
+              border-slate-800 rounded-2xl px-4 py-3 text-white placeholder:text-slate-600 focus:border-cyan-500/80 
+              outline-none transition font-medium">
+          </div>
+
+          <!-- Gender Dropdown -->
+          <div class="relative">
+            <label class="block text-[11px] font-bold text-slate-400 uppercase 
+            tracking-wider mb-2 flex items-center gap-2">
+              <i class="fa-solid fa-venus-mars text-cyan-400"></i> Gender
+            </label>
+            <input type="hidden" id="pGender" required value="" />
+
+            <button type="button" id="customGenderBtn" class="w-full bg-[#050811] border border-slate-800 
+            hover:border-slate-700 rounded-2xl px-4 py-3.5 flex items-center justify-between text-white 
+            text-left focus:border-cyan-500/80 transition outline-none cursor-pointer">
+              <span id="selectedGenderText" class="text-slate-400 font-medium truncate">Select Gender</span>
+              <i class="fa-solid fa-chevron-down text-slate-500 text-xs"></i>
+            </button>
+
+            <!-- Custom Menu -->
+            <div id="customGenderMenu" class="hidden absolute left-0 right-0 top-full mt-2 bg-[#0b101d] rounded-2xl
+             shadow-2xl border border-slate-800 z-50 p-1.5 space-y-1">
+
+              <div class="gender-option p-3 hover:bg-cyan-500/10 hover:text-cyan-400 rounded-xl cursor-pointer 
+              text-slate-200 font-medium transition" data-value="Male">
+                Male
+              </div>
+
+              <div class="gender-option p-3 hover:bg-cyan-500/10 hover:text-cyan-400 rounded-xl cursor-pointer 
+              text-slate-200 font-medium transition" data-value="Female">
+                Female
+              </div>
+
+              <div class="gender-option p-3 hover:bg-cyan-500/10 hover:text-cyan-400 rounded-xl cursor-pointer  
+              text-slate-200 font-medium transition" data-value="Other">
+                Other
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800/60">
+          <button id="cancelModal" type="button" class="px-6 py-3 rounded-2xl border border-slate-800 
+           bg-[#080e1a] hover:bg-slate-800 text-slate-300 font-bold tracking-wider text-[11px] uppercase 
+           transition cursor-pointer">
+            CANCEL
+          </button>
+
+          <button id="savePatientBtn" type="submit" class="px-7 py-3 rounded-2xl bg-gradient-to-r from-cyan-500 
+          to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-slate-950 font-black tracking-wider text-[11px]
+          uppercase transition shadow-[0_0_20px_rgba(6,182,212,0.4)] cursor-pointer">
+            SAVE PATIENT
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./index.js"></script>
+
+  <!------------- MODAL ADD / EDIT PATIENT END ------------->
+
+</body>
+
+</html>

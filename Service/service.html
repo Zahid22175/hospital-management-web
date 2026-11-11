@@ -1,0 +1,1678 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Services & Specialities | ClinicBook</title>
+
+    <!-- SVG Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+     100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+     <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+     fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+     5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+    <!-- TAILWIND CSS CDN LINK -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONT AWESOME ICON LINK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body class="selection:bg-cyan-500 selection:text-white">
+
+    <!-------------- NAVBAR SECTION START -------------->
+    <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 relative z-50 w-full shadow-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center gap-4">
+
+            <!-- Logo -->
+            <a href="../index.html" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-2xl
+                    flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 
+                    transition-transform">
+                    <i class="fa-solid fa-tooth text-lg"></i>
+                </div>
+
+                <div class="flex flex-col">
+                    <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+                        Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 
+                            bg-clip-text text-transparent">Book</span>
+                    </span>
+
+                    <span class="text-[9px] font-bold tracking-widest text-cyan-600 uppercase mt-0.5">Dental & Smile
+                        Care</span>
+                </div>
+            </a>
+
+            <!-- Hamburger Button -->
+            <button id="menu-toggle" aria-label="Toggle navigation menu" class="lg:hidden text-slate-700
+              hover:text-cyan-600 w-10 h-10 rounded-xl hover:bg-slate-100 flex items-center justify-center text-xl
+              transition cursor-pointer">
+                <i id="menu-icon" class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+
+                <!-- Home -->
+                <a href="../index.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+                     hover:bg-slate-100/80 rounded-xl transition">Home</a>
+
+                <!-- About -->
+                <a href="../About/about.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+                     hover:bg-slate-100/80 rounded-xl transition">About</a>
+
+                <!-- Services -->
+                <a href="./service.html" class="px-3 py-2 text-s font-bold text-sky-500 bg-blue-50 
+                    rounded-xl transition">Services</a>
+
+                <!-- Contact -->
+                <a href="../Contact/contact.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+                    hover:bg-slate-100/80 rounded-xl transition">Contact</a>
+            </div>
+
+            <!-- Book Now Btn-->
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="../book-Appointment/book.html" target="_blank" class="book-now-btn inline-flex items-center 
+                  gap-2 bg-gradient-to-r from-sky-500 to-sky-500 hover:from-sky-700 hover:to-sky-600 text-white text-s
+                  font-bold px-4 py-2.5 rounded-xl shadow-md shadow-sky-500/20 transition transform active:scale-95">
+                    <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+                <div class="h-4 w-px bg-slate-200 my-auto"></div>
+
+                <!-- Login Btn -->
+                <a id="login-btn" href="../login/login.html" class="inline-flex items-center gap-2 bg-sky-500 
+                 hover:bg-sky-400 text-white text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20
+                 transition transform active:scale-95">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    <span>Login</span>
+                </a>
+
+                <!-- Logout Btn -->
+                <button id="logout-btn" class="hidden inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 
+                    text-white text-sm font-bold px-4 py-2.5 rounded-xl shadow-md shadow-red-500/20 transition
+                    active:scale-95 cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="lg:hidden fixed top-0 left-0 h-screen w-72 bg-white shadow-2xl 
+            z-50 transform -translate-x-full transition-transform duration-300 ease-in-out p-5 flex flex-col
+            justify-between overflow-y-auto">
+            <div>
+                <div class="p-4 space-y-3">
+
+                    <!-- Logo & Close Button -->
+                    <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+                        <div class="flex items-center gap-2">
+
+                            <div class="w-8 h-8 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white
+                                rounded-xl flex items-center justify-center shadow-lg shadow-cyan-500/25 
+                                group-hover:scale-105 transition-transform">
+                                <i class="fa-solid fa-tooth text-sm"></i>
+                            </div>
+                            <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+                                Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text 
+                                    text-transparent">Book</span>
+                            </span>
+                        </div>
+
+                        <!-- Close Button Icon -->
+                        <button id="close-menu-btn" class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 
+                            rounded-lg flex items-center justify-center transition cursor-pointer">
+                            <i class="fa-solid fa-xmark text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Home -->
+                    <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold 
+                     text-slate-600 hover:bg-slate-100 rounded-xl transition">Home</a>
+
+                    <!-- About -->
+                    <a href="../About/about.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold
+                     text-slate-700 hover:bg-slate-100 rounded-xl transition">About</a>
+
+                    <!-- Servicres -->
+                    <a href="./service.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold  
+                     text-sky-500 bg-blue-50 rounded-xl">Services</a>
+
+                    <!-- Contact -->
+                    <a href="../Contact/contact.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold 
+                     text-slate-700 hover:bg-slate-100 rounded-xl transition">Contact</a>
+
+                    <!-- Book Now Btn -->
+                    <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+                        <a href="../book-Appointment/book.html" class="flex items-center justify-center gap-2 w-full 
+                         bg-gradient-to-r from-sky-500 to-sky-600 text-white text-xs font-bold py-3 rounded-xl 
+                         shadow-md shadow-sky-500/20"><i class="fa-solid fa-calendar-plus"></i>Book Now
+                        </a>
+
+                        <!-- Login Btn -->
+                        <div class="grid grid-cols-2 gap-2 mt-1">
+                            <a id="login-btn-mobile" href="../login/login.html" class="flex items-center justify-center
+                             gap-2 py-2.5 bg-sky-500 hover:bg-blue-700 text-white text-xs font-bold rounded-xl 
+                             shadow-md shadow-blue-500/20 transition active:scale-95">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                                <span>Login</span>
+                            </a>
+
+                            <!-- Logout Btn -->
+                            <button id="logout-btn-mobile" class="hidden text-center py-2.5 bg-red-600 text-white
+                             text-xs font-bold rounded-xl hover:bg-red-700 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </nav>
+    <!-------------- NAVBAR SECTION END -------------->
+
+
+    <!-------------- HERO BANNER SECTION START -------------->
+    <section class="relative h-[240px] sm:h-[300px] md:h-[360px] w-full flex items-center justify-center 
+        bg-cover bg-center overflow-hidden" style="background-image: url('../image/services/carousel-1.jpg');">
+
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-950/90"></div>
+
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 bg-sky-500/20
+             rounded-full blur-[90px] pointer-events-none">
+        </div>
+
+        <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto flex flex-col items-center">
+
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 text-transparent 
+                bg-clip-text bg-gradient-to-r from-white via-slate-100 to-sky-300">
+                Our Services
+            </h1>
+
+            <nav aria-label="Breadcrumb" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 
+                backdrop-blur-md border border-white/15 text-xs sm:text-sm font-medium text-slate-300 shadow-lg">
+
+                <!-- Home Link -->
+                <a href="../index.html" class="hover:text-sky-400 transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-house text-[10px]"></i>
+                    <span>Home</span>
+                </a>
+
+                <!-- Services Link -->
+                <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+                <span class="text-sky-400 font-semibold">Services</span>
+            </nav>
+        </div>
+
+        <!-- Bottom Effect -->
+        <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
+    </section>
+    <!-------------- HERO BANNER SECTION END -------------->
+
+
+    <!-------------- OUR SPECIALIZED DENTAL SECTION START -------------->
+    <main class="max-w-6xl mx-auto px-4 py-8 overflow-hidden">
+        <div class="text-center max-w-3xl mx-auto">
+            <span class="bg-sky-50 text-sky-600 font-bold text-xs px-3 py-1.5 rounded-full uppercase border
+                 border-sky-100 inline-block mb-3">
+                World-Class Care
+            </span>
+
+            <h2 class="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight leading-snug break-words">
+                Our Specialized Dental Treatments
+            </h2>
+
+            <p class="mt-3 text-slate-600 text-xs sm:text-sm max-w-xl mx-auto">
+                Click on any treatment card to view detailed clinical procedures and consultation highlights.
+            </p>
+
+            <div class="mt-6 flex flex-wrap justify-center gap-2 text-s font-semibold">
+                <div class="bg-white border px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                    <span class="text-emerald-600">✓</span>
+                    <span>Affordable Treatments</span>
+                </div>
+
+                <div class="bg-white border px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                    <span class="text-sky-600">✓</span>
+                    <span>Leading Technology</span>
+                </div>
+
+                <div class="bg-white border px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                    <span class="text-indigo-600">✓</span>
+                    <span>Guaranteed Results</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- SERVICES GRID CARDS -->
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Card 1 -->
+        <div onclick="openModal('modal1')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+         shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col
+         justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/C1.jpg" alt="Braces & Orthodontics" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs
+                         px-3 py-1 rounded-xl shadow-sm">Orthodontics</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Braces & Orthodontics </h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Align your teeth and improve your bite with customized metal, ceramic, or clear aligner
+                    treatments. </p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Metal, Ceramic & Clear Aligners</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Personalized Treatment Plans</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: 12–24 Months</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs 
+                    font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div onclick="openModal('modal2')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+             shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between
+             group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S2.jpg" alt="Complete & Partial Dentures" class="w-full h-full 
+                        object-cover group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs px-3
+                         py-1 rounded-xl shadow-sm">Restorative Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Complete & Partial Dentures</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Restore your smile and chewing ability with comfortable, custom-made full
+                    or partial dentures.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Custom-Fitted Dentures</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Improved Chewing & Speech</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: Several Visits</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs 
+                    font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div onclick="openModal('modal3')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+             shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+             justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S3.png" alt=" Cosmetic Dentistry" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs px-3
+                         py-1 rounded-xl shadow-sm">Cosmetic Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Cosmetic Dentistry</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Enhance your smile with cosmetic dental treatments designed to improve the color, shape, and
+                    appearance of your teeth.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Smile Enhancement Treatments</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Personalized Smile Design</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: Varies by Treatment</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs 
+                    font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div onclick="openModal('modal4')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+              shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col
+             justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S4.jpg" alt="Dental Crowns & Bridges" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs px-3
+                         py-1 rounded-xl shadow-sm">Restorative Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Dental Crowns & Bridges</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Restore damaged teeth and replace missing teeth with custom-designed dental crowns
+                    and bridges.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Protects Damaged Teeth</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Restores Tooth Function</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: 2–3 Visits</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold
+                     px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div onclick="openModal('modal5')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+            shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+            justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S5.jpg" alt="Dental Implants" class="w-full h-full object-cover
+                         group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs 
+                        px-3 py-1 rounded-xl shadow-sm">Implant Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Dental Implants</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Replace missing teeth with dental implants that provide stable support for natural-looking
+                    replacement teeth.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Long-Term Tooth Replacement</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Natural-Looking Smile</div>
+                </div>
+            </div>
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400"> Duration: Several Months</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold 
+                    px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div onclick="openModal('modal6')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+            shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+            justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S6.jpg" alt="Emergency Dental Care" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-red-500 text-white font-bold text-xs px-3 py-1 rounded-xl
+                         shadow-sm animate-pulse">Emergency Care</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Emergency Dental Care</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Get prompt dental assessment for tooth pain, broken teeth, dental injuries, and other urgent
+                    oral health problems.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Urgent Dental Assessment</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Emergency Treatment Options</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-red-500">Duration: Depends on Condition</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold 
+                    px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 7 -->
+        <div onclick="openModal('modal7')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+            shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+            justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S7.jpg" alt="Root Canal Treatment" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs 
+                        px-3 py-1 rounded-xl shadow-sm">Endodontics</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Root Canal Treatment</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Treat infection inside a tooth, help relieve dental pain, and preserve your natural tooth
+                    whenever possible.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Treats Infected Tooth Pulp</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Helps Preserve Natural Teeth</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: 1–2 or More Visits</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold
+                     px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 8 -->
+        <div onclick="openModal('modal8')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+             shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col
+             justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S8.jpg" alt="Teeth Cleaning & Polishing" class="w-full h-full
+                         object-cover group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs
+                         px-3 py-1 rounded-xl shadow-sm">Preventive Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Teeth Cleaning & Polishing</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Remove plaque and tartar buildup with professional cleaning to maintain healthier
+                    teeth and gums.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Removes Plaque & Tartar</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Fresh & Clean Smile</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: 30–60 Minutes</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold
+                     px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 9 -->
+        <div onclick="openModal('modal9')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+             shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+             justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/C9.jpg" alt="Pediatric Dentistry" class="w-full h-full object-cover
+                         group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs 
+                        px-3 py-1 rounded-xl shadow-sm">Pediatric Care </span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Pediatric Dentistry</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Support your child's oral health with gentle dental checkups, preventive care,
+                    and age-appropriate treatments.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Child-Friendly Dental Care</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Cavity Prevention</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: Depends on Treatment</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs 
+                    font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 10 -->
+        <div onclick="openModal('modal10')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500
+             shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col
+              justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S10.jpg" alt="Wisdom Tooth Removal" class="w-full h-full 
+                        object-cover group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold
+                         text-xs px-3 py-1 rounded-xl shadow-sm">Oral Surgery </span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Wisdom Tooth Removal</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Assess and treat problematic wisdom teeth that cause pain, swelling, crowding,
+                    or other dental complications.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Professional Tooth Assessment</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Personalized Aftercare Guidance</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: Depends on Complexity</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold
+                     px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 11 -->
+        <div onclick="openModal('modal11')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+            shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+            justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S11.jpg" alt="Porcelain Veneers" class="w-full h-full object-cover
+                         group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold text-xs
+                         px-3 py-1 rounded-xl shadow-sm">Cosmetic Dentistry</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">
+                    Porcelain Veneers</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Improve the appearance of selected teeth with custom-made porcelain veneers
+                    designed for your smile.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Improves Tooth Appearance</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Customized Smile Design</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: 2–3 Visits</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs font-bold
+                     px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+
+        <!-- Card 12 -->
+        <div onclick="openModal('modal12')" class="cursor-pointer bg-white rounded-3xl p-6 border border-slate-500 
+            shadow-sm hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col 
+            justify-between group">
+            <div>
+                <div class="relative overflow-hidden rounded-2xl h-52 mb-6 bg-slate-100">
+
+                    <!-- Image -->
+                    <img src="../image/services/S12.jpg" alt="Care & Periodontics" class="w-full h-full object-cover 
+                        group-hover:scale-105 transition-transform duration-500">
+
+                    <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-sky-700 font-bold 
+                        text-xs px-3 py-1 rounded-xl shadow-sm">Periodontics</span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-slate-800 group-hover:text-sky-600 transition-colors">Gum
+                    Care & Periodontics</h3>
+
+                <p class="text-slate-500 text-sm mt-2 leading-relaxed">
+                    Protect your gums with professional assessment and treatments for gum inflammation
+                    and periodontal disease.</p>
+
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2 text-xs font-medium text-slate-600">
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Gum Health Assessment</div>
+
+                    <div class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-sky-500"></i>
+                        Personalized Gum Care</div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                <span class="text-xs font-semibold text-slate-400">Duration: Varies</span>
+                <span class="inline-flex items-center gap-2 bg-sky-500 hover:bg-sky-600 text-white text-xs
+                     font-bold px-4 py-2.5 rounded-xl transition shadow-md shadow-sky-200">
+                    View Details <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- MODAL 1 -->
+    <div id="modal1" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center
+         justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal1Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal1')" class="absolute top-3 right-3 z-30 bg-slate-100 text-slate-700 
+                rounded-full w-9 h-9 flex items-center justify-center shadow-md">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/C1.jpg" alt=" Braces & Orthodontics" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1
+                         rounded-full shadow-md">Orthodontics</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800 pr-12">
+                            Braces & Orthodontics</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Perfect Alignments for Beautiful Smiles.</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Improve the alignment of your teeth and bite with personalized orthodontic treatment.
+                            Metal braces, ceramic braces, and clear aligners may be suitable depending on your dental
+                            needs. </p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Metal, Ceramic & Clear Aligner Options</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Personalized Treatment Plans </li>
+
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Estimated Time: 12–24 Months </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2 cursor-pointer">
+                            Book Now <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2 -->
+    <div id="modal2" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center 
+        justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal2Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal2')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md
+                 z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S2.jpg" alt="Complete & Partial Dentures"
+                        class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Restorative Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Complete & Partial Dentures</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Restore Your Smile with Confidence</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Replace missing teeth with custom-made complete or partial dentures designed to improve
+                            your smile, support chewing, and help restore everyday oral function.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Custom-Fitted Dentures</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Improved Chewing & Speech </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Duration: Several Visits</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3 -->
+    <div id="modal3" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex 
+        items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal3Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border 
+            border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal3')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100
+                 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md 
+                 shadow-md z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S3.png" alt="Cosmetic Dentistry" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Cosmetic Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Cosmetic Dentistry</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Enhance Your Natural Smile</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Improve the appearance of your teeth with personalized cosmetic treatments. Depending
+                            on your needs, options may include teeth whitening, veneers, and other smile-enhancing
+                            procedures.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Smile Enhancement Options </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Personalized Treatment Plans </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: Varies by Treatment </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4 -->
+    <div id="modal4" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm 
+        flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal4Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl 
+            border border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal4')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100
+                 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md
+                  z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S4.jpg" alt="Dental Crowns & Bridges"
+                        class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Restorative Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800 pr-12">
+                            Dental Crowns & Bridges</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Restore Strength and Function</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Restore weakened or damaged teeth with dental crowns, or replace missing teeth with
+                            bridges. Your dentist will recommend a suitable option based on your oral health.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Protects Weakened Teeth </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Replaces Missing Teeth </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: Multiple Visits </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5 -->
+    <div id="modal5" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center 
+        justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal5Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border 
+            border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal5')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md
+                 z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S5.jpg" alt="Dental Implants" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 
+                        py-1 rounded-full shadow-md">Implant Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Dental Implants</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            A Stable Solution for Missing Teeth</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Dental implants can replace missing teeth by supporting replacement teeth with an
+                            implant placed in the jawbone. Suitability depends on your bone health and overall
+                            dental condition.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Replacement for Missing Teeth </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Supports Chewing Function </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: Several Months </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6 -->
+    <div id="modal6" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm
+         flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal6Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal6')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100
+                 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md 
+                 z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S6.jpg" alt="Emergency Dental Care" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-red-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Emergency Care</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Emergency Dental Care</h3>
+
+                        <p class="text-xs text-red-500 font-semibold mt-1">
+                            Prompt Care When You Need It</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Get dental assessment for sudden tooth pain, broken teeth, swelling, or oral injuries.
+                            Prompt care can help identify the problem and determine the appropriate treatment.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Urgent Dental Assessment </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Treatment Options for Dental Pain</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Duration: Depends on Condition</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 7 -->
+    <div id="modal7" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm
+         flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal7Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal7')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md
+                 z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S7.jpg" alt="Root Canal Treatment" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 
+                        py-1 rounded-full shadow-md">Endodontics</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Root Canal Treatment</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Help Preserve Your Natural Tooth</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Root canal treatment addresses infection or inflammation inside a tooth. The procedure
+                            helps remove the affected tissue, manage discomfort, and preserve the natural tooth when
+                            possible. </p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Treats Infected Tooth Pulp</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Helps Preserve Natural Teeth </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Duration: 1–2 or More Visits</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 8 -->
+    <div id="modal8" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex 
+        items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal8Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal8')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md 
+                z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S8.jpg" alt="Teeth Cleaning & Polishing"
+                        class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Preventive Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Teeth Cleaning & Polishing</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Keep Your Smile Fresh and Healthy</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Professional cleaning removes plaque and hardened tartar that regular brushing may miss.
+                            Polishing helps leave your teeth feeling clean while supporting good oral hygiene.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Removes Plaque & Tartar </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Supports Healthy Gums </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: 30–60 Minutes</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 9 -->
+    <div id="modal9" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex
+         items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal9Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border 
+            border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal9')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100
+                 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md
+                  z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/C9.jpg" alt="Pediatric Dentistry" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3
+                         py-1 rounded-full shadow-md">Pediatric Care </span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Pediatric Dentistry</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Healthy Smiles for Little Ones</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Help children develop healthy dental habits with age-appropriate checkups, preventive
+                            care, and treatment for common dental problems in a supportive environment.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Child-Friendly Dental Checkups</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Cavity Prevention & Oral Care</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Duration: Depends on Treatment
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 10 -->
+    <div id="modal10" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm 
+        flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal10Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border 
+            border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal10')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100
+                 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md 
+                 z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S10.jpg" alt="Wisdom Tooth Removal" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1 
+                        rounded-full shadow-md">Oral Surgery </span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Wisdom Tooth Removal</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Care for Problematic Wisdom Teeth</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Wisdom teeth may need removal when they become impacted, cause repeated pain, or create
+                            other dental problems. Your dentist will assess the tooth and explain suitable options.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Dental Assessment & X-rays if Needed </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Personalized Aftercare Guidance</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: Depends on Complexity</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 11 -->
+    <div id="modal11" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex
+         items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal11Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+             border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal11')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md 
+                z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S11.jpg" alt="Porcelain Veneers" class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1
+                         rounded-full shadow-md">Cosmetic Dentistry</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Porcelain Veneers</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Create a More Confident Smile</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Porcelain veneers are thin, custom-made coverings bonded to the front surfaces of selected
+                            teeth. They may improve the appearance of discoloration, chips, or uneven tooth shapes after
+                            a dental assessment.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Improves Tooth Appearance </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Custom Smile Design</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Duration: Multiple Visits</li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 12 -->
+    <div id="modal12" class="service-modal fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm 
+        flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+
+        <div id="modal12Box" class="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border
+            border-slate-100 transform scale-95 transition-all duration-300 relative">
+
+            <button onclick="closeModal('modal12')" class="absolute top-4 right-4 bg-white/80 hover:bg-slate-100 
+                text-slate-600 rounded-full w-9 h-9 flex items-center justify-center backdrop-blur-md shadow-md 
+                z-10 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2">
+                <div class="h-56 sm:h-auto relative">
+                    <img src="../image/services/S12.jpg" alt="Gum Care & Periodontics"
+                        class="w-full h-full object-cover">
+
+                    <span class="absolute bottom-3 left-3 bg-sky-500 text-white font-bold text-xs px-3 py-1
+                         rounded-full shadow-md">Periodontics</span>
+                </div>
+
+                <div class="p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-800">
+                            Gum Care & Periodontics</h3>
+
+                        <p class="text-xs text-sky-600 font-semibold mt-1">
+                            Protect Your Gum Health</p>
+
+                        <p class="text-slate-600 text-xs sm:text-sm mt-4 leading-relaxed">
+                            Maintain healthier gums with professional assessment and treatment for gum inflammation
+                            and periodontal disease. Care is tailored to your gum condition and oral health needs.</p>
+
+                        <ul class="mt-4 space-y-2 text-xs font-medium text-slate-700">
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Gum Health Assessment </li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i>Personalized Gum Care</li>
+
+                            <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-500">
+                                </i> Duration: Varies </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-[10px] uppercase text-slate-400 font-bold">Consultation</span>
+                            <span class="text-sm font-bold text-slate-800">Book a Checkup</span>
+                        </div>
+
+                        <a href="../book-Appointment/book.html" class="popup-book-btn bg-sky-500 hover:bg-sky-600 
+                         text-white text-xs font-bold px-5 py-2.5 rounded-xl transition shadow-md shadow-sky-200
+                         flex items-center gap-2">
+                            Book Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT FOR MODALS -->
+    <script>
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            const box = document.getElementById(id + 'Box');
+            if (modal && box) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                box.classList.remove('scale-95');
+                box.classList.add('scale-100');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            const box = document.getElementById(id + 'Box');
+            if (modal && box) {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                box.classList.remove('scale-100');
+                box.classList.add('scale-95');
+            }
+        }
+    </script>
+    <!-------------- OUR SPECIALIZED DENTAL SECTION END -------------->
+
+
+    <!-------------- NEWSLETTER & FOOTER SECTION START -------------->
+    <section class="relative -mb-20 z-10 px-4 sm:px-6 mt-12">
+        <div class="max-w-6xl mx-auto bg-sky-500 p-6 sm:p-10 flex justify-center rounded-lg shadow-xl">
+
+            <form class="flex flex-col sm:flex-row w-full max-w-3xl gap-0">
+                <input type="email" placeholder="Your Email" required class="w-full px-6 py-4 outline-none rounded-t
+                    sm:rounded-t-none sm:rounded-l-lg bg-white text-slate-800 text-sm sm:text-base">
+
+                <button type="submit" class="bg-slate-900 text-white px-8 py-4 sm:py-0 rounded-b sm:rounded-b-none
+                    sm:rounded-r-lg font-bold hover:bg-slate-800 transition whitespace-nowrap text-sm sm:text-base">
+                    Sign Up
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-white pt-32 px-4 sm:px-6">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-16">
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Quick Links
+                </h3>
+                <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+                    <!-- Home -->
+                    <li>
+                        <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+                    </li>
+
+                    <!-- About -->
+                    <li>
+                        <a href="../About/about.html"
+                            class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+                    </li>
+
+                    <!-- Services -->
+                    <li>
+                        <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+                    </li>
+
+                    <!-- Laatest Blog -->
+                    <li>
+                        <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+                    </li>
+
+                    <!-- Contact Us -->
+                    <li>
+                        <a href="../Contact/contact.html"
+                            class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Popular Links -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Popular Links
+                </h3>
+                <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+                    <!-- Home -->
+                    <li>
+                        <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+                    </li>
+
+                    <!-- About -->
+                    <li>
+                        <a href="../About/about.html"
+                            class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+                    </li>
+
+                    <!-- Services -->
+                    <li>
+                        <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+                    </li>
+
+                    <!-- Latest Blog -->
+                    <li>
+                        <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+                    </li>
+
+                    <!-- Contact Us -->
+                    <li>
+                        <a href="../Contact/contact.html"
+                            class="hover:text-sky-400 transition inline-flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Get In Touch -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Get In Touch
+                </h3>
+                <ul class="space-y-4 text-slate-300 text-sm sm:text-base">
+
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-location-dot text-sky-400 mt-1"></i>
+                        <span>123 Street, New York, USA</span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-envelope text-sky-400 mt-1"></i>
+                        <span>info@example.com</span>
+                    </li>
+
+                    <li class="flex items-start gap-3">
+                        <i class="fa-solid fa-phone text-sky-400 mt-1"></i>
+                        <span>+012 345 67890</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Social Media Icons -->
+            <div>
+                <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Follow Us
+                </h3>
+                <div class="flex gap-3">
+
+                    <!-- Twitter Icon -->
+                    <a href="https://twitter.com/yourusername" target="_blank" class="bg-sky-500 hover:bg-sky-600 
+                     text-white w-10 h-10 rounded flex items-center justify-center transition">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+
+                    <!-- Facebook Icon -->
+                    <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="bg-sky-500 
+                     hover:bg-sky-600 text-white w-10 h-10 rounded flex items-center justify-center transition">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <!-- Linkedin Icon -->
+                    <a href="https://www.linkedin.com/feed/" target="_blank" class="bg-sky-500 hover:bg-sky-600
+                     text-white w-10 h-10 rounded flex items-center justify-center transition">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                    <!-- Instagram Icon -->
+                    <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="bg-sky-500 
+                     hover:bg-sky-600 text-white w-10 h-10 rounded flex items-center justify-center transition">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="border-t border-slate-800">
+            <div class="max-w-6xl mx-auto py-6 flex flex-col sm:flex-row justify-between items-center text-center 
+                 sm:text-left gap-2 text-sm text-slate-400">
+                <p>© Your Site Name. All Rights Reserved.</p>
+                <p>
+                    Designed by <span class="text-white font-semibold">HTML Codex</span> |
+                    Distributed by <span class="text-white font-semibold">ThemeWagon</span>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODULE JS -->
+    <script type="module" src="./service.js"></script>
+
+    <!-------------- NEWSLETTER & FOOTER SECTION END -------------->
+
+</body>
+
+</html>

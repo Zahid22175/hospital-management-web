@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us & Location | ClinicBook</title>
+
+  <!-- SVG Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 
+    100'><defs><linearGradient id='g' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' style='stop-color:%232563eb;'/>
+    <stop offset='100%' style='stop-color:%2306b6d4;'/></linearGradient></defs><rect width='100' height='100' rx='22'
+    fill='url(%23g)'/><path d='M50 18c-14 0-25 10-25 24 0 11 3 24 8 36 3 7 8 10 12 4 3-5 4-12 5-16 1-4 2-4 3 0 1 4 2 11
+    5 16 4 6 9 3 12-4 5-12 8-25 8-36 0-14-11-24-25-24z' fill='white'/></svg>">
+
+  <!-- TAILWIND CSS CDN LINK -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- FONT AWESOME ICON LINK -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- SweetAlert2 CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body class="selection:bg-cyan-500 selection:text-white">
+
+  <!-------------- NAVBAR SECTION START -------------->
+  <nav class="bg-white/90 backdrop-blur-md border-b border-slate-200/80 relative z-50 w-full shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex justify-between items-center gap-4">
+
+      <!-- Logo -->
+      <a href="../index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-2xl
+           flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-tooth text-lg"></i>
+        </div>
+
+        <div class="flex flex-col">
+          <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+            Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+          </span>
+
+          <span class="text-[9px] font-bold tracking-widest text-cyan-600 uppercase mt-0.5">
+            Dental & Smile Care</span>
+        </div>
+      </a>
+
+      <!-- Hamburger Button -->
+      <button id="menu-toggle" aria-label="Toggle navigation menu" class="lg:hidden text-slate-700 hover:text-blue-600
+         w-10 h-10 rounded-xl hover:bg-slate-100 flex items-center justify-center text-xl transition cursor-pointer">
+        <i id="menu-icon" class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center gap-1 xl:gap-2">
+
+        <!-- Home -->
+        <a href="../index.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+           hover:bg-slate-100/80 rounded-xl transition">Home</a>
+
+        <!-- About -->
+        <a href="../About/about.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+           hover:bg-slate-100/80 rounded-xl transition">About</a>
+
+        <!-- Services -->
+        <a href="../Service/service.html" class="px-3 py-2 text-s font-bold text-slate-600 hover:text-sky-500
+           hover:bg-slate-100/80 rounded-xl transition">Services</a>
+
+        <!-- Contact -->
+        <a href="../Contact/contact.html" class="px-3 py-2 text-s font-bold text-sky-500 bg-blue-50 rounded-xl
+            transition">Contact</a>
+      </div>
+
+      <!-- Book Now Btn -->
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="../book-Appointment/book.html" target="_blank" class="book-now-btn inline-flex items-center gap-2
+         bg-gradient-to-r from-sky-500 to-sky-500 hover:from-sky-700 hover:to-sky-600 text-white text-s font-bold
+         px-4 py-2.5 rounded-xl shadow-md shadow-sky-500/20 transition transform active:scale-95">
+          <i class="fa-solid fa-calendar-plus"></i> Book Now </a>
+
+        <div class="h-4 w-px bg-slate-200 my-auto"></div>
+
+        <!-- Login Btn -->
+        <a id="login-btn" href="../login/login.html" class="inline-flex items-center gap-2 bg-sky-500 
+        hover:bg-sky-400 text-white text-s font-bold px-4 py-2.5 rounded-xl shadow-md shadow-blue-500/20 
+        transition transform active:scale-95">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          <span>Login</span>
+        </a>
+
+        <!-- Logout Btn -->
+        <button id="logout-btn" class="hidden inline-flex items-center gap-2 bg-red-600 hover:bg-red-700
+           text-white text-sm font-bold px-4 py-2.5 rounded-xl shadow-md shadow-red-500/20 transition active:scale-95
+           cursor-pointer">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Dropdown -->
+    <div id="mobile-menu" class="lg:hidden fixed top-0 left-0 h-screen w-72 bg-white shadow-2xl z-50 
+      transform -translate-x-full transition-transform duration-300 ease-in-out p-5 flex flex-col
+       justify-between overflow-y-auto">
+      <div>
+
+        <div class="p-4 space-y-3">
+
+          <!-- Logo & Close Button -->
+          <div class="flex items-center justify-between pb-4 border-b border-slate-200 mb-4">
+            <div class="flex items-center gap-2">
+
+              <div class="w-8 h-8 bg-gradient-to-tr from-cyan-600 via-cyan-600 to-cyan-500 text-white rounded-xl
+                 flex items-center justify-center shadow-lg shadow-cyan-500/25 group-hover:scale-105 
+                 transition-transform">
+                <i class="fa-solid fa-tooth text-sm"></i>
+              </div>
+              <span class="text-xl font-black tracking-tight text-slate-900 leading-none">
+                Clinic<span class="bg-gradient-to-r from-cyan-600 to-cyan-500 bg-clip-text text-transparent">Book</span>
+              </span>
+            </div>
+
+            <!-- Close Button Icon -->
+            <button id="close-menu-btn" class="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg
+               flex items-center justify-center transition cursor-pointer">
+              <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+          </div>
+
+          <!-- Home -->
+          <a href="../index.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600 
+          hover:bg-slate-100 rounded-xl transition">Home</a>
+
+          <!-- About -->
+          <a href="../About/about.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600 
+          hover:bg-slate-100 rounded-xl transition">About</a>
+
+          <!-- Services -->
+          <a href="../Service/service.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-slate-600
+           hover:bg-slate-100 rounded-xl transition">Services</a>
+
+          <!-- Contact -->
+          <a href="../Contact/contact.html" class="flex items-center gap-3 px-3.5 py-2.5 text-xs font-bold text-sky-500 
+            bg-blue-50 rounded-xl">Contact</a>
+
+          <!-- Book Now Btn -->
+          <div class="pt-3 border-t border-slate-100 flex flex-col gap-2">
+            <a href="../book-Appointment/book.html" class="flex items-center justify-center gap-2 w-full bg-gradient-to-r 
+             from-sky-500 to-sky-600 text-white text-xs font-bold py-3 rounded-xl shadow-md shadow-sky-500/20">
+              <i class="fa-solid fa-calendar-plus"></i> Book Now</a>
+
+            <!-- Login Btn -->
+            <div class="grid grid-cols-2 gap-2 mt-1">
+              <a id="login-btn-mobile" href="../login/login.html" class="flex items-center justify-center gap-2 py-2.5 
+              bg-sky-500 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-md shadow-blue-500/20 
+              transition active:scale-95">
+                <i class="fa-solid fa-right-to-bracket"></i>
+                <span>Login</span>
+              </a>
+
+              <!-- Logout Btn -->
+              <button id="logout-btn-mobile" class="hidden text-center py-2.5 bg-red-600 text-white text-xs font-bold
+               rounded-xl hover:bg-red-700 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+  </nav>
+  <!-------------- NAVBAR SECTION END -------------->
+
+
+  <!-------------- HERO BANNER SECTION START -------------->
+  <section class="relative h-[240px] sm:h-[300px] md:h-[360px] w-full flex items-center justify-center 
+    bg-cover bg-center overflow-hidden" style="background-image: url('../image/contact/carousel-1.jpg');">
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/80 to-slate-950/90"></div>
+
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 bg-sky-500/20
+       rounded-full blur-[90px] pointer-events-none">
+    </div>
+
+    <div class="relative z-10 text-center text-white px-4 max-w-4xl mx-auto flex flex-col items-center">
+
+      <h1 class="text-3xl sm:text-5xl md:text-6xl font-black tracking-tight mb-4 text-transparent
+         bg-clip-text bg-gradient-to-r from-white via-slate-100 to-sky-300">
+        Contact Us </h1>
+
+      <!-- Home Link -->
+      <nav aria-label="Breadcrumb" class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 
+        backdrop-blur-md border border-white/15 text-xs sm:text-sm font-medium text-slate-300 shadow-lg">
+        <a href="../index.html" class="hover:text-sky-400 transition-colors flex items-center gap-1.5">
+          <i class="fa-solid fa-house text-[10px]"></i>
+          <span>Home</span>
+        </a>
+
+        <!-- Contact Link -->
+        <i class="fa-solid fa-chevron-right text-[10px] text-slate-500"></i>
+        <span class="text-sky-400 font-semibold">Contact Us</span>
+      </nav>
+    </div>
+
+    <!-- Bottom Effect -->
+    <div class="absolute bottom-0 left-0 right-0 h-6 bg-gradient-to-t from-white to-transparent"></div>
+  </section>
+  <!-------------- HERO BANNER SECTION END -------------->
+
+
+  <!-------------- CONTACT SECTION START -------------->
+  <section class="py-16 sm:py-24 px-4 sm:px-6 bg-slate-50/50">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+
+      <div class="lg:col-span-4 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white
+         p-7 sm:p-9 rounded-3xl shadow-xl border border-slate-800 flex flex-col justify-between relative 
+         overflow-hidden group">
+
+        <!-- Background -->
+        <div class="absolute -top-10 -right-10 w-40 h-40 bg-sky-500/20 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="relative z-10">
+
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/10 border 
+            border-sky-500/20 text-sky-400 text-xs font-bold uppercase tracking-widest mb-4">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+            Contact Us
+          </div>
+
+          <h2 class="text-2xl sm:text-3xl font-black text-white mb-8 leading-snug">
+            Feel Free To <br class="hidden sm:inline"> Connect With Us
+          </h2>
+
+          <!-- Contact Items List -->
+          <div class="space-y-6">
+
+            <div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors duration-300">
+              <div class="w-12 h-12 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center
+                 justify-center shrink-0 text-sky-400 text-lg shadow-inner">
+                <i class="fa-solid fa-location-dot"></i>
+              </div>
+
+              <!-- Location -->
+              <div>
+                <h4 class="font-bold text-slate-200 text-sm sm:text-base">Our Office</h4>
+                <p class="text-slate-400 text-xs sm:text-sm mt-0.5 leading-relaxed">Ibrahim Trade Tower,
+                  Shahrah-e-Faisal, Karachi</p>
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors duration-300">
+              <div class="w-12 h-12 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center 
+                justify-center shrink-0 text-sky-400 text-lg shadow-inner">
+                <i class="fa-solid fa-envelope"></i>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-slate-200 text-sm sm:text-base">Email Us</h4>
+                <p class="text-slate-400 text-xs sm:text-sm mt-0.5">info@example.com</p>
+              </div>
+            </div>
+
+            <!-- Phone -->
+            <div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors duration-300">
+              <div class="w-12 h-12 bg-sky-500/10 border border-sky-500/30 rounded-2xl flex items-center 
+                justify-center shrink-0 text-sky-400 text-lg shadow-inner">
+                <i class="fa-solid fa-phone"></i>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-slate-200 text-sm sm:text-base">Call Us</h4>
+                <p class="text-slate-400 text-xs sm:text-sm mt-0.5">+012 345 6789</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Available -->
+        <div class="relative z-10 mt-8 pt-6 border-t border-slate-800 text-xs text-slate-400 flex 
+          items-center justify-between">
+          <span>Available 24/7 Support</span>
+          <i class="fa-solid fa-headset text-sky-400 text-base"></i>
+        </div>
+      </div>
+
+      <!-- FORM CONTAINER -->
+      <div class="lg:col-span-4 bg-white p-7 sm:p-9 rounded-3xl shadow-xl shadow-slate-200/50 border 
+        border-slate-100 flex flex-col justify-center">
+
+        <h3 class="text-xl font-extrabold text-slate-900 mb-6 flex items-center gap-2">
+          <span>Send a Message</span>
+        </h3>
+
+        <form id="contactForm" class="space-y-4">
+
+          <!-- Your Name -->
+          <div>
+            <label for="name" class="sr-only">Your Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Your Name" required class="w-full 
+               bg-slate-50 border border-slate-200/80 px-4 py-3.5 text-sm rounded-xl outline-none focus:border-sky-500
+               focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all font-medium text-slate-800 
+               placeholder-slate-400">
+          </div>
+
+          <!-- Your Email -->
+          <div>
+            <label for="email" class="sr-only">Your Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="Your Email" required class="w-full 
+               bg-slate-50 border border-slate-200/80 px-4 py-3.5 text-sm rounded-xl outline-none focus:border-sky-500
+               focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all font-medium text-slate-800 
+               placeholder-slate-400">
+          </div>
+
+          <!-- Subject -->
+          <div>
+            <label for="subject" class="sr-only">Subject</label>
+            <input type="text" id="subject" name="subject" autocomplete="off" placeholder="Subject" required class="w-full 
+              bg-slate-50 border border-slate-200/80 px-4 py-3.5 text-sm rounded-xl outline-none focus:border-sky-500 
+              focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all font-medium text-slate-800 
+              placeholder-slate-400">
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="sr-only">Message</label>
+            <textarea id="message" name="message" autocomplete="off" placeholder="Message" rows="4" required class="w-full
+               bg-slate-50 border border-slate-200/80 px-4 py-3.5 text-sm rounded-xl outline-none focus:border-sky-500 
+               focus:bg-white focus:ring-4 focus:ring-sky-500/10 transition-all font-medium text-slate-800
+               placeholder-slate-400 resize-none"></textarea>
+          </div>
+
+          <!-- Submit Btn -->
+          <button type="submit" class="w-full bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600
+             hover:to-blue-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-sky-500/25 
+             hover:shadow-sky-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 flex 
+             items-center justify-center gap-2">
+            <span>Send Message</span>
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- MAP -->
+      <div class="lg:col-span-4 bg-white p-2 rounded-3xl shadow-xl shadow-slate-200/50 border 
+        border-slate-100 flex flex-col h-full min-h-[380px]">
+        <div class="w-full h-full rounded-2xl overflow-hidden relative group">
+          <iframe src="https://www.google.com/maps?q=Shahrah+e+Faisal+Ibrahim+Trade+Tower+Karachi&output=embed"
+            class="w-full h-full border-0 min-h-[360px] grayscale hover:grayscale-0 transition-all duration-700"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-------------- CONTACT SECTION END -------------->
+
+
+  <!-------------- NEWSLETTER & FOOTER SECTION START -------------->
+  <section class="relative -mb-20 z-10 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto bg-sky-500 p-6 sm:p-10 flex justify-center rounded-lg shadow-xl">
+
+      <form class="flex flex-col sm:flex-row w-full max-w-3xl gap-0">
+        <input type="email" placeholder="Your Email" required class="w-full px-6 py-4 outline-none rounded-t
+           sm:rounded-t-none sm:rounded-l-lg bg-white text-slate-800 text-sm sm:text-base">
+
+        <button type="submit" class="bg-slate-900 text-white px-8 py-4 sm:py-0 rounded-b sm:rounded-b-none
+           sm:rounded-r-lg font-bold hover:bg-slate-800 transition whitespace-nowrap text-sm sm:text-base">
+          Sign Up
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-slate-900 text-white pt-32 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pb-16">
+
+      <!-- Quick Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Quick Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="../About/about.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="../Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Laatest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Popular Links -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Popular Links</h3>
+        <ul class="space-y-3 text-slate-300 text-sm sm:text-base">
+
+          <!-- Home -->
+          <li>
+            <a href="../index.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Home</a>
+          </li>
+
+          <!-- About -->
+          <li>
+            <a href="../About/about.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>About Us</a>
+          </li>
+
+          <!-- Services -->
+          <li>
+            <a href="../Service/service.html" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Our Services</a>
+          </li>
+
+          <!-- Latest Blog -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Latest Blog</a>
+          </li>
+
+          <!-- Contact Us -->
+          <li>
+            <a href="#" class="hover:text-sky-400 transition inline-flex items-center gap-2">
+              <i class="fa-solid fa-arrow-right text-sky-400 text-xs"></i>Contact Us
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get In Touch -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Get In Touch</h3>
+        <ul class="space-y-4 text-slate-300 text-sm sm:text-base">
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-location-dot text-sky-400 mt-1"></i>
+            <span>123 Street, New York, USA</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-envelope text-sky-400 mt-1"></i>
+            <span>info@example.com</span>
+          </li>
+
+          <li class="flex items-start gap-3">
+            <i class="fa-solid fa-phone text-sky-400 mt-1"></i>
+            <span>+012 345 67890</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social Media Icons -->
+      <div>
+        <h3 class="text-xl font-bold mb-6 text-white tracking-wide border-b border-slate-800 pb-2">Follow Us</h3>
+        <div class="flex gap-3">
+
+          <!-- Twitter Icon -->
+          <a href="https://twitter.com/yourusername" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+           w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-twitter"></i>
+          </a>
+
+          <!-- Facebook Icon -->
+          <a href="https://www.facebook.com/zahidkhan.zahidkhan.779642" target="_blank" class="bg-sky-500 
+           hover:bg-sky-600 text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+
+          <!-- Linkedin Icon -->
+          <a href="https://www.linkedin.com/feed/" target="_blank" class="bg-sky-500 hover:bg-sky-600 text-white
+           w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+
+          <!-- Instagram Icon -->
+          <a href="https://www.instagram.com/zahid_hussain1512" target="_blank" class="bg-sky-500 hover:bg-sky-600
+           text-white w-10 h-10 rounded flex items-center justify-center transition">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800">
+      <div class="max-w-6xl mx-auto py-6 flex flex-col sm:flex-row justify-between items-center text-center 
+        sm:text-left gap-2 text-sm text-slate-400">
+        <p>© Your Site Name. All Rights Reserved.</p>
+        <p>
+          Designed by <span class="text-white font-semibold">HTML Codex</span> |
+          Distributed by <span class="text-white font-semibold">ThemeWagon</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- EMAILJS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- MODULE JS -->
+  <script type="module" src="./contact.js"></script>
+
+  <!-------------- NEWSLETTER & FOOTER SECTION END -------------->
+
+
+</body>
+
+</html>
