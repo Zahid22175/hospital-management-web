@@ -5,7 +5,7 @@ import {
   db,
   collection,
   getDocs
-} from "../firebase.js";
+} from "./firebase.js";
 
 // Book Now Form 
 document.addEventListener("DOMContentLoaded", () => {
