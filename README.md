@@ -31,7 +31,7 @@ You can explore different role-based dashboards using the following demo account
 | 👤 Patient Dashboard | kamran@gmail.com | 123456 |
 | 👨‍⚕️ Doctor Dashboard | bisma01@gmail.com | bisma01 |
 | 👨‍💼 Staff Dashboard | hassan@gmail.com | 123456 |
-| 🛡️ Admin Dashboard | YOUR_ADMIN_EMAIL | YOUR_ADMIN_PASSWORD |
+| 🛡️ Admin Dashboard | Private Access | Restricted |
 
 **Note:** These demo credentials are provided for testing and demonstration purposes only. Use them to explore the different dashboards and functionalities of ClinicBook.
 
