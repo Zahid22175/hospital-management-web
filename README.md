@@ -1,26 +1,52 @@
 # 🏥 ClinicBook - Hospital Management System
 
-A comprehensive, responsive web-based **Hospital Management System** designed to streamline healthcare services, patient appointments, and administrative workflows. Built using modern frontend technologies and cloud backend services.
+A comprehensive, responsive web-based **Hospital Management System** designed to streamline healthcare services, patient appointments, and administrative workflows. Built using modern frontend technologies and Firebase cloud services.
 
 ## ✨ Live Demo
-🌐 Check out the live website here: [ClinicBook Live](https://zahid22175.github.io/hospital-management-web/)
+
+🌐 **Live Website:** [ClinicBook Live](https://zahid22175.github.io/hospital-management-web/)
 
 ---
 
 ## 🚀 Features
-* **Role-Based Dashboards:** Tailored interfaces and routing for Patients, Doctors, and Admin/Staff members.
-* **Appointment Booking:** Seamless scheduling system allowing patients to book consultations effortlessly.
-* **Responsive UI/UX:** Fully optimized layouts ensuring smooth performance across mobile, tablet, and desktop screens.
-* **Secure Authentication:** Integrated user signup, login, and session management using Firebase Auth.
-* **Real-time Database:** Dynamic data storage and retrieval powered by Firebase Firestore.
+
+- **Role-Based Dashboards:** Dedicated dashboards for Patients, Doctors, Staff, and Admin.
+- **Appointment Booking:** Seamless appointment scheduling system for patients.
+- **Patient Management:** Manage patient profiles, appointments, prescriptions, and health records.
+- **Doctor Management:** Manage doctor profiles, specialties, schedules, and appointments.
+- **Staff Management:** Centralized staff information and management.
+- **Admin Dashboard:** Complete control over doctors, patients, appointments, departments, staff, and messages.
+- **Responsive UI/UX:** Fully optimized for mobile, tablet, and desktop screens.
+- **Secure Authentication:** User signup, login, and session management using Firebase Authentication.
+- **Real-Time Database:** Dynamic data storage and synchronization powered by Firebase Firestore.
+
+---
+
+## 🔑 Demo Login Credentials
+
+You can explore different role-based dashboards using the following demo accounts.
+
+| Dashboard | Email | Password |
+|---|---|---|
+| 👤 Patient Dashboard | YOUR_PATIENT_EMAIL | YOUR_PATIENT_PASSWORD |
+| 👨‍⚕️ Doctor Dashboard | YOUR_DOCTOR_EMAIL | YOUR_DOCTOR_PASSWORD |
+| 👨‍💼 Staff Dashboard | YOUR_STAFF_EMAIL | YOUR_STAFF_PASSWORD |
+| 🛡️ Admin Dashboard | YOUR_ADMIN_EMAIL | YOUR_ADMIN_PASSWORD |
+
+**Note:** These demo credentials are provided for testing and demonstration purposes only. Use them to explore the different dashboards and functionalities of ClinicBook.
 
 ---
 
 ## 🛠️ Tech Stack
-* **HTML5 / CSS3** (Structure & Styling)
-* **Tailwind CSS** (Modern utility-first styling framework)
-* **JavaScript (ES6+)** (Dynamic interactivity & logic modules)
-* **Firebase** (Cloud Authentication & Database management)
+
+- **HTML5 / CSS3** – Website structure and styling
+- **Tailwind CSS** – Modern utility-first CSS framework
+- **JavaScript (ES6+)** – Dynamic functionality and application logic
+- **Firebase Authentication** – User authentication and authorization
+- **Cloud Firestore** – Real-time cloud database
+- **SweetAlert2** – Interactive alerts and notifications
+- **EmailJS** – Email notification integration
+- **Git & GitHub** – Version control and project hosting
 
 ---
 
@@ -30,27 +56,76 @@ A comprehensive, responsive web-based **Hospital Management System** designed to
 hospital-management-web/
 │
 ├── 📁 Admin/                      # Main Admin Control Panel
-│   ├── 📁 appointment/            # Appointment management dashboard
-│   ├── 📁 department/             # Hospital departments configuration
-│   ├── 📁 doctor/                 # Doctors directory & status management
-│   ├── 📁 messages/               # Contact & feedback messages center
-│   ├── 📁 paitent/                # Patient records & logs management
-│   ├── 📁 staff/                  # Staff directory & role management
-│   ├── 📄 index.html              # Admin main view
-│   └── ⚡ index.js                # Admin logic handler
+│   ├── 📁 appointment/            # Appointment management
+│   ├── 📁 department/             # Department management
+│   ├── 📁 doctor/                 # Doctor directory and management
+│   ├── 📁 messages/               # Contact and feedback messages
+│   ├── 📁 paitent/                # Patient records management
+│   ├── 📁 staff/                  # Staff directory and management
+│   ├── 📄 index.html              # Admin main dashboard
+│   └── ⚡ index.js                # Admin dashboard logic
 │
-├── 📁 About/                      # About Us page details
-├── 📁 book-Appointment/           # Public appointment booking module
-├── 📁 Contact/                    # ContactUs form module
-├── 📁 Doctor/                     # Dedicated Doctor Portal
-├── 📁 Patient/                    # Dedicated Patient Portal
-├── 📁 Service/                    # Hospital services showcase
-├── 📁 Staff/                      # Dedicated Staff Portal
-├── 📁 login/                      # User authentication login module
-├── 📁 signup/                     # User registration module
-├── 📁 image/                      # Media assets, icons & graphics
+├── 📁 About/                      # About Us page
+├── 📁 book-Appointment/           # Appointment booking module
+├── 📁 Contact/                    # Contact Us module
+├── 📁 Doctor/                     # Doctor Portal
+├── 📁 Patient/                    # Patient Portal
+├── 📁 Service/                    # Hospital services
+├── 📁 Staff/                      # Staff Portal
+├── 📁 login/                      # User authentication
+├── 📁 signup/                     # User registration
+├── 📁 image/                      # Images, icons and graphics
 │
 ├── 📄 index.html                  # Main website landing page
-├── ⚡ index.js                    # Main router & app startup logic
-├── 🔥 firebase.js                 # Firebase initialization & auth configuration
-└── 🎨 style.css                   # Global styles & layout rules
+├── ⚡ index.js                    # Main application logic
+├── 🔥 firebase.js                 # Firebase initialization
+└── 🎨 style.css                   # Global styles
+```
+
+---
+
+## 🔥 Firebase Integration
+
+ClinicBook uses Firebase services to handle authentication and application data.
+
+- Firebase Authentication for user signup and login.
+- Cloud Firestore for storing and retrieving application data.
+- Real-time listeners for dynamic data updates.
+- Role-based access for different dashboard users.
+
+---
+
+## 📱 Responsive Design
+
+The application is designed to provide a consistent user experience across:
+
+- Desktop Computers
+- Tablets
+- Mobile Devices
+
+---
+
+## 💡 Project Highlights
+
+- Multi-role healthcare management system.
+- Separate dashboards for different user roles.
+- Centralized hospital administration.
+- Real-time Firebase database integration.
+- Responsive and modern user interface.
+- Complete appointment management workflow.
+
+---
+
+## 🤝 Feedback & Contributions
+
+Suggestions, feedback, and improvements are always welcome!
+
+If you find this project useful, consider giving the repository a ⭐.
+
+---
+
+## 👨‍💻 Developer
+
+**Zahid Hussain**
+
+GitHub: [View My GitHub Profile](https://github.com/zahid22175)
